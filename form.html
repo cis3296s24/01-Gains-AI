@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>From page</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<h2>Details to be filled for personalized workout</h2>
+
+<h4>Name</h4>
+<input type="text" id="name" name="name">
+
+<h4>Age</h4>
+<input type="number" id="age" name="Age" min="10" max="100">
+
+<h4>Gender</h4>
+<lable><input type="radio" name="Gender" value="Male"> Male </lable>
+<label><input type="radio" name="Gender" value="Female"> Female </label>
+<lable><input type="radio" name="Gender" value="Other"> Other </lable>
+
+<h4>Duration</h4>
+<select id="Duration" name="Duration">
+    <option value="10">10 minutes</option>
+    <option value="30">30 minutes</option>
+    <option value="45">45 minutes</option>
+    <option value="60">60 minutes</option>
+</select>
+
+<h4>Fitness Level</h4>
+<label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
+<label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
+<label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
+
+<p href="">
+    <button onclick="window.location.href='workout.html'">Start</button>
+    <button onclick="exitForm()">Exit</button>
+</p>
+
+<script src="script.js"></script>
+
+</body>
+</html>
