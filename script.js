@@ -1,13 +1,11 @@
 const apiKey = 'AIzaSyBTuCeOs1FsZjh4s8FEt35472yzfuXIpmI';
 
-// Initialize global variables for user selections
 let name = "";
 let age = "";
 let gender = "";
 let duration = "";
 let fitnessLevel = "";
 
-// Function to get user inputs
 function getUserInputs() {
     name = document.getElementById("name").value;
     age = document.getElementById("age").value;
@@ -28,20 +26,20 @@ function getUserInputs() {
     }
 }
 
-// Function to load YouTube video
+// load YouTube video
 function loadWorkoutVideo() {
-    // Get user inputs
+
     getUserInputs();
 
-    // Construct search query based on user inputs
+    // search query based on user inputs
     const searchQuery = `${fitnessLevel} ${gender} workout`;
 
-    // Make API call to fetch video
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
+    // Call API to fetch video
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            const videoId = data.items[0].id.videoId;
-            const workoutUrl = `Workout.html?videoId=${videoId}`;
+            const videoIds = data.items.map(item => item.id.videoId);
+            const workoutUrl = `Workout.html?videoIds=${videoIds.join(',')}`;
             window.location.href = workoutUrl;
         })
         .catch(error => {
@@ -49,16 +47,14 @@ function loadWorkoutVideo() {
         });
 }
 
-// Function to exit form
 function exitForm() {
-    // Add exit functionality as needed
     console.log("Exiting form...");
 }
 
-// Event listener to load workout video on button click
+// listener to load workout video on button click
 document.getElementById("startButton").addEventListener("click", loadWorkoutVideo);
 
-// Toggle dark mode function
+// dark mode function
 function toggleDarkMode() {
     document.body.classList.toggle("light-mode");
 }
@@ -78,7 +74,7 @@ document.getElementById("toggleDarkMode").addEventListener("click", function () 
     toggleDarkMode();
 });
 
-// Function to exit the form with confirmation
+// exit the form 
 function exitForm() {
     if (confirm("Are you sure you want to exit?")) {
         window.location.href = "Homepage.html"; // Close the current window/tab

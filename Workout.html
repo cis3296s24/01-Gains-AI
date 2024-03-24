@@ -11,15 +11,23 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const videoId = urlParams.get('videoId');
-
-        if (videoId) {
+        const videoIds = urlParams.get('videoIds');
+        if (videoIds) {
             const playerDiv = document.getElementById("player");
-            playerDiv.innerHTML = `
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-            `;
+            const videoIdsArray = videoIds.split(',');
+
+            videoIdsArray.forEach(videoId => {
+                const iframeElement = document.createElement('iframe');
+                iframeElement.width = '560';
+                iframeElement.height = '315';
+                iframeElement.src = `https://www.youtube.com/embed/${videoId}`;
+                iframeElement.frameBorder = '0';
+                iframeElement.allowFullscreen = true;
+                playerDiv.appendChild(iframeElement);
+                playerDiv.appendChild(document.createElement('br')); 
+            });
         } else {
-            console.error('No video ID provided.');
+            console.error('No video IDs provided.');
         }
     </script>
 </body>
