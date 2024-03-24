@@ -9,7 +9,18 @@
 <body>
     <div id="player"></div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="script.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('videoId');
+
+        if (videoId) {
+            const playerDiv = document.getElementById("player");
+            playerDiv.innerHTML = `
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+            `;
+        } else {
+            console.error('No video ID provided.');
+        }
+    </script>
 </body>
 </html>

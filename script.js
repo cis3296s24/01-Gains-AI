@@ -41,10 +41,8 @@ function loadWorkoutVideo() {
         .then(response => response.json())
         .then(data => {
             const videoId = data.items[0].id.videoId;
-            const playerDiv = document.getElementById("player");
-            playerDiv.innerHTML = `
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-            `;
+            const workoutUrl = `Workout.html?videoId=${videoId}`;
+            window.location.href = workoutUrl;
         })
         .catch(error => {
             console.error('Error fetching workout video:', error);
