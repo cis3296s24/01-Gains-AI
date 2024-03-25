@@ -62,8 +62,25 @@ function exitForm() {
 // listener to load workout video on button click
 document.getElementById("startButton").addEventListener("click", loadWorkoutVideo);
 
-function toggleDarkMode(){
-    let element = document.body
+// Function to toggle dark mode
+function toggleDarkMode() {
+    let element = document.body;
     element.classList.toggle("light-mode");
+    
+    // Save user's preference in local storage
+    localStorage.setItem('lightMode', element.classList.contains('light-mode'));
 }
+
+// Function to apply dark mode if it was set previously
+function applyLightMode() {
+    const lightModeEnabled = localStorage.getItem('lightMode') === 'true';
+    const element = document.body;
+    
+    if (lightModeEnabled) {
+        element.classList.add('light-mode');
+    }
+}
+
+// Apply dark mode when the page loads
+window.onload = applyLightMode;
   
