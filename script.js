@@ -55,7 +55,7 @@ function exitForm() {
 // exit the form 
 function exitForm() {
     if (confirm("Are you sure you want to exit?")) {
-        window.location.href = "Homepage.html"; // Close the current window/tab
+        window.location.href = "index.html"; // Close the current window/tab
     }
 }
 
