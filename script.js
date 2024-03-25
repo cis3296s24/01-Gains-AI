@@ -51,28 +51,6 @@ function exitForm() {
     console.log("Exiting form...");
 }
 
-// listener to load workout video on button click
-document.getElementById("startButton").addEventListener("click", loadWorkoutVideo);
-
-// dark mode function
-function toggleDarkMode() {
-    document.body.classList.toggle("light-mode");
-}
-
-// Set initial mode function
-function setInitialMode() {
-    var mode = localStorage.getItem("mode");
-    if (mode === "light") {
-        document.body.classList.add("light-mode");
-    } else {
-        document.body.classList.remove("light-mode");
-    }
-}
-
-// Event listener for dark mode toggle button
-document.getElementById("toggleDarkMode").addEventListener("click", function () {
-    toggleDarkMode();
-});
 
 // exit the form 
 function exitForm() {
@@ -80,3 +58,12 @@ function exitForm() {
         window.location.href = "Homepage.html"; // Close the current window/tab
     }
 }
+
+// listener to load workout video on button click
+document.getElementById("startButton").addEventListener("click", loadWorkoutVideo);
+
+function toggleDarkMode(){
+    let element = document.body
+    element.classList.toggle("light-mode");
+}
+  
