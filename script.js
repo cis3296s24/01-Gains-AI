@@ -1,5 +1,4 @@
 const apiKey = 'AIzaSyBTuCeOs1FsZjh4s8FEt35472yzfuXIpmI';
-
 let name = "";
 let age = "";
 let gender = "";
@@ -9,30 +8,18 @@ let fitnessLevel = "";
 function getUserInputs() {
     name = document.getElementById("name").value;
     age = document.getElementById("age").value;
-    const genderOptions = document.getElementsByName("Gender");
-    for (const option of genderOptions) {
-        if (option.checked) {
-            gender = option.value;
-            break;
-        }
-    }
+    gender = document.querySelector('input[name="Gender"]:checked')?.value || "";
     duration = document.getElementById("Duration").value;
-    const fitnessLevelOptions = document.getElementsByName("Fitness Level");
-    for (const option of fitnessLevelOptions) {
-        if (option.checked) {
-            fitnessLevel = option.value;
-            break;
-        }
-    }
+    fitnessLevel = document.querySelector('input[name="Fitness Level"]:checked')?.value || "";
 }
 
-// load YouTube video
-function loadWorkoutVideo() {
+function loadWorkoutVideo(event) {
+    event.preventDefault();
 
     getUserInputs();
 
     // search query based on user inputs
-    const searchQuery = `${fitnessLevel==="Beginner"?"beginner":fitnessLevel==="Intermediate"?"intermediate":fitnessLevel==="Advance"?"advance":""} ${gender === "Male" ? "male" : gender === "Female" ? "female" : "other"} workout ${duration} minutes`;
+    const searchQuery = `${fitnessLevel === "Beginner" ? "beginner" : fitnessLevel === "Intermediate" ? "intermediate" : fitnessLevel === "Advance" ? "advance" : ""} ${gender === "Male" ? "male" : gender === "Female" ? "female" : "other"} workout ${duration} minutes`;
 
     // Call API to fetch video
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
@@ -47,17 +34,59 @@ function loadWorkoutVideo() {
         });
 }
 
-function exitForm() {
-    console.log("Exiting form...");
+function loadVideoPlayers(videoIds) {
+    const playerDiv = document.getElementById("player");
+    playerDiv.innerHTML = ''; // Clear existing content
+
+    videoIds.forEach(videoId => {
+        const iframeElement = document.createElement('iframe');
+        iframeElement.width = '560';
+        iframeElement.height = '315';
+        iframeElement.src = `https://www.youtube.com/embed/${videoId}`;
+        iframeElement.frameBorder = '0';
+        iframeElement.allowFullscreen = true;
+        playerDiv.appendChild(iframeElement);
+        playerDiv.appendChild(document.createElement('br')); // Add line break after each video
+    });
 }
 
-// listener to load workout video on button click
-document.getElementById("startButton").addEventListener("click", loadWorkoutVideo);
+function exitForm(event) {
+    event.preventDefault();
+    if (confirm("Are you sure you want to exit?")) {
+        window.location.href = "Homepage.html"; // Close the current window/tab
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const startButton = document.querySelector('.Workout');
+    const exitButton = document.querySelector('.Homepage');
+
+    startButton.addEventListener('click', loadWorkoutVideo);
+    exitButton.addEventListener('click', exitForm);
+});
+
 
 // dark mode function
-function toggleDarkMode() {
-    document.body.classList.toggle("light-mode");
+function toggleTheme() {
+    const body = document.body;
+    if (body.classList.contains('light')) {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        localStorage.setItem('theme', 'light');
+    }
 }
+
+// Check theme preference
+document.addEventListener('DOMContentLoaded', function () {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+    }
+});
 
 // Set initial mode function
 function setInitialMode() {
@@ -74,9 +103,3 @@ document.getElementById("toggleDarkMode").addEventListener("click", function () 
     toggleDarkMode();
 });
 
-// exit the form 
-function exitForm() {
-    if (confirm("Are you sure you want to exit?")) {
-        window.location.href = "Homepage.html"; // Close the current window/tab
-    }
-}

@@ -1,10 +1,34 @@
-
 /* Reset and basic styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* Light Theme */
+body.light {
+    background-color: #ffffff;
+    color: #000000;
 }
 
+/* Dark Theme */
+body.dark {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+/* Button Style */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #9c56e3;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
 /* Header */
 header {
     background-color: #333;
@@ -47,13 +71,8 @@ nav {
     cursor: pointer;
 }
 
-.sign-up {
-    background-color: transparent;
-    color: #fff;
-}
-
-.start {
-    background-color: #8b2ce8;
+.sign-up, .Login {
+    background-color: #9c56e3;
     color: #fff;
 }
 
@@ -70,8 +89,8 @@ nav {
     margin-bottom: 20px;
 }
 
-.explore {
-    background-color: #8b2ce8;
+.Get-Started  {
+    background-color: #9c56e3;
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -94,49 +113,6 @@ nav {
 .feature img {
     max-width: 100px;
 }
-
-/* Testimonial Section */
-.testimonials {
-    background-color: #f5f5f5;
-    padding: 50px;
-    text-align: center;
-}
-
-.testimonial {
-    margin-bottom: 30px;
-}
-
-.testimonial img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Pricing Section */
-.pricing {
-    padding: 50px;
-    text-align: center;
-}
-
-.plan {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 4px;
-    margin-bottom: 30px;
-}
-
-.plan h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.price {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
 .plan ul {
     list-style: none;
     padding: 0;
@@ -153,13 +129,88 @@ nav {
     cursor: pointer;
 }
 
+/* Form styles */
+form {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #333; 
+    color: #fff; 
+}
+form h2, form h4 {
+    color: #fff; }
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form input[type="radio"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; 
+    color: #333; 
+}
+
+form input[type="radio"] {
+    margin-bottom: 5px;
+}
+
+form p {
+    text-align: center;
+}
+
+form button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #9c56e3; 
+    color: #fff; 
+}
+
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.radio-group label {
+    margin-right: 10px;
+}
+
+.form-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-buttons button {
+    margin: 0 5px;
+}
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: #2b2b2b;
     color: #fff;
-    padding: 50px;
-    display: flex;
-    justify-content: space-between;
+    padding: 10px;
+    margin-top: auto; 
 }
 
 .footer-section h4 {
@@ -171,12 +222,74 @@ footer {
     padding: 0;
     margin: 0;
 }
-
-.social-links a {
-    margin-right: 10px;
+/* Styles for Signup Page */
+#signupForm {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f5f5f5; 
+    color: #333; 
 }
 
-.social-links img {
-    width: 30px;
-    height: 30px;
+#signupForm label {
+    color: #333; /* text color */
+}
+
+#signupForm input[type="text"],
+#signupForm input[type="email"],
+#signupForm input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; 
+    color: #333; 
+}
+
+#signupForm button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #9c56e3; 
+    color: #fff; 
+}
+/* Styles for Login Page */
+#loginForm {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+#loginForm label {
+    color: #333; /* text color */
+}
+
+#loginForm input[type="email"],
+#loginForm input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+#loginForm button {
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #9c56e3;
+    color: #fff;
+    margin-top: 10px;
 }

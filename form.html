@@ -1,44 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>From page</title>
-<link rel="stylesheet" href="styles.css">
+    <title>Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-<h2>Details to be filled for personalized workout</h2>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">GaiNS.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Music</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="signup.html"><button class="sign-up">Sign Up</button></a>
+                <a href="login.html"><button class="Login">Login</button></a>
+            </div>
+        </nav>
+    </header>
 
-<h4>Name</h4>
-<input type="text" id="name" name="name">
+    <section class="form-container">
+        <h2>Details to be filled for personalized workout</h2>
+        <form>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><label for="name">Name</label></td>
+                    <td><input type="text" id="name" name="name"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Gender" value="Male"> Male </label>
+                            <label><input type="radio" name="Gender" value="Female"> Female </label>
+                            <label><input type="radio" name="Gender" value="Other"> Other </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Duration">Duration</label></td>
+                    <td>
+                        <select id="Duration" name="Duration">
+                            <option value="10">10 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Fitness Level</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
+                            <label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
+                            <label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-buttons">
+                <button class="Workout">Start</button>
+                <button class="Homepage">Exit</button>
+            </div>
+        </form>
+    </section>
 
-<h4>Age</h4>
-<input type="number" id="age" name="Age" min="10" max="100" autocomplete="age">
-
-<h4>Gender</h4>
-<lable><input type="radio" name="Gender" value="Male"> Male </lable>
-<label><input type="radio" name="Gender" value="Female"> Female </label>
-<lable><input type="radio" name="Gender" value="Other"> Other </lable>
-
-<h4>Duration</h4>
-<select id="Duration" name="Duration">
-    <option value="10">10 minutes</option>
-    <option value="30">30 minutes</option>
-    <option value="45">45 minutes</option>
-    <option value="60">60 minutes</option>
-</select>
-
-<h4>Fitness Level</h4>
-<label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
-<label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
-<label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
-
-<p href="">
-    <button id="startButton">Start</button>
-    <button onclick="exitForm()">Exit</button>
-</p>
-<div id="player"></div>
-<script src="script.js"></script>
-<script src="https://www.youtube.com/iframe_api"></script>
-
+   
+    <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
