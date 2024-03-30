@@ -32,7 +32,7 @@ function loadWorkoutVideo() {
     getUserInputs();
 
     // search query based on user inputs
-    const searchQuery = `${fitnessLevel} ${gender} workout`;
+    const searchQuery = `${fitnessLevel==="Beginner"?"beginner":fitnessLevel==="Intermediate"?"intermediate":fitnessLevel==="Advance"?"advance":""} ${gender === "Male" ? "male" : gender === "Female" ? "female" : "other"} workout ${duration} minutes`;
 
     // Call API to fetch video
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
