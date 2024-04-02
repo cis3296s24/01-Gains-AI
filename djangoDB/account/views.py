@@ -29,3 +29,9 @@ def register(request):
         return redirect('view_database')
     else:
         return render(request, 'register.html', {})
+    
+def homepage(request):
+    return render(request, 'index.html', {})
+    
+    
+    
