@@ -19,8 +19,8 @@ function loadWorkoutVideo(event) {
     getUserInputs();
 
     // search query based on user inputs
-    const searchQuery = `${fitnessLevel === "Beginner" ? "beginner" : fitnessLevel === "Intermediate" ? "intermediate" : fitnessLevel === "Advance" ? "advance" : ""} ${gender === "Male" ? "male" : gender === "Female" ? "female" : "other"} workout ${duration} minutes`;
-
+    const searchQuery = `${fitnessLevel === "Beginner" ? "beginner" : fitnessLevel === "Intermediate" ? "intermediate" : fitnessLevel === "Advance" ? "advance" : ""} ${gender === "Male" ? "male" : gender === "Female" ? "female" : "other"} workout ${duration} minutes ${Array.from(document.querySelectorAll('#mini-yoga-popup input[type="checkbox"]:checked')).map(checkbox => checkbox.value).join(' ')}`;
+    
     // Call API to fetch video
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
         .then(response => response.json())
@@ -46,14 +46,14 @@ function loadVideoPlayers(videoIds) {
         iframeElement.frameBorder = '0';
         iframeElement.allowFullscreen = true;
         playerDiv.appendChild(iframeElement);
-        playerDiv.appendChild(document.createElement('br')); // Add line break after each video
+        playerDiv.appendChild(document.createElement('br')); 
     });
 }
 
 function exitForm(event) {
     event.preventDefault();
     if (confirm("Are you sure you want to exit?")) {
-        window.location.href = "Homepage.html"; // Close the current window/tab
+        window.location.href = "Homepage.html"; // Close the current tab
     }
 }
 
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     startButton.addEventListener('click', loadWorkoutVideo);
     exitButton.addEventListener('click', exitForm);
+    
 });
 
 
