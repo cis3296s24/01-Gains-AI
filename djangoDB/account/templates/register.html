@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+
+{% block content %}
+    <h1> Registration Page </h1>
+    </br>
+    <form method="POST" action="{% url 'register' %}">
+        {%csrf_token%}
+    <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First Name"
+          aria-describedby="basic-addon1"
+          name = "fname"
+          value = "{{ fname }}"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name"
+          aria-describedby="basic-addon1"
+          name = "lname"
+          value = "{{ lname }}"
+        />
+      </div>
+  
+      <div class="input-group mb-3">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          aria-describedby="basic-addon1"
+          name = "password"
+        />
+      </div>
+  
+      <div class="input-group mb-3">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          aria-describedby="basic-addon1"
+          name = "email"
+          value = "{{ email }}"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Age"
+          aria-describedby="basic-addon1"
+          name = "age"
+          value = "{{ age }}"
+        />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Register</button> 
+
+    </form>
+{% endblock %}

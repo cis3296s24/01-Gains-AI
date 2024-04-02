@@ -20,8 +20,8 @@
     </header>
     <div id="player"></div>
     <script src="script.js"></script>
-
     <script>
+        window.onload = applyLightMode;
         const urlParams = new URLSearchParams(window.location.search);
         const videoIds = urlParams.get('videoIds');
         if (videoIds) {
@@ -42,5 +42,6 @@
             console.error('No video IDs provided.');
         }
     </script>
+
 </body>
 </html>
