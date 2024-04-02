@@ -124,7 +124,7 @@ function setInitialMode() {
 
 //Chatgpt Api section 
 
-const ChatgptapiKey = "";
+const ChatgptapiKey = "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";
 function sendChatgptMessage(message) {
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
