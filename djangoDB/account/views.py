@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Member
-from .forms import Memberform
+from .models import Member, SignUpMember
+from .forms import Memberform, SignUpform
 from django.contrib import messages
 # Create your views here.
 
@@ -31,7 +31,33 @@ def register(request):
         return render(request, 'register.html', {})
     
 def homepage(request):
-    return render(request, 'index.html', {})
+    return render(request, 'Homepage.html', {})
+
+def form(request):
+    return render(request, 'form.html', {})
+
+def signup(request):
+    if request.method == "POST":
+        form = SignUpform(request.POST or None)
+        if form.is_valid():
+            form.save()
+        else:
+            fname = request.POST['fname']
+            lname = request.POST['lname']
+            email = request.POST['email']
+            messages.success(request, ('There was an error in your form! Please Try again'))
+            return render(request, 'signup.html',
+                          {'fname': fname,
+                           'lname': lname,
+                           'email': email})
+        messages.success(request, ('Your Form Has Been Submitted Successfully!'))
+        return redirect('homepage')
+    else:
+        return render(request, 'signup.html', {})
+def login(request):
+    return render(request, 'login.html', {})
+
+
     
     
     
