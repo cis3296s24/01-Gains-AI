@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Form</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
     <style>
         /* CSS for the popup */
         .open-mini-popup{
@@ -48,8 +49,8 @@
                 <li><a href="Music.html">Music</a></li>
             </ul>
             <div class="nav-buttons">
-                <a href="signup.html"><button class="sign-up">Sign Up</button></a>
-                <a href="login.html"><button class="Login">Login</button></a>
+                <a href="{% url 'signup' %}"><button class="sign-up">Sign Up</button></a>
+                <a href="{% url 'login' %}"><button class="Login">Login</button></a>
             </div>
         </nav>
     </header>
@@ -111,8 +112,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Body-Part">Body-Part</label></td>
-                    <td><input type="text" id="Body-Part" Body_Part="Body-Part"></td>
+                    <td><label>Body-Part</label></td>
+                    <td>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="Body Part" value="biceps"> Biceps</label>
+                            <label><input type="checkbox" name="Body Part" value="belly"> Belly</label>
+                            <label><input type="checkbox" name="Body Part" value="arms"> Arms</label>
+                            <label><input type="checkbox" name="Body Part" value="legs"> Legs</label>
+                            <label><input type="checkbox" name="Body Part" value="chest"> Chest</label>
+                        </div>
+                    </td>
                 </tr>
             </table>
             
