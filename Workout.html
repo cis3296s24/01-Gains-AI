@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .container {
+            display: flex;
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+        }
+        .video-exercise-container {
+            margin: 10px; /* Adjust spacing between video-exercise containers */
+            text-align: center; /* Center content horizontally */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,32 +28,67 @@
                 <li><a href="#">Community</a></li>
                 <li><a href="Music.html">Music</a></li>
             </ul>
-            
         </nav>
     </header>
-    <div id="player"></div>
+    <div class="container">
+        <div id="player">
+            <!-- Videos will be inserted here -->
+        </div>
+        <div id="context">
+            
+
+        </div>
+    </div>
     <script src="script.js"></script>
 
     <script>
+        // Retrieve the serialized arrays from local storage
+        var serializedexecriseName = localStorage.getItem('exerciseName');
+        var serializedexecriseDescription = localStorage.getItem('exerciseDescription');
+
+        // Deserialize the array string back to an array using JSON.parse
+        var Name = JSON.parse(serializedexecriseName);
+        var Description = JSON.parse(serializedexecriseDescription);
+
+        const contextDiv = document.getElementById("context");
+        const playerDiv = document.getElementById("player");
+
         const urlParams = new URLSearchParams(window.location.search);
         const videoIds = urlParams.get('videoIds');
+
         if (videoIds) {
-            const playerDiv = document.getElementById("player");
+            
             const videoIdsArray = videoIds.split(',');
 
-            videoIdsArray.forEach(videoId => {
+            videoIdsArray.forEach((videoId, index) => {
+                // Create container for video and exercise name
+                const videoExerciseContainer = document.createElement('div');
+                videoExerciseContainer.classList.add('video-exercise-container');
+
+                const exerciseElement = document.createElement('h1');
+                exerciseElement.textContent = Name[index];
+                videoExerciseContainer.appendChild(exerciseElement);
+
+                const exerciseDescriptionElement = document.createElement('div');
+                exerciseDescriptionElement.textContent = Description[index];
+                videoExerciseContainer.appendChild(exerciseDescriptionElement);
+
+                // Create video iframe
                 const iframeElement = document.createElement('iframe');
                 iframeElement.width = '560';
                 iframeElement.height = '315';
                 iframeElement.src = `https://www.youtube.com/embed/${videoId}`;
                 iframeElement.frameBorder = '0';
                 iframeElement.allowFullscreen = true;
-                playerDiv.appendChild(iframeElement);
-                playerDiv.appendChild(document.createElement('br')); 
+                videoExerciseContainer.appendChild(iframeElement);
+
+                // Append the container to the player div
+                playerDiv.appendChild(videoExerciseContainer);
             });
         } else {
             console.error('No video IDs provided.');
         }
+
     </script>
 </body>
 </html>
