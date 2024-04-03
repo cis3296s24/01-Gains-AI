@@ -66,12 +66,24 @@
                 videoExerciseContainer.classList.add('video-exercise-container');
 
                 const exerciseElement = document.createElement('h1');
-                exerciseElement.textContent = Name[index];
+                try{
+                    exerciseElement.textContent = Name[index];
+                }
+                catch(error){
+                    exerciseElement.textContent = 'Did not get Api result';
+                }
                 videoExerciseContainer.appendChild(exerciseElement);
 
+
                 const exerciseDescriptionElement = document.createElement('div');
-                exerciseDescriptionElement.textContent = Description[index];
+                try{
+                    exerciseDescriptionElement.textContent = Description[index];
+                }
+                catch(error){
+                    exerciseDescriptionElement.textContent = 'Did not get Api result';
+                }
                 videoExerciseContainer.appendChild(exerciseDescriptionElement);
+                
 
                 // Create video iframe
                 const iframeElement = document.createElement('iframe');
