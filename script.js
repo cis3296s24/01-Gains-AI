@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyBTuCeOs1FsZjh4s8FEt35472yzfuXIpmI';
+const apiKey = 'AIzaSyCOau10uiAjFbxdDv7SC9IVLZKyk6SvsrA';
 let name = "";
 let age = "";
 let gender = "";
@@ -23,7 +23,7 @@ function getUserInputs() {
 
 function generateWorkoutprompt(){
     getUserInputs();
-    Workout_prompt = `Give me 5 exercises ${Body_Part} for ${gender} age ${age} with description seperated by :`;
+    Workout_prompt = `Give me 5 ${Body_Part} exercises for ${gender} age ${age} with a description seperated by :`;
     console.log(Workout_prompt);
     sendChatgptMessage(Workout_prompt);
 }
@@ -37,7 +37,7 @@ function loadWorkoutVideo(event) {
 
 
     // search query based on user inputs
-    const searchQuery = Workout_prompt
+    const searchQuery = `${Body_Part} exercise`
     
     // Call API to fetch video
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}`)
@@ -124,7 +124,7 @@ function setInitialMode() {
 
 //Chatgpt Api section 
 
-const ChatgptapiKey = "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";
+const ChatgptapiKey = "ADD KEY";
 function sendChatgptMessage(message) {
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -137,7 +137,7 @@ function sendChatgptMessage(message) {
             messages: [{ role: 'user', content: message }]
         })
     })
-    .then(response => response.json())
+    .then(ChatGptresponse => ChatGptresponse.json())
     .then(data => {
         const responseMessage = data.choices[0].message.content;
         
@@ -147,8 +147,8 @@ function sendChatgptMessage(message) {
 
        
         //Display each curl on the website
-         ExcisesArray.forEach((excrise) => {
-             const ExcisesDescription =excrise.split(':').map(part => part.trim());
+         ExcisesArray.forEach((exercise) => {
+            const ExcisesDescription = exercise.split(/: /);
              
                 
                 exerciseName.push(ExcisesDescription[0]);
@@ -156,6 +156,7 @@ function sendChatgptMessage(message) {
                 
 
 
+                
                 exerciseDescription.push(ExcisesDescription[1]);
                 
 
