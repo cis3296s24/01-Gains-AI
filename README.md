@@ -6,9 +6,15 @@ This is a web application aimed at streamlining personalized exercise routines t
 
 
 # How to run
+You can view this page here but it won't generate workout(At this moment) 
+Click on the link https://cis3296s24.github.io/01-Gains-AI/
+
+
+## To generate workout to you have to run this locally
 To run this locally, After installing and building the project and inserting key 
 
 Right click on Homepage.html and click on option Open in Default Browser
+
 
 # How to contribute
 Follow this project board to know the latest status of the project: https://github.com/orgs/cis3296s24/projects/65
