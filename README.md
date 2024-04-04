@@ -4,25 +4,18 @@ This is a web application aimed at streamlining personalized exercise routines t
 
 ![This is a screenshot.](images.png)
 # How to run
-Provide here instructions on how to use your application.   
-- Download the latest binary from the Release section on the right on GitHub.  
-- On the command line uncompress using
-```
-tar -xzf  
-```
-- On the command line run with
-```
-./hello
-```
-- You will see Hello World! on your terminal. 
+To run this locally, After installing and building the project and inserting key 
+
+Right click on Homepage.html and click on option Open in Default Browser
 
 # How to contribute
-Follow this project board to know the latest status of the project: [http://...]([http://...])  
+Follow this project board to know the latest status of the project: https://github.com/orgs/cis3296s24/projects/65
 
 ### How to build
-- Use this github repository: ... 
-- Specify what branch to use for a more stable release or for cutting edge development.  
-- Use InteliJ 11
-- Specify additional library to download if needed 
-- What file and target to compile and run. 
-- What is expected to happen when the app start. 
+- Use this github repository: https://github.com/cis3296s24/01-Gains-AI/tree/main?tab=readme-ov-file
+- Select release 2 from Tags
+- Downloaded the coded from the Tag
+- Install Vscode and install open in browser extenstion  
+- Go to OpenAl and sign up and create a key
+- In the script.js replace the ChatGPT key with your own
+- Right click on Homepage.html and click on option Open in Default Browser
