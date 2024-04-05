@@ -12,23 +12,8 @@ body.light {
     color: #000000;
 }
 
-/* Dark Theme */
-body.dark {
-    background-color: #1f1f1f;
-    color: #ffffff;
-}
 
-/* Button Style */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px;
-    background-color: #9c56e3;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-}
+
 /* Header */
 header {
     background-color: #333;
@@ -76,7 +61,7 @@ nav {
     color: #fff;
 }
 
-/* Hero Section */
+
 .hero {
     background-color: #333;
     color: #fff;
@@ -220,11 +205,11 @@ nav {
 /* Form styles */
 form {
     margin: 20px auto;
-    max-width: 600px;
+    max-width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #333; 
+    border-radius: px;
+    background-color: #7b7e8b; 
     color: #fff; 
 }
 form h2,
@@ -236,13 +221,13 @@ form input[type="text"],
 form input[type="number"],
 form select,
 form input[type="radio"] {
-    width: 100%;
+    width: 50%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff; 
-    color: #333; 
+    color: #f8f6f6; 
 }
 
 form input[type="radio"] {
@@ -267,7 +252,7 @@ form button {
     margin-bottom: 20px;
 }
 .checkbox {
-    margin-top: 5px; /* Adjust spacing between label and checkboxes */
+    margin-top: 5px; 
 }
 
 .form-field {
