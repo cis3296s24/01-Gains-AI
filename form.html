@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <title>Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         /* CSS for the popup */
-        .open-mini-popup{
+        .open-mini-popup {
             padding: 12px 24px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #9c56e3; 
-            color: #fff; 
+            background-color: #5e57ec;
+            color: #fff;
+            margin-bottom: 10px; 
+            display: block; 
+            width: 80%; 
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
+        
         .mini-popup {
             display: none;
             position: fixed;
@@ -33,140 +42,506 @@
             cursor: pointer;
             font-size: 20px;
         }
+        .dark-mode {
+            /* Add styles for dark mode here */
+            background-color: #343a40;
+            color: #fff;
+        }
+        /* Form styles */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6C63FF;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container .radio-group label,
+        .form-container .checkbox label {
+            margin-right: 10px;
+        }
+        .form-container .form-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-container .form-buttons button {
+            margin: 0 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #6C63FF;
+            color: #fff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 280px; 
+            position: fixed;
+            z-index: 1;
+            top: 75px; 
+            left: 0;
+            background-color: #343a40;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Responsive media queries */
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .sidebar a {
+                font-size: 16px;
+            }
+        }
+        /* Types of workouts form styles */
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            max-height: min-content;
+            padding: 20px;
+            border: 1px solid #3b3636;
+            border-radius: 4px;
+            background-color: #f3f6f8; 
+            color: #fff; 
+        }
+
+        /* Search bar */
+        .search-bar {
+            margin-bottom: 20px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar i {
+            margin-left: 10px;
+            color: #6C63FF;
+            cursor: pointer;
+        }
+       
     </style>
 </head>
 
+
+<!-- Header -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="Homepage.html">GaiNS.ai</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Music.html">Music</a>
+                </li>
+            </ul>
+            <div class="nav-buttons mr-3"> 
+                <a href="signup.html" class="btn btn-primary mr-2">Sign Up</a>
+                <a href="login.html" class="btn btn-outline-light">Login</a>
+            </div>
+            <div id="themeToggle" class="fas fa-adjust fa-lg text-primary" style="cursor: pointer;" onclick="toggleTheme()"></div>
+        </div>
+    </nav>
+</header>
+
+<!-- Sidebar -->
 <body>
     
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">GaiNS.ai</div>
-            <ul class="nav-menu">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="Music.html">Music</a></li>
-            </ul>
-            <div class="nav-buttons">
-                <a href="signup.html"><button class="sign-up">Sign Up</button></a>
-                <a href="login.html"><button class="Login">Login</button></a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Workout Section -->
-    <section class="form-container">
-        <button class="open-mini-popup" data-popup-target="mini-workout-popup">Start Workout</button>
-        <button class="open-mini-popup" data-popup-target="mini-yoga-popup">Start Yoga</button>
-    </section>
-
-    <!-- Mini Workout Popup Form -->
-    <div id="mini-workout-popup" class="mini-popup">
-        <span class="popup-close">&times;</span>
-        <h2 style="text-align: center;">Workout Form</h2>
-        <form>
-            <!-- Add workout form fields here -->
-            <table>
-                <tr>
-                    <th>Field</th>
-                    <th>Value</th>
-                </tr>
-                <tr>
-                    <td><label for="name">Name</label></td>
-                    <td><input type="text" id="name" name="name"></td>
-                </tr>
-                <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
-                </tr>
-                <tr>
-                    <td><label>Gender</label></td>
-                    <td>
-                        <div class="radio-group">
-                            <label><input type="radio" name="Gender" value="Male"> Male </label>
-                            <label><input type="radio" name="Gender" value="Female"> Female </label>
-                            <label><input type="radio" name="Gender" value="Other"> Other </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="Duration">Duration</label></td>
-                    <td>
-                        <select id="Duration" name="Duration">
-                            <option value="10">10 minutes</option>
-                            <option value="30">30 minutes</option>
-                            <option value="45">45 minutes</option>
-                            <option value="60">60 minutes</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>Fitness Level</label></td>
-                    <td>
-                        <div class="radio-group">
-                            <label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
-                            <label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
-                            <label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>Body-Part</label></td>
-                    <td>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="Body Part" value="biceps"> Biceps</label>
-                            <label><input type="checkbox" name="Body Part" value="belly"> Belly</label>
-                            <label><input type="checkbox" name="Body Part" value="arms"> Arms</label>
-                            <label><input type="checkbox" name="Body Part" value="legs"> Legs</label>
-                            <label><input type="checkbox" name="Body Part" value="chest"> Chest</label>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            
-            <div class="form-buttons">
-                <button class="Workout">Start</button>
-                <button class="Homepage">Exit</button>
-            </div>
-        </form>
+    <div id="mySidebar" class="sidebar">
+        <div class="search-bar">
+            <input type="text" id="workout-search" placeholder="Search workouts...">
+            <i class="fas fa-search"></i>
+        </div>
+            <h3 style="text-align: center; color: #f1f1f1;" >Types of Workouts</h3>
+            <button class="open-mini-popup" data-popup-target="mini-workout-popup">Gym Workout</button>
+            <button class="open-mini-popup" data-popup-target="mini-home-workout-popup">Home Workout</button>
+            <button class="open-mini-popup" data-popup-target="mini-body-building-popup">Body Building</button>
+            <button class="open-mini-popup" data-popup-target="mini-calisthenics-popup">Calisthenics</button>
+            <button class="open-mini-popup" data-popup-target="mini-yoga-popup">Yoga</button>
+            <button class="open-mini-popup" data-popup-target="mini-meditation-popup">Meditation</button>
     </div>
-<!-- Mini Yoga Popup Form -->
-<div id="mini-yoga-popup" class="mini-popup">
+
+<!-- Mini Workout Popup Form -->
+<div id="mini-workout-popup" class="mini-popup">
     <span class="popup-close">&times;</span>
-    <h2 style="text-align: center;">Yoga Form</h2>
-    <form>
-        
-        <table>
+    <h3 style="text-align: center;"> Gym Workout Form</h3>
+        <!-- workout form fields -->
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
             <tr>
-                <th>Field</th>
-                <th>Value</th>
+                <th>Attribute</th>
+                <th>Entry</th>
             </tr>
             <tr>
                 <td><label for="name">Name</label></td>
-                <td><input type="text" id="name" name="name"></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
             </tr>
             <tr>
                 <td><label for="age">Age</label></td>
-                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
             </tr>
             <tr>
                 <td><label>Gender</label></td>
                 <td>
                     <div class="radio-group">
-                        <label><input type="radio" name="Gender" value="Male"> Male </label>
-                        <label><input type="radio" name="Gender" value="Female"> Female </label>
-                        <label><input type="radio" name="Gender" value="Other"> Other </label>
+                        <label><input type="radio" name="Gender" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender" value="Female"> Female</label>
+                        <label><input type="radio" name="Gender" value="Other"> Other</label>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td><label for="Duration">Duration</label></td>
                 <td>
-                    <select id="Duration" name="Duration">
+                    <select id="Duration" name="Duration" class="form-control">
                         <option value="10">10 minutes</option>
                         <option value="30">30 minutes</option>
                         <option value="45">45 minutes</option>
                         <option value="60">60 minutes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Fitness Level">Fitness Level</label></td>
+                <td>
+                    <select id="Fitness Level" name="Fitness Level" class="form-control">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermidate">Intermidate</option>
+                        <option value="Advance">Advance</option>
+                    </select>
+                </td>
+            </tr>
+            </form>
+            <tr>
+                <td><label>Types of Yoga</label></td>
+                <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="squat"> Squat </label>
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="hip hinge"> Hip Hinge </label>
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="Pull-Ups"> Pull-Ups </label>
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="Deadlifts"> Deadlifts </label>
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="Leg Press"> Leg Press </label>
+                        <label><input type="checkbox" name="Type of Gym Workouts" value="Suspension training"> Suspension training </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td><label for="Other">Other</label></td>
+                <td><textarea id="Other" name="Other" class="form-control" rows="1"></textarea></td>
+            </tr>
+           
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!-- Mini Home Workout Popup Form -->
+<div id="mini-home-workout-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h3 style="text-align: center;">Home Workout Form</h3>
+    <form onsubmit="loadWorkoutVideo(event)">
+        <!--  home workout form fields -->
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender" value="Female"> Female</label>
+                        <label><input type="radio" name="Gender" value="Other"> Other</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Duration">Duration</label></td>
+                <td>
+                    <select id="Duration" name="Duration" class="form-control">
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Fitness Level">Fitness Level</label></td>
+                <td>
+                    <select id="Fitness Level" name="Fitness Level" class="form-control">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermidate">Intermidate</option>
+                        <option value="Advance">Advance</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="workout">Workout</label></td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="workout" value="Push-Ups"> Push-Ups</label>
+                        <label><input type="checkbox" name="workout" value="Sit-Ups"> Sit-Ups</label>
+                        <label><input type="checkbox" name="workout" value="Jumping Jacks"> Jumping Jacks</label>
+                        <label><input type="checkbox" name="workout" value="Planks"> Planks</label>
+                        <label><input type="checkbox" name="workout" value="Burpees"> Burpees</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Other">Other</label></td>
+                <td><textarea id="Other" name="Other" class="form-control" rows="1"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+            </form>
+        </table>
+    </form>
+</div>
+<!-- Mini Body Building Popup Form -->
+<div id="mini-body-building-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h3 style="text-align: center;">Home Workout Form</h3>
+        <!--  body building form fields -->
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender" value="Female"> Female</label>
+                        <label><input type="radio" name="Gender" value="Other"> Other</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Duration">Duration</label></td>
+                <td>
+                    <select id="Duration" name="Duration" class="form-control">
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Fitness Level">Fitness Level</label></td>
+                <td>
+                    <select id="Fitness Level" name="Fitness Level" class="form-control">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermidate">Intermidate</option>
+                        <option value="Advance">Advance</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="body-building">Body Building</label></td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="body-building" value="Weightlifting"> Weightlifting</label>
+                        <label><input type="checkbox" name="body-building" value="Powerlifting"> Powerlifting</label>
+                        <label><input type="checkbox" name="body-building" value="CrossFit"> CrossFit</label>
+                        <label><input type="checkbox" name="body-building" value="Strength Training"> Strength Training</label>
+                        <label><input type="checkbox" name="body-building" value="Bodybuilding Competitions"> Bodybuilding Competitions</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Other">Other</label></td>
+                <td><textarea id="Other" name="Other" class="form-control" rows="1"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </form>
+        </table>
+    </form>
+</div>
+<!-- Mini Calisthenics Popup Form -->
+<div id="mini-calisthenics-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h3>Calisthenics Form</h3>
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender" value="Female"> Female</label>
+                        <label><input type="radio" name="Gender" value="Other"> Other</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="calisthenics-type">Types of Calisthenics</label></td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="calisthenics-type" value="Push-Ups"> Push-Ups</label>
+                        <label><input type="checkbox" name="calisthenics-type" value="Pull-Ups"> Pull-Ups</label>
+                        <label><input type="checkbox" name="calisthenics-type" value="Squats"> Squats</label>
+                        <label><input type="checkbox" name="calisthenics-type" value="Lunges"> Lunges</label>
+                        <label><input type="checkbox" name="calisthenics-type" value="Planks"> Planks</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </td>
+            </tr>
+            </form>
+        </table>
+    </form>
+</div>
+
+<!-- Mini Yoga Popup Form -->
+<div id="mini-yoga-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h3 style="text-align: center;">Yoga Form</h3>
+   
+        <!-- yoga form fields  -->
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="yoga-name">Name</label></td>
+                <td><input type="text" id="yoga-name" name="yoga-name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="yoga-duration">Duration</label></td>
+                <td>
+                    <select id="yoga-duration" name="yoga-duration" class="form-control">
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Fitness Level">Fitness Level</label></td>
+                <td>
+                    <select id="Fitness Level" name="Fitness Level" class="form-control">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
                     </select>
                 </td>
             </tr>
@@ -184,60 +559,134 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
         </table>
-        <div class="form-buttons">
-            <button class="Workout">Start</button>
-            <button class="Homepage">Exit</button>
-        </div>
     </form>
 </div>
-    <script src="script.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const openMiniPopupButtons = document.querySelectorAll('.open-mini-popup');
-            openMiniPopupButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetPopupId = button.getAttribute('data-popup-target');
-                    const targetPopup = document.getElementById(targetPopupId);
-                    const otherPopupId = targetPopupId === 'mini-workout-popup' ? 'mini-yoga-popup' : 'mini-workout-popup';
-                    const otherPopup = document.getElementById(otherPopupId);
-                    
-                    if (targetPopup.style.display === 'none') {
-                        targetPopup.style.display = 'block';
-                        otherPopup.style.display = 'none';
-                    } else {
-                        targetPopup.style.display = 'none';
+<!-- Mini Meditation Popup Form -->
+<div id="mini-meditation-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h3>Meditation Form</h3>
+    <form>
+        <table class="table">
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')">
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender" value="Female"> Female</label>
+                        <label><input type="radio" name="Gender" value="Other"> Other</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="meditation-type">Types of Meditation</label></td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="meditation-type" value="Mindfulness"> Mindfulness</label>
+                        <label><input type="checkbox" name="meditation-type" value="Transcendental"> Transcendental</label>
+                        <label><input type="checkbox" name="meditation-type" value="Guided"> Guided</label>
+                        <label><input type="checkbox" name="meditation-type" value="Loving-Kindness"> Loving-Kindness</label>
+                        <label><input type="checkbox" name="meditation-type" value="Body Scan"> Body Scan</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Other">Other</label></td>
+                <td><textarea id="Other" name="Other" class="form-control" rows="1"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </td>
+            </tr>
+            </form>
+        </table>
+    </form>
+</div>
+    </form>
+<script>
+     function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+    }
+     function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+    }
+    // opening/closing mini popups
+    const openMiniPopups = document.querySelectorAll('.open-mini-popup');
+    const miniPopups = document.querySelectorAll('.mini-popup');
+
+    openMiniPopups.forEach((openBtn) => {
+        openBtn.addEventListener('click', () => {
+            const popupId = openBtn.getAttribute('data-popup-target');
+            const popup = document.getElementById(popupId);
+
+            if (popup) {
+                popup.style.display = 'block';
+
+                // Close the popup when clicking on close button or outside the popup
+                popup.querySelector('.popup-close').addEventListener('click', () => {
+                    popup.style.display = 'none';
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.style.display = 'none';
                     }
                 });
-            });
-                        // Close button functionality
-                        const closeButtons = document.querySelectorAll('.popup-close');
-                        closeButtons.forEach(closeButton => {
-                            closeButton.addEventListener('click', () => {
-                                const popup = closeButton.parentElement;
-                                popup.style.display = 'none';
-                    });
-                });
-        const startYogaButton = document.querySelector('#mini-yoga-popup .Workout');
-        const exitYogaButton = document.querySelector('#mini-yoga-popup .Homepage');
-
-        startYogaButton.addEventListener('click', () => {
-                // Redirect to existing Workout.html when Start button in Yoga form is clicked
-                event.preventDefault();
-                window.location.href = 'Workout.html'; 
-            });
-
-        exitYogaButton.addEventListener('click', () => {
-            // Close the Yoga form when Exit button is clicked
-            event.preventDefault();
-            const yogaPopup = document.getElementById('mini-yoga-popup');
-            if (confirm("Are you sure you want to exit?")) {
-            window.location.href = 'Homepage.html';
             }
         });
     });
-    </script>
-    
+    function handleFormSubmission(event, redirectPage) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const queryParams = new URLSearchParams(formData).toString();
+        const redirectUrl = `${redirectPage}?${queryParams}`;
+        console.log("Redirecting to:", redirectUrl);
+        window.location.href = redirectUrl;
+    }
+    //  search box
+    const searchInput = document.getElementById('workout-search');
+        const buttons = document.querySelectorAll('.left-side-buttons button');
+        const searchIcon = document.querySelector('.search-bar i');
+
+        searchIcon.addEventListener('click', () => {
+            searchInput.focus();
+        });
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = this.value.trim().toLowerCase();
+            buttons.forEach(button => {
+                const textContent = button.textContent.trim().toLowerCase();
+                button.style.display = textContent.includes(searchTerm) ? 'block' : 'block';
+            });
+        });
+</script>
 </body>
 </html>
