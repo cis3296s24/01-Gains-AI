@@ -4,73 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to GaiNS.ai</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
 </head>
 <body>
-    <h1 style="text-align: center;">GaiNS.ai</h1>
-    <h4 style="text-align: center;">Welcome to our exercise site, where personalized fitness routines meet cutting-edge technology for your optimal workout experience!</h4>
- <!-- switch the mode -->
- <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
-    <!-- Header -->
+    <style>
+    /* Dark Theme */
+        body.dark {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+    </style>
+    <!--Header-->
     <header>
-        <nav>
-            <div class="logo">GaiNS.ai</div>
-            <ul class="nav-menu">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="Music.html">Music</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">    
+        <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Music.html">Music</a>
+                </li>
             </ul>
-            <div class="nav-buttons">
-                <a href="signup.html"><button class="sign-up">Sign Up</button></a>
-                <a href="login.html"><button class="Login">Login</button>"</a>             
+            <div class="nav-buttons mr-3"> 
+                <a href="signup.html" class="btn btn-primary mr-2">Sign Up</a>
+                <a href="login.html" class="btn btn-outline-light">Login</a>
             </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h1>Improve your fitness and boost your mood</h1>
-        <a href="form.html">
-        <button class="Get-Started">Get Started</button></a>
-    </section>
-
-    <!-- Feature Sections -->
-    <section class="features">
-        <div class="feature">
-            <span style='font-size:50px;' class="emoji hearts" role="img" aria-label="hearts"></span>
-            <h3>Happy Body</h3>
-            <p>Embrace your well-being and lead a healthy lifestyle.</p>
+            <div id="themeToggle" class="fas fa-adjust fa-lg text-primary" style="cursor: pointer;" onclick="toggleTheme()">
         </div>
-        <div class="feature">
-            <span style='font-size:50px;'class="emoji clock" role="img" aria-label="clock"></span>
-            <h3>Quality Rest</h3>
-            <p>Get better sleep and health rejuvenated.</p>
+    </nav>
+</header>
+<!--Get started section-->
+    <div class="jumbotron jumbotron-fluid bg-dark text-white text-center">
+        <div class="container">
+            <h1 class="display-4">Welcome to GaiNS.ai</h1>
+            <p class="lead">Where personalized fitness routines meet cutting-edge technology for your optimal workout experience!</p>
+            <a href="form.html" class="btn btn-primary btn-lg">Get Started</a>
         </div>
-        <div class="feature">
-            <span style='font-size:50px;'class="emoji hourglass" role="img" aria-label="hourglass"></span>
-            <h3>Magnis dis</h3>
-            <p>Enhance your well-being and lead a healthy lifestyle.</p>
-        </div>
-    </section>  
+    </div>
 
-    <!-- Footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature">
+                    <span style='font-size:50px;' class="emoji hearts" role="img" aria-label="hearts"></span>
+                    <h3>Happy Body</h3>
+                    <p>Embrace your well-being and lead a healthy lifestyle.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature">
+                    <span style='font-size:50px;'class="emoji clock" role="img" aria-label="clock"></span>
+                    <h3>Quality Rest</h3>
+                    <p>Get better sleep and health rejuvenated.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature">
+                    <span style='font-size:50px;'class="emoji hourglass" role="img" aria-label="hourglass"></span>
+                    <h3>Magnis dis</h3>
+                    <p>Enhance your well-being and lead a healthy lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Community section-->
     <footer>
-        <div class="footer-section">
-            <h4>About us</h4>
-            <ul>Credit:
-                <li>Brian Truong</li>
-                <li>Himanshi Sheth</li>
-                <li>Justin Truong</li>
-            </ul>
+    <div class="jumbotron jumbotron-fluid bg-dark text-white text-center">
+        <div class="container">
+            <h1 class="display-4">Join Our Community</h1>
+            <p class="lead">Connect with like-minded individuals and achieve your fitness goals together!</p>
+            <a href="Community.html" class="btn btn-outline-light btn-lg">Join Now</a>
         </div>
-        <!-- Add other footer sections here -->
-       <!-- <div class="social-links">
-            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-        </div>-->
+    </div>
     </footer>
-
+ 
+    <script> function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+    }
+    </script>
     <script src="script.js"></script>
-
 </body>
 </html>
