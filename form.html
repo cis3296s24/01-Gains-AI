@@ -304,7 +304,6 @@
 <div id="mini-home-workout-popup" class="mini-popup">
     <span class="popup-close">&times;</span>
     <h3 style="text-align: center;">Home Workout Form</h3>
-    <form onsubmit="loadWorkoutVideo(event)">
         <!--  home workout form fields -->
         <table class="table">
             <form onsubmit="handleFormSubmission(event, 'Workout.html')">
@@ -574,7 +573,6 @@
 <div id="mini-meditation-popup" class="mini-popup">
     <span class="popup-close">&times;</span>
     <h3>Meditation Form</h3>
-    <form>
         <table class="table">
             <form onsubmit="handleFormSubmission(event, 'Workout.html')">
             <tr>
@@ -648,6 +646,11 @@
             const popup = document.getElementById(popupId);
 
             if (popup) {
+                // Close all other popups
+                miniPopups.forEach((popup) => {
+                    popup.style.display = 'none';
+                });
+
                 popup.style.display = 'block';
 
                 // Close the popup when clicking on close button or outside the popup
@@ -663,6 +666,7 @@
             }
         });
     });
+
     function handleFormSubmission(event, redirectPage) {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -671,6 +675,7 @@
         console.log("Redirecting to:", redirectUrl);
         window.location.href = redirectUrl;
     }
+
     //  search box
     const searchInput = document.getElementById('workout-search');
         const buttons = document.querySelectorAll('.left-side-buttons button');
