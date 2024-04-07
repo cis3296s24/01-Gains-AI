@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
             // Split the response into separate strings based on the numbers
-            const ExcisesArray = responseMessage.split(/\d+\./).filter(Boolean).map(s => s.trim());
+            const ExcisesArray = responseMessage.split(/\d+\.|(?<=\d)\)/).filter(Boolean).map(s => s.trim());
 
             const contextDiv = document.getElementById("context");
 
@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             videoExerciseContainer.appendChild(ExciseDescription);
                             videoExerciseContainer.appendChild(iframe);
                             contextDiv.appendChild(videoExerciseContainer);
+                            var Different_Prompt =localStorage.getItem("DifferentWorkout_prompt_key") 
+                            Different_Prompt = Different_Prompt + ExciseName.textContent + ", ";
+                            localStorage.setItem("DifferentWorkout_prompt_key", Different_Prompt);
                         })
                         .catch(error => {
                             console.error('Error fetching workout video:', error);

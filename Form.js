@@ -54,6 +54,8 @@ let Body_Part = document.getElementById("Body-Part").value;
     
 Workout_prompt = `Give me 5 ${Body_Part} exercises for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
 localStorage.setItem("Workout_prompt_key", Workout_prompt);
+Different_prompt = Workout_prompt + " Not Included "
+localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
 console.log(Workout_prompt);
         
 window.location.href = 'Workout.html'; // Redirect to Workout.html
