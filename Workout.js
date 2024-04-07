@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const GenerateButton = document.getElementById('Generate');
     const GenerateButton_again = document.getElementById('Generate_Again');
+    const GenerateButton_Different = document.getElementById('Generate_Different');
 
     GenerateButton.addEventListener('click', function() {
         var Prompt = localStorage.getItem("Workout_prompt_key");
@@ -13,8 +14,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
     });
 
-    const YoutubeApiKey = 'AIzaSyCOau10uiAjFbxdDv7SC9IVLZKyk6SvsrA';
-    const ChatgptApiKey = "ADD Key" // Replace with your key
+    GenerateButton_Different.addEventListener('click', function() {
+        var Different_Prompt = localStorage.getItem("DifferentWorkout_prompt_key");
+        sendMessage(Different_Prompt);
+    });
+
+
+    const YoutubeApiKey = "AIzaSyANYHMCsoWiCsqmZgm8S2y0wcQrixB62xk";
+    const ChatgptApiKey = "" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -35,8 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Split the response into separate strings based on the numbers
             const ExcisesArray = responseMessage.split(/\d+\./).filter(Boolean).map(s => s.trim());
 
-            const contextDiv = document.getElementById('content');
-            const playerDiv = document.getElementById("player");
+            const contextDiv = document.getElementById("context");
+
+            // Create container for video and exercise name
+            const videoExerciseContainer = document.createElement('div');
+            videoExerciseContainer.classList.add('video-exercise-container');
 
             //Display each curl on the website
              ExcisesArray.forEach((excrise) => {
@@ -44,18 +54,17 @@ document.addEventListener("DOMContentLoaded", function() {
                  
                     const ExciseName = document.createElement('h1');
                     ExciseName.textContent = ` ${ExcisesDescription[0]}`;
-                    contextDiv.appendChild(ExciseName);
                     console.log(ExciseName)
                     
 
 
                     const ExciseDescription = document.createElement('div');
                     ExciseDescription.textContent = ` ${ExcisesDescription[1]}`;
-                    contextDiv.appendChild(ExciseDescription);
+                    videoExerciseContainer.appendChild(ExciseDescription);
                     console.log(ExciseDescription)
 
                     
-                    const searchQuery = `How to do ${ExciseDescription.textContent}`;
+                    const searchQuery = `How to do ${ExciseName.textContent}`;
                     // Call API to fetch video
                     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(searchQuery)}&type=video&videoEmbeddable=true&key=${YoutubeApiKey}`)
                         .then(response => response.json())
@@ -73,14 +82,16 @@ document.addEventListener("DOMContentLoaded", function() {
                             iframe.setAttribute('allowfullscreen', '');
                             
                             // Append the iframe to a container element in your HTML
-        
-                            contextDiv.appendChild(iframe);
+                            videoExerciseContainer.appendChild(ExciseName);
+                            videoExerciseContainer.appendChild(ExciseDescription);
+                            videoExerciseContainer.appendChild(iframe);
+                            contextDiv.appendChild(videoExerciseContainer);
                         })
                         .catch(error => {
                             console.error('Error fetching workout video:', error);
                         });
                     
-
+                
                
             });
 

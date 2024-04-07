@@ -52,7 +52,7 @@ let duration = document.getElementById("Duration").value;
 let fitnessLevel = document.querySelector('input[name="Fitness Level"]:checked')?.value || "";
 let Body_Part = document.getElementById("Body-Part").value;
     
-Workout_prompt = `Give me 5 ${Body_Part} exercises for ${gender} age ${age} with a description seperated by :`;
+Workout_prompt = `Give me 5 ${Body_Part} exercises for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
 localStorage.setItem("Workout_prompt_key", Workout_prompt);
 console.log(Workout_prompt);
         
