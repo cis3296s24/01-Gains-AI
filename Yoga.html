@@ -1,0 +1,80 @@
+<html>
+    <body>
+        <style>.btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3; /* Set border color to purple */
+            color: white; /* Set text color to white */
+        }</style>
+        <div id="mini-yoga-popup" class="mini-popup">
+            <span class="popup-close">&times;</span>
+            
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')"data-workout-type="Yoga">
+                <h3 style="text-align: center;color: #000;">Yoga Form</h3>
+                <!-- yoga form fields  -->
+                <table class="table">
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Entry</th>
+                    </tr>
+                    <tr>
+                        <td><label for="yoga-name">Name</label></td>
+                        <td><input type="text" id="yoga-name" name="yoga-name" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="yoga-duration">Duration</label></td>
+                        <td>
+                            <select id="yoga-duration" name="yoga-duration" class="form-control">
+                                <option value="10">10 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">60 minutes</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Fitness Level">Fitness Level</label></td>
+                        <td>
+                            <select id="Fitness Level" name="Fitness Level" class="form-control">
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td>
+                            <div class="radio-group">
+                                <label><input type="radio" name="Gender" value="Male"> Male</label>
+                                <label><input type="radio" name="Gender" value="Female"> Female</label>
+                                <label><input type="radio" name="Gender" value="Other"> Other</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Types of Yoga</label></td>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Bikram Yoga"> Bikram </label>
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Kundalini Yoga"> Kundalini </label>
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Hath Yoga"> Hath </label>
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Iyengar Yoga"> Iyengar </label>
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Ashtanga Yoga">  Ashtanga </label>
+                                <label><input type="checkbox" name="TypeofYoga[]" value="Katonah Yoga"> Katonah </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <div class="form-buttons">
+                                <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
