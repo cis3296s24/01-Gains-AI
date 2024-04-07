@@ -386,3 +386,13 @@ footer {
     color: #fff;
     margin-top: 10px;
 }
+
+
+
+  
+  /* Styles for the icon */
+  #icon {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    cursor: pointer;
+  }
