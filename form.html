@@ -37,7 +37,10 @@
 </head>
 
 <body>
-    
+    <script src="script.js"></script>
+    <script src="Form.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
     <!-- Header -->
     <header>
         <nav>
@@ -184,52 +187,7 @@
     </form>
 </div>
     <script src="script.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const openMiniPopupButtons = document.querySelectorAll('.open-mini-popup');
-            openMiniPopupButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetPopupId = button.getAttribute('data-popup-target');
-                    const targetPopup = document.getElementById(targetPopupId);
-                    const otherPopupId = targetPopupId === 'mini-workout-popup' ? 'mini-yoga-popup' : 'mini-workout-popup';
-                    const otherPopup = document.getElementById(otherPopupId);
-                    
-                    if (targetPopup.style.display === 'none') {
-                        targetPopup.style.display = 'block';
-                        otherPopup.style.display = 'none';
-                    } else {
-                        targetPopup.style.display = 'none';
-                    }
-                });
-            });
-                        // Close button functionality
-                        const closeButtons = document.querySelectorAll('.popup-close');
-                        closeButtons.forEach(closeButton => {
-                            closeButton.addEventListener('click', () => {
-                                const popup = closeButton.parentElement;
-                                popup.style.display = 'none';
-                    });
-                });
-        const startYogaButton = document.querySelector('#mini-yoga-popup .Workout');
-        const exitYogaButton = document.querySelector('#mini-yoga-popup .Homepage');
-
-        startYogaButton.addEventListener('click', () => {
-                // Redirect to existing Workout.html when Start button in Yoga form is clicked
-                event.preventDefault();
-                window.location.href = 'Workout.html'; 
-            });
-
-        exitYogaButton.addEventListener('click', () => {
-            // Close the Yoga form when Exit button is clicked
-            event.preventDefault();
-            const yogaPopup = document.getElementById('mini-yoga-popup');
-            if (confirm("Are you sure you want to exit?")) {
-            window.location.href = 'Homepage.html';
-            }
-        });
-    });
-    </script>
+    <script src="Form.js"></script>
     
 </body>
 </html>
