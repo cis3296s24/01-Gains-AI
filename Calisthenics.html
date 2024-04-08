@@ -1,0 +1,58 @@
+<body>
+    <html>
+        <style>.btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3;
+            color: white; /* Set text color to white */
+        }</style>
+        <div id="mini-calisthenics-popup" class="mini-popup">
+            <span class="popup-close">&times;</span>
+            <form onsubmit="handleFormSubmission(event, 'Workout.html')" data-workout-type="Calisthenics">
+                <h3 style="text-align: center;color: #000;">Calisthenics Form</h3>
+                <table class="table">
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Entry</th>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Name</label></td>
+                        <td><input type="text" id="name" name="name" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="age">Age</label></td>
+                        <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td>
+                            <div class="radio-group">
+                                <label><input type="radio" name="Gender" value="Male"> Male</label>
+                                <label><input type="radio" name="Gender" value="Female"> Female</label>
+                                <label><input type="radio" name="Gender" value="Other"> Other</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="CalisthenicsType[]">Types of Calisthenics</label></td>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="CalisthenicsType[]" value="Push-Ups"> Push-Ups</label>
+                                <label><input type="checkbox" name="CalisthenicsType[]" value="Pull-Ups"> Pull-Ups</label>
+                                <label><input type="checkbox" name="CalisthenicsType[]" value="Squats"> Squats</label>
+                                <label><input type="checkbox" name="CalisthenicsType[]" value="Lunges"> Lunges</label>
+                                <label><input type="checkbox" name="CalisthenicsType[]" value="Planks"> Planks</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="form-buttons">
+                            <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script src="script.js"></script>
+    </html>
+</body>
