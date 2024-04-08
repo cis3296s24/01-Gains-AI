@@ -1,74 +1,227 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const openMiniPopupButtons = document.querySelectorAll('.open-mini-popup');
-    openMiniPopupButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetPopupId = button.getAttribute('data-popup-target');
-            const targetPopup = document.getElementById(targetPopupId);
-            const otherPopupId = targetPopupId === 'mini-workout-popup' ? 'mini-yoga-popup' : 'mini-workout-popup';
-            const otherPopup = document.getElementById(otherPopupId);
-            
-            if (targetPopup.style.display === 'none') {
-                targetPopup.style.display = 'block';
-                otherPopup.style.display = 'none';
-            } else {
-                targetPopup.style.display = 'none';
+   
+ 
+    // opening/closing mini popups
+    const openMiniPopups = document.querySelectorAll('.open-mini-popup');
+    const miniPopups = document.querySelectorAll('.mini-popup');
+
+    openMiniPopups.forEach((openBtn) => {
+        openBtn.addEventListener('click', () => {
+            const popupId = openBtn.getAttribute('data-popup-target');
+            const popup = document.getElementById(popupId);
+
+            if (popup) {
+                // Close all other popups
+                miniPopups.forEach((popup) => {
+                    popup.style.display = 'none';
+                });
+
+                popup.style.display = 'block';
             }
         });
     });
-                // Close button functionality
-                const closeButtons = document.querySelectorAll('.popup-close');
-                closeButtons.forEach(closeButton => {
-                    closeButton.addEventListener('click', () => {
-                        const popup = closeButton.parentElement;
-                        popup.style.display = 'none';
+
+    // Add event listener for close button
+    miniPopups.forEach(popup => {
+        const closeButton = popup.querySelector('.popup-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                popup.style.display = 'none';
             });
-        });
-const startYogaButton = document.querySelector('#mini-yoga-popup .Workout');
-const exitYogaButton = document.querySelector('#mini-yoga-popup .Homepage');
-
-startYogaButton.addEventListener('click', () => {
-        // Redirect to existing Workout.html when Start button in Yoga form is clicked
-        event.preventDefault();
-        window.location.href = 'Workout.html'; 
+        }
     });
-
-exitYogaButton.addEventListener('click', () => {
-    // Close the Yoga form when Exit button is clicked
-    event.preventDefault();
-    if (confirm("Are you sure you want to exit?")) {
-    window.location.href = 'Homepage.html';
-    }
 });
 
-const startWorkoutButton = document.querySelector('#mini-workout-popup .Workout');
-const exitWorkoutButton = document.querySelector('#mini-workout-popup .Homepage');
-
-startWorkoutButton.addEventListener('click', (event) => {
-event.preventDefault(); // Prevent form submission
-let name = document.getElementById("name").value;
-let age = document.getElementById("age").value;
-let gender = document.querySelector('input[name="Gender"]:checked')?.value || "";
-let duration = document.getElementById("Duration").value;
-let fitnessLevel = document.querySelector('input[name="Fitness Level"]:checked')?.value || "";
-let Body_Part = document.getElementById("Body-Part").value;
+    function handleFormSubmissionGym(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("name.gym").value;
+        let age = document.getElementById("age.gym").value;
+        let gender = document.querySelector('input[name="Gender.gym"]:checked')?.value || "";
+        let duration = document.getElementById("Duration.gym").value;
+        let fitnessLevel = document.querySelector('input[name="Fitness Level.gym"]:checked')?.value || "";
+        var selectElement = document.getElementById('GymWorkout');
+        var Body_Part = selectElement.value;
+        if(Body_Part == "other"){
+            Body_Part = document.getElementById('Other.gym').value;
+        }
     
-Workout_prompt = `Give me 5 ${Body_Part} exercises for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
-localStorage.setItem("Workout_prompt_key", Workout_prompt);
-Different_prompt = Workout_prompt + " Not Included "
-localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
-console.log(Workout_prompt);
-        
-window.location.href = 'Workout.html'; // Redirect to Workout.html
-
-});
-
-exitWorkoutButton.addEventListener('click', () => {
-    // Close the Yoga form when Exit button is clicked
-    event.preventDefault();
-    if (confirm("Are you sure you want to exit?")) {
-    window.location.href = 'Homepage.html';
+        Workout_prompt = `Give me 5 ${Body_Part} exercises at the gym for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        // Redirect 
+        window.location.href = actionUrl;
     }
-});
 
-});
+    var checkboxes = document.querySelectorAll('input[name="TypesofEquipment[]"]:checked');
+    var selectedValues = [];
+    checkboxes.forEach(function(checkbox) {
+        selectedValues.push(checkbox.value);
+    });
+    function handleFormSubmissionHomeWorkout(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("name.home").value;
+        let age = document.getElementById("age.home").value;
+        let gender = document.querySelector('input[name="Gender.home"]:checked')?.value || "";
+        let duration = document.getElementById("Duration.home").value;
+        let fitnessLevel = document.querySelector('input[name="Fitness Level.home"]:checked')?.value || "";
+
+        var checkboxes = document.querySelectorAll('input[name="TypesofEquipment[]"]:checked');
+        var selectedValues = [];
+        checkboxes.forEach(function(checkbox) {
+            selectedValues.push(checkbox.value);
+        });
+
+        var limits= "Limit to these equipment: " + selectedValues.join(', ');
+
+
+
+        var selectElement = document.getElementById('HomeWorkout');
+        var Body_Part = selectElement.value;
+        if(Body_Part == "other"){
+            Body_Part = document.getElementById('Other.home').value;
+        }
+    
+        Workout_prompt = `Give me 5 ${Body_Part} home exercises ${limits} for ${gender} age ${age} with a description that last for ${duration} minutes for ${fitnessLevel} seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        // Redirect 
+        window.location.href = actionUrl;
+    }
+
+    function handleFormSubmissionWorkoutBodyBuilding(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("name.BodyBuilding").value;
+        let age = document.getElementById("age.BodyBuilding").value;
+        let gender = document.querySelector('input[name="Gender.BodyBuilding"]:checked')?.value || "";
+        let duration = document.getElementById("Duration.BodyBuilding").value;
+        
+
+        var BodyBuilding = document.getElementById('BodyBuilding');
+        var TypeofBodyBuilding = BodyBuilding.value;
+
+
+        var selectElement = document.getElementById('BodyWorkout');
+        var Body_Part = selectElement.value;
+        if(Body_Part == "other"){
+            Body_Part = document.getElementById('Other.BodyBuilding').value;
+        }
+
+        Workout_prompt = `Give me 5 ${Body_Part} exercise for ${TypeofBodyBuilding} for ${gender} age ${age} with a description that last for ${duration} minutes seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        // Redirect 
+        window.location.href = actionUrl;
+    }
+
+
+    function handleFormSubmissionWorkoutCalisthenics(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("name.Calisthenics").value;
+        let age = document.getElementById("age.Calisthenics").value;
+        let gender = document.querySelector('input[name="Gender.Calisthenics"]:checked')?.value || "";
+        let duration = document.getElementById("Duration.Calisthenics").value;
+        
+
+        var Calisthenics = document.getElementById('Calistenthic');
+        var TypeofCalisthenics = Calisthenics.value;
+
+
+        var selectElement = document.getElementById('Bodypart');
+        var Body_Part = selectElement.value;
+        if(Body_Part == "other"){
+            Body_Part = document.getElementById('Other.Calistenthic').value;
+        }
+
+        Workout_prompt = `Give me 5 ${Body_Part} ${TypeofCalisthenics} Calisthenics for ${gender} age ${age} with a description that last for ${duration} minutes seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        // Redirect 
+        window.location.href = actionUrl;
+    }
+
+ 
+
+
+    function handleFormSubmissionWorkoutYoga(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("yoga-name").value;
+        let gender = document.querySelector('input[name="Gender.yoga"]:checked')?.value || "";
+        let duration = document.getElementById("yoga-duration").value;
+        let fitnessLevel = document.getElementById("Fitness Level.yoga").value;
+        
+
+
+        var Yoga = document.getElementById('Yoga');
+        var TypeofYoga = Yoga.value;
+        // Check if the selected value is "other"
+        if (TypeofYoga === "other") {
+        // Get the value from the "Other" textarea
+        TypeofYoga = document.getElementById('Other.yoga').value;
+        }
+
+
+        Workout_prompt = `Give me 5 ${TypeofYoga} yoga exercise for ${gender} with a description that last for ${duration} minutes for ${fitnessLevel} seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        
+        window.location.href = actionUrl;
+    }
+
+    
+
+    function handleFormSubmissionMeditation(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        let name = document.getElementById("name.Meditation").value;
+        let gender = document.querySelector('input[name="Gender.Meditation"]:checked')?.value || "";
+        let duration = document.getElementById("meditation-duration").value;
+        
+
+        var Meditation = document.getElementById('Meditation');
+        var TypeofMeditation = Meditation.value;
+        // Check if the selected value is "other"
+        if (TypeofMeditation === "other") {
+        // Get the value from the "Other" textarea
+        TypeofMeditation = document.getElementById('Other.meditation').value;
+        }
+
+
+        Workout_prompt = `Give me 5 ${TypeofMeditation} Meditation Techniques for ${gender} with a description that last for ${duration} minutes seperated by :`;
+        localStorage.setItem("Workout_prompt_key", Workout_prompt);
+        Different_prompt = Workout_prompt + " Not Included "
+        localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
+        console.log(Workout_prompt);
+        //  form submission logic
+        console.log('Form submitted!');
+        
+        window.location.href = actionUrl;
+    }
+
+
+
 
