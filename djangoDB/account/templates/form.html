@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form</title>
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <style>
+        /* CSS for the popup */
+        .open-mini-popup{
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #9c56e3; 
+            color: #fff; 
+        }
+        .mini-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            z-index: 9999;
+            max-width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Close button */
+        .popup-close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">GaiNS.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="Music.html">Music</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="{% url 'signup' %}"><button class="sign-up">Sign Up</button></a>
+                <a href="{% url 'login' %}"><button class="Login">Login</button></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Workout Section -->
+    <section class="form-container">
+        <button class="open-mini-popup" data-popup-target="mini-workout-popup">Start Workout</button>
+        <button class="open-mini-popup" data-popup-target="mini-yoga-popup">Start Yoga</button>
+    </section>
+
+    <!-- Mini Workout Popup Form -->
+    <div id="mini-workout-popup" class="mini-popup">
+        <span class="popup-close">&times;</span>
+        <h2 style="text-align: center;">Workout Form</h2>
+        <form>
+            <!-- Add workout form fields here -->
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><label for="name">Name</label></td>
+                    <td><input type="text" id="name" name="name"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Gender" value="Male"> Male </label>
+                            <label><input type="radio" name="Gender" value="Female"> Female </label>
+                            <label><input type="radio" name="Gender" value="Other"> Other </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Duration">Duration</label></td>
+                    <td>
+                        <select id="Duration" name="Duration">
+                            <option value="10">10 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Fitness Level</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
+                            <label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
+                            <label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Body-Part</label></td>
+                    <td>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="Body Part" value="biceps"> Biceps</label>
+                            <label><input type="checkbox" name="Body Part" value="belly"> Belly</label>
+                            <label><input type="checkbox" name="Body Part" value="arms"> Arms</label>
+                            <label><input type="checkbox" name="Body Part" value="legs"> Legs</label>
+                            <label><input type="checkbox" name="Body Part" value="chest"> Chest</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="form-buttons">
+                <button class="Workout">Start</button>
+                <button class="Homepage">Exit</button>
+            </div>
+        </form>
+    </div>
+<!-- Mini Yoga Popup Form -->
+<div id="mini-yoga-popup" class="mini-popup">
+    <span class="popup-close">&times;</span>
+    <h2 style="text-align: center;">Yoga Form</h2>
+    <form>
+        
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name" name="name"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender" value="Male"> Male </label>
+                        <label><input type="radio" name="Gender" value="Female"> Female </label>
+                        <label><input type="radio" name="Gender" value="Other"> Other </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Duration">Duration</label></td>
+                <td>
+                    <select id="Duration" name="Duration">
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Types of Yoga</label></td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="Type of Yoga" value="Vinyasa Yoga"> Vinyasa </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Bikram Yoga"> Bikram </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Kundalini Yoga"> Kundalini </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Hath Yoga"> Hath </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Iyengar Yoga"> Iyengar </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Ashtanga Yoga">  Ashtanga </label>
+                        <label><input type="checkbox" name="Type of Yoga" value="Katonah Yoga"> Katonah </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-buttons">
+            <button class="Workout">Start</button>
+            <button class="Homepage">Exit</button>
+        </div>
+    </form>
+</div>
+    <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const openMiniPopupButtons = document.querySelectorAll('.open-mini-popup');
+            openMiniPopupButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetPopupId = button.getAttribute('data-popup-target');
+                    const targetPopup = document.getElementById(targetPopupId);
+                    const otherPopupId = targetPopupId === 'mini-workout-popup' ? 'mini-yoga-popup' : 'mini-workout-popup';
+                    const otherPopup = document.getElementById(otherPopupId);
+                    
+                    if (targetPopup.style.display === 'none') {
+                        targetPopup.style.display = 'block';
+                        otherPopup.style.display = 'none';
+                    } else {
+                        targetPopup.style.display = 'none';
+                    }
+                });
+            });
+                        // Close button functionality
+                        const closeButtons = document.querySelectorAll('.popup-close');
+                        closeButtons.forEach(closeButton => {
+                            closeButton.addEventListener('click', () => {
+                                const popup = closeButton.parentElement;
+                                popup.style.display = 'none';
+                    });
+                });
+        const startYogaButton = document.querySelector('#mini-yoga-popup .Workout');
+        const exitYogaButton = document.querySelector('#mini-yoga-popup .Homepage');
+
+        startYogaButton.addEventListener('click', () => {
+                // Redirect to existing Workout.html when Start button in Yoga form is clicked
+                event.preventDefault();
+                window.location.href = 'Workout.html'; 
+            });
+
+        exitYogaButton.addEventListener('click', () => {
+            // Close the Yoga form when Exit button is clicked
+            event.preventDefault();
+            const yogaPopup = document.getElementById('mini-yoga-popup');
+            if (confirm("Are you sure you want to exit?")) {
+            window.location.href = 'Homepage.html';
+            }
+        });
+    });
+    </script>
+    
+</body>
+</html>

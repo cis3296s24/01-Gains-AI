@@ -41,54 +41,15 @@
     </div>
     <script src="script.js"></script>
 
-    <script>
-        // Retrieve the serialized arrays from local storage
-        var serializedexecriseName = localStorage.getItem('exerciseName');
-        var serializedexecriseDescription = localStorage.getItem('exerciseDescription');
+    
+    <button id="Generate">Generate</button>
+    <button id="Generate_Different">Generate 5 more exercise</button>
+    <button id="Generate_Again"> Change workout Type</button>
+    <div id = "content">
+        <!-- Your content here -->
+    </div>
 
-        // Deserialize the array string back to an array using JSON.parse
-        var Name = JSON.parse(serializedexecriseName);
-        var Description = JSON.parse(serializedexecriseDescription);
 
-        const contextDiv = document.getElementById("context");
-        const playerDiv = document.getElementById("player");
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoIds = urlParams.get('videoIds');
-
-        if (videoIds) {
-            
-            const videoIdsArray = videoIds.split(',');
-
-            videoIdsArray.forEach((videoId, index) => {
-                // Create container for video and exercise name
-                const videoExerciseContainer = document.createElement('div');
-                videoExerciseContainer.classList.add('video-exercise-container');
-
-                const exerciseElement = document.createElement('h1');
-                exerciseElement.textContent = Name[index];
-                videoExerciseContainer.appendChild(exerciseElement);
-
-                const exerciseDescriptionElement = document.createElement('div');
-                exerciseDescriptionElement.textContent = Description[index];
-                videoExerciseContainer.appendChild(exerciseDescriptionElement);
-
-                // Create video iframe
-                const iframeElement = document.createElement('iframe');
-                iframeElement.width = '560';
-                iframeElement.height = '315';
-                iframeElement.src = `https://www.youtube.com/embed/${videoId}`;
-                iframeElement.frameBorder = '0';
-                iframeElement.allowFullscreen = true;
-                videoExerciseContainer.appendChild(iframeElement);
-
-                // Append the container to the player div
-                playerDiv.appendChild(videoExerciseContainer);
-            });
-        } else {
-            console.error('No video IDs provided.');
-        }
-
-    </script>
+    <script src="Workout.js"></script>
 </body>
 </html>
