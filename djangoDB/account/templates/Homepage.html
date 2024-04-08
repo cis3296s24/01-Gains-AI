@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to GaiNS.ai</title>
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+   <style>.btn-custom {
+    background-color: #9c56e3;
+    border-color: #9c56e3; 
+    color: white; /* Set text color to white */
+}</style>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
+            <a class="navbar-brand" href="#">    
+            <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'about' %}>About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Community.html">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Music.html">Music</a>
+                    </li>
+                </ul>
+                {% if user.is_authenticated %}
+                <div class="nav-buttons mr-3"> 
+                    <a href={% url 'logout' %} class="btn btn-outline-light">Logout</a>
+                </div>
+                {% else %}
+                <div class="nav-buttons mr-3"> 
+                    <a href={% url 'signup' %} class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
+                    <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
+                </div>
+                {% endif %}
+                <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()"></div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="jumbotron jumbotron-fluid bg-dark-#333 text-white text-center" style="background-color: #333;">
+        
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            <h1 class="display-1 font-weight-bold">Welcome to GaiNS.ai</h1>
+            <p class="lead">Where personalized fitness routines meet cutting-edge technology for your optimal workout experience!</p>
+            <a href={% url 'form' %} class="btn btn-custom btn-lg" style="background-color: #9c56e3;">Get Started</a>
+        </div>
+    </div>
+    
+
+    <!-- Feature Sections -->
+    <section class="features">
+        <div class="feature">
+            <span style='font-size:50px;' class="emoji hearts" role="img" aria-label="hearts"></span>
+            <h3>Happy Body</h3>
+            <p>Embrace your well-being and lead a healthy lifestyle.</p>
+        </div>
+        <div class="feature">
+            <span style='font-size:50px;'class="emoji clock" role="img" aria-label="clock"></span>
+            <h3>Quality Rest</h3>
+            <p>Get better sleep and health rejuvenated.</p>
+        </div>
+        <div class="feature">
+            <span style='font-size:50px;'class="emoji hourglass" role="img" aria-label="hourglass"></span>
+            <h3>Magnis dis</h3>
+            <p>Enhance your well-being and lead a healthy lifestyle.</p>
+        </div>
+    </section>  
+
+    <!-- Footer -->
+    <footer>
+        <div class="jumbotron jumbotron-fluid bg-dark-#333 text-white text-center"style="background-color: #333;border: none;">
+                <h1 class="display-4">Join Our Community</h1>
+                <p class="lead">Connect with like-minded individuals and achieve your fitness goals together!</p>
+                <a href="Community.html" class="btn btn-outline-light btn-lg">Join Now</a>
+        </div>
+        <!-- Add other footer sections here -->
+       <!-- <div class="social-links">
+            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        </div>-->
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
