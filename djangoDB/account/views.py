@@ -63,6 +63,10 @@ def about(request):
     return render(request, 'About.html', {})
 
 
+def workout(request):
+    return render(request, 'Workout.html', {})
+
+
     
     
     

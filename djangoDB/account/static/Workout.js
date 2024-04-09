@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     const YoutubeApiKey = "AIzaSyAXjzH8sqzsz5c_yNWDhr_Cf-RHH6FzY1E";
-    const ChatgptApiKey = "ADD KEY" // Replace with your key
+    const ChatgptApiKey = "Add Key" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
