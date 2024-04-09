@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Body_Part = document.getElementById('Other.gym').value;
         }
     
-        Workout_prompt = `Give me 5 ${Body_Part} exercises at the gym for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
+        Workout_prompt = `Give me 5 ${Body_Part} gym exercises for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
         Different_prompt = Workout_prompt + " Not Included "
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
