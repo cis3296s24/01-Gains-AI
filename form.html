@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src ="Form.js"></script>
+    <script src ="script.js"></script>
     <style>
         /* CSS for the popup */
         .open-mini-popup {
@@ -205,6 +206,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Music.html">Music</a>
                     </li>
+                    <li>
+                        <img id="icon" src="Mute_Icon.png" alt="Icon">
+                        <audio id="music" src=""></audio>
+                    </li>
                 </ul>
                 <div class="nav-buttons mr-3">
                     <a href="signup.html" class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
@@ -240,7 +245,6 @@
     </div></div>
     <!-- popup from the Gym.html -->
     <div id="mini-workout-popup" class="mini-popup" style="display: none;">
-        <span class="popup-close">&times;</span>
             <span class="popup-close">&times;</span>
             <form onsubmit="handleFormSubmissionGym(event, 'Workout.html')" data-workout-type="Gym">
                 <h3 style="text-align: center;color: #000;">Gym Form</h3>
@@ -308,7 +312,7 @@
                 <tr>
                 <tr>
                     <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.gym" class="form-control" rows="1"></textarea></td>
+                    <td><textarea id="Other.gym" name="Other" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
@@ -406,7 +410,7 @@
                 </tr>
                 <tr>
                     <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.home" class="form-control" rows="1"></textarea></td>
+                    <td><textarea id="Other.home" name="Other" class="form-control" rows="1"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
