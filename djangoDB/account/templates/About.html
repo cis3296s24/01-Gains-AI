@@ -13,7 +13,7 @@
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
-        <a class="navbar-brand" href={% url 'homepage' %}>    
+        <a class="navbar-brand" href={% url 'homepage' %}>
         <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,6 +44,44 @@
         </div>
     </nav>
 </header>
+
+
+<div class="container" style="display: flex;justify-content: center;align-items: center;">
+    {% comment %} <div class="row"> {% endcomment %}
+
+        <div class="card" style="margin: 10px;float:left">      
+            <img src="{% static 'profile.jpg'%}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center;">Brian Truong</h5>
+                <p class="card-text">"Hi there! I'm a senior studying computer science, and I have a passion for napping, eating, and gaming!
+                    At home, I have a feline companion named Mo, who's always eager for a treat.
+                    Whenever I crave a delicious meal, pho is my go-to dish. Lately, I've been immersing myself in the world of Deep Rock Galactic –
+                    it's my current gaming obsession!"
+                </p>
+            </div>
+        </div>
+        <div class="card" style="margin: 10px;float: left">      
+            <img src="{% static 'profile.jpg'%}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center;">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="margin: 10px;float: left">      
+            <img src="{% static 'profile.jpg'%}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center;">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+
+    {% comment %} </div> {% endcomment %}
+</div>
+
+
+
+
+
 <style>.dark-mode {
     /*  dark mode  */
     background-color: #000000;
