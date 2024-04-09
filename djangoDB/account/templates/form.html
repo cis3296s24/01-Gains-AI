@@ -4,15 +4,19 @@
 <head>
     <title>Form</title>
     <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         /* CSS for the popup */
-        .open-mini-popup{
+        .open-mini-popup {
             padding: 12px 24px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #9c56e3; 
-            color: #fff; 
+            background-color: #9c56e3;
+            color: #fff;
         }
         .mini-popup {
             display: none;
@@ -34,211 +38,405 @@
             cursor: pointer;
             font-size: 20px;
         }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6C63FF;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container .radio-group label,
+        .form-container .checkbox label {
+            margin-right: 10px;
+        }
+        .form-container .form-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-container .form-buttons button {
+            margin: 0 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #6C63FF;
+            color: #fff;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1;
+            top: 75px;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+        }
+
+        .sidebar .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .sidebar .btn-group button {
+            width: 100%;
+            text-align: left;
+            padding: 10px 0;
+            margin: 5px 0;
+            font-size: 18px;
+            color: #f5f3f3;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .sidebar .btn-group button:hover {
+            color: #9c56e3;
+        }
+
+        /* Responsive media queries */
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .sidebar a {
+                font-size: 16px;
+            }
+        }
+        /* Types of workouts form styles */
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            max-height: min-content;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #f3f6f8;
+            color: #fff;
+        }
+
+        /* Search bar */
+        .search-bar {
+            margin-bottom: 20px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar i {
+            margin-left: 10px;
+            color: #9c56e3;
+            cursor: pointer;
+        }
+        .dark-mode {
+            /*  dark mode  */
+            background-color: #000000;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-    
     <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">GaiNS.ai</div>
-            <ul class="nav-menu">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="Music.html">Music</a></li>
-            </ul>
-            <div class="nav-buttons">
-                <a href="{% url 'signup' %}"><button class="sign-up">Sign Up</button></a>
-                <a href="{% url 'login' %}"><button class="Login">Login</button></a>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
+            <a class="navbar-brand" href={% url 'homepage' %}>
+                <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'about' %}>About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Music.html">Music</a>
+                    </li>
+                </ul>
+                {% if user.is_authenticated %}
+                <div class="nav-buttons mr-3"> 
+                    <a href={% url 'logout' %} class="btn btn-outline-light">Logout</a>
+                </div>
+                {% else %}
+                <div class="nav-buttons mr-3"> 
+                    <a href={% url 'signup' %} class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
+                    <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
+                </div>
+                {% endif %}
+                <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()">
+                </div>
             </div>
         </nav>
     </header>
-
-    <!-- Workout Section -->
-    <section class="form-container">
-        <button class="open-mini-popup" data-popup-target="mini-workout-popup">Start Workout</button>
-        <button class="open-mini-popup" data-popup-target="mini-yoga-popup">Start Yoga</button>
-    </section>
-
-    <!-- Mini Workout Popup Form -->
-    <div id="mini-workout-popup" class="mini-popup">
-        <span class="popup-close">&times;</span>
-        <h2 style="text-align: center;">Workout Form</h2>
-        <form>
-            <!-- Add workout form fields here -->
-            <table>
-                <tr>
-                    <th>Field</th>
-                    <th>Value</th>
-                </tr>
-                <tr>
-                    <td><label for="name">Name</label></td>
-                    <td><input type="text" id="name" name="name"></td>
-                </tr>
-                <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
-                </tr>
-                <tr>
-                    <td><label>Gender</label></td>
-                    <td>
-                        <div class="radio-group">
-                            <label><input type="radio" name="Gender" value="Male"> Male </label>
-                            <label><input type="radio" name="Gender" value="Female"> Female </label>
-                            <label><input type="radio" name="Gender" value="Other"> Other </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="Duration">Duration</label></td>
-                    <td>
-                        <select id="Duration" name="Duration">
-                            <option value="10">10 minutes</option>
-                            <option value="30">30 minutes</option>
-                            <option value="45">45 minutes</option>
-                            <option value="60">60 minutes</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>Fitness Level</label></td>
-                    <td>
-                        <div class="radio-group">
-                            <label><input type="radio" name="Fitness Level" value="Beginner"> Beginner</label>
-                            <label><input type="radio" name="Fitness Level" value="Intermediate"> Intermediate</label>
-                            <label><input type="radio" name="Fitness Level" value="Advance"> Advance </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>Body-Part</label></td>
-                    <td>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="Body Part" value="biceps"> Biceps</label>
-                            <label><input type="checkbox" name="Body Part" value="belly"> Belly</label>
-                            <label><input type="checkbox" name="Body Part" value="arms"> Arms</label>
-                            <label><input type="checkbox" name="Body Part" value="legs"> Legs</label>
-                            <label><input type="checkbox" name="Body Part" value="chest"> Chest</label>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            
-            <div class="form-buttons">
-                <button class="Workout">Start</button>
-                <button class="Homepage">Exit</button>
-            </div>
-        </form>
-    </div>
-<!-- Mini Yoga Popup Form -->
-<div id="mini-yoga-popup" class="mini-popup">
-    <span class="popup-close">&times;</span>
-    <h2 style="text-align: center;">Yoga Form</h2>
-    <form>
-        
-        <table>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td><label for="name">Name</label></td>
-                <td><input type="text" id="name" name="name"></td>
-            </tr>
-            <tr>
-                <td><label for="age">Age</label></td>
-                <td><input type="number" id="age" name="Age" min="10" max="100" autocomplete="age"></td>
-            </tr>
-            <tr>
-                <td><label>Gender</label></td>
-                <td>
-                    <div class="radio-group">
-                        <label><input type="radio" name="Gender" value="Male"> Male </label>
-                        <label><input type="radio" name="Gender" value="Female"> Female </label>
-                        <label><input type="radio" name="Gender" value="Other"> Other </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="Duration">Duration</label></td>
-                <td>
-                    <select id="Duration" name="Duration">
-                        <option value="10">10 minutes</option>
-                        <option value="30">30 minutes</option>
-                        <option value="45">45 minutes</option>
-                        <option value="60">60 minutes</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Types of Yoga</label></td>
-                <td>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="Type of Yoga" value="Vinyasa Yoga"> Vinyasa </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Bikram Yoga"> Bikram </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Kundalini Yoga"> Kundalini </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Hath Yoga"> Hath </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Iyengar Yoga"> Iyengar </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Ashtanga Yoga">  Ashtanga </label>
-                        <label><input type="checkbox" name="Type of Yoga" value="Katonah Yoga"> Katonah </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <div class="form-buttons">
-            <button class="Workout">Start</button>
-            <button class="Homepage">Exit</button>
-        </div>
-    </form>
-</div>
-    <script src="script.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const openMiniPopupButtons = document.querySelectorAll('.open-mini-popup');
-            openMiniPopupButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const targetPopupId = button.getAttribute('data-popup-target');
-                    const targetPopup = document.getElementById(targetPopupId);
-                    const otherPopupId = targetPopupId === 'mini-workout-popup' ? 'mini-yoga-popup' : 'mini-workout-popup';
-                    const otherPopup = document.getElementById(otherPopupId);
+        function toggleTheme() {
+        console.log('Toggle theme function called');
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+        }
+    </script>
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <div class="search-bar">
+            <input type="text" id="workout-search" placeholder="Search workouts...">
+            <i class="fas fa-search"></i>
+        </div>
+        <h3 style="text-align: center; color: #b57bf0" class="font-weight-bold">Types of Workouts</h3>
+        <div class="btn-group">
+        <button  id="gym-workout-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-workout-popup">Gym Workout</button>
+        <button  id="home-workout-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-home-workout-popup">Home Workout</button>
+        <button  id="Bodybuilding-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-bodybuilding-popup">Body Building</button>
+        <button  id="Calisthenics-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-calisthenics-popup">Calisthenics</button>
+        <button  id="Yoga-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-yoga-popup">Yoga</button>
+        <button  id="Meditation-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-meditation-popup">Meditation</button>
+        
+    </div></div>
+
+    <div id="mini-workout-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the Gym.html -->
+      </div>
+      <div id="mini-home-workout-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the Home.html -->
+      </div>
+      <div id="mini-body-building-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the Bodybuilding.html -->
+      </div>
+      <div id="mini-calisthenics-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the Calisthenics.html -->
+      </div>
+      <div id=mini-yoga-popup class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the Yoga.html --> 
+      </div>
+      <div id="mini-meditation-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <!-- popup from the meditation.html -->
+      </div>
+
+    <script>
+        //Gym.html
+        document.getElementById('gym-workout-btn').addEventListener('click', () => {
+        // Fetch the Gym.html file
+            fetch('./Gym.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
                     
-                    if (targetPopup.style.display === 'none') {
-                        targetPopup.style.display = 'block';
-                        otherPopup.style.display = 'none';
-                    } else {
-                        targetPopup.style.display = 'none';
-                    }
-                });
+                    //  content of the Gym.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-workout-popup').innerHTML = formContent;
+                    document.getElementById('mini-workout-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading Gym.html:', error);
             });
-                        // Close button functionality
-                        const closeButtons = document.querySelectorAll('.popup-close');
-                        closeButtons.forEach(closeButton => {
-                            closeButton.addEventListener('click', () => {
-                                const popup = closeButton.parentElement;
-                                popup.style.display = 'none';
-                    });
-                });
-        const startYogaButton = document.querySelector('#mini-yoga-popup .Workout');
-        const exitYogaButton = document.querySelector('#mini-yoga-popup .Homepage');
-
-        startYogaButton.addEventListener('click', () => {
-                // Redirect to existing Workout.html when Start button in Yoga form is clicked
-                event.preventDefault();
-                window.location.href = 'Workout.html'; 
+        });
+        //HomeWorkout.html
+        document.getElementById('home-workout-btn').addEventListener('click', () => {
+        // Fetch the HomeWorkout.html file
+            fetch('./HomeWorkout.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
+                    
+                    //  content of the HomeWorkout.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-home-workout-popup').innerHTML = formContent;
+                    document.getElementById('mini-HomeWorkout-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading HomeWorkout.html:', error);
             });
+        });
+        //BodyBuilding.html
+        document.getElementById('Bodybuilding-btn').addEventListener('click', () => {
+        // Fetch the BodyBuilding.html file
+            fetch('./BodyBuilding.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
+                    
+                    //  content of the BodyBuilding.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-body-building-popup').innerHTML = formContent;
+                    document.getElementById('mini-body-building-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading BodyBuilding.html:', error);
+            });
+        });
+        //Calisthenics.html
+        document.getElementById('Calisthenics-btn').addEventListener('click', () => {
+        // Fetch the Calisthenics.html file
+            fetch('./Calisthenics.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
+                    
+                    //  content of the Calisthenics.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-calisthenics-popup').innerHTML = formContent;
+                    document.getElementById('mini-calisthenics-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading Calisthenics.html:', error);
+            });
+        });
+        //Yoga.html
+            document.getElementById('Yoga-btn').addEventListener('click', () => {
+            // Fetch the Yoga.html file
+            fetch('./Yoga.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
+                    
+                    //  content of the Yoga.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-yoga-popup').innerHTML = formContent;
+                    document.getElementById('mini-yoga-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading Yoga.html:', error);
+            });
+    });
 
-        exitYogaButton.addEventListener('click', () => {
-            // Close the Yoga form when Exit button is clicked
-            event.preventDefault();
-            const yogaPopup = document.getElementById('mini-yoga-popup');
-            if (confirm("Are you sure you want to exit?")) {
-            window.location.href = 'Homepage.html';
+        //Meditation.html
+        document.getElementById('Meditation-btn').addEventListener('click', () => {
+            // Fetch the meditation.html file
+            fetch('./Meditation.html')
+                .then(response => response.text())
+                .then(data => {
+                    //  a temporary element to hold the fetched HTML
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = data;
+                    
+                    //  content of the Meditation.html file
+                    const formContent = tempElement.querySelector('form').outerHTML;
+                    
+                    // Insert to the popup
+                    document.getElementById('mini-meditation-popup').innerHTML = formContent;
+                    document.getElementById('mini-meditation-popup').style.display = 'block';
+                })
+            .catch(error => {
+                console.error('Error loading Mediataion.html:', error);
+            });
+    });
+
+ 
+    // opening/closing mini popups
+    const openMiniPopups = document.querySelectorAll('.open-mini-popup');
+    const miniPopups = document.querySelectorAll('.mini-popup');
+
+    openMiniPopups.forEach((openBtn) => {
+        openBtn.addEventListener('click', () => {
+            const popupId = openBtn.getAttribute('data-popup-target');
+            const popup = document.getElementById(popupId);
+
+            if (popup) {
+                // Close all other popups
+                miniPopups.forEach((popup) => {
+                    popup.style.display = 'none';
+                });
+
+                popup.style.display = 'block';
             }
         });
     });
-    </script>
-    
+
+    // Add event listener for close button
+    miniPopups.forEach(popup => {
+        const closeButton = popup.querySelector('.popup-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                popup.style.display = 'none';
+            });
+        }
+    });
+    function handleFormSubmission(event, actionUrl) {
+        // Handle form submission 
+        event.preventDefault();
+        //  form submission logic
+        console.log('Form submitted!');
+        // Redirect 
+        window.location.href = actionUrl;
+    }
+
+</script>
 </body>
 </html>

@@ -1,8 +1,133 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GaiNS.ai</title>
+  <link rel="stylesheet" href="{% static 'styles.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
+    <a class="navbar-brand" href={% url 'homepage' %}>
+      <img src="" style="width: 30px; height: 30px;">GaiNS.ai
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'about' %}>About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Community.html">Community</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Music.html">Music</a>
+        </li>
+      </ul>
+      <div class="nav-buttons mr-3">
+        <a href={% url 'signup' %} class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
+        <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
+      </div>
+      <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()">
+      </div>
+    </div>
+  </nav>
+</header>
+<body>
+  <h1 style="text-align: center;" >Login to GaiNS.ai</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning" role="alert" style="text-align: center;">
+          {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <form id="loginForm" method="POST" action="{% url 'login' %}">
+    {%csrf_token%}
+    <label for="login-username">Username:</label>
+    <input type="text" id="login-username" name="username" required>
+    <label for="login-password">Password:</label>
+    <input type="password" id="login-password" name="password" required>
+    <button type="submit">Login</button>
+    <a href="#" id="forgotPassword">Forgot Password?</a>
+  </form>
 
-{% block content %}
-<h1 style="display: flex; justify-content: center; align-items: center; height: 75vh; margin: 0;font-size: 300px;">WIP...</h1>
-<div style="display: flex; justify-content: center; align-items: center;" >
-    <a href="{% url 'homepage' %}"><button class="sign-up">Back to HomePage</button></a>           
-</div>
-{% endblock %}
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <form id="forgotPasswordForm">
+            <div class="form-group">
+              <label for="forgot-email" class="mr-2">Email:</label>
+              <input type="text" id="forgot-email" name="email" class="form-control" style="max-width: 250px;">
+            </div>
+            <button type="submit" class="btn btn-custom" style="background-color: #ae77e5;">Reset Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .dark-mode {
+      /* dark mode */
+      background-color: #000000;
+      color: #fff;
+    }
+  </style>
+
+  <script>
+    function toggleTheme() {
+      console.log('Toggle theme function called');
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+    }
+
+    // listener for the forgot pss link
+    document.getElementById('forgotPassword').addEventListener('click', () => {
+      $('#forgotPasswordModal').modal('show');
+    });
+
+    // listener for the forgot pss form submission
+    document.getElementById('forgotPasswordForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('forgot-email').value;
+
+      try {
+        await sendPasswordResetEmail(email);
+        console.log('Password reset email sent');
+        // Close or redirect the user to the appropriate page
+        $('#forgotPasswordModal').modal('hide');
+      } catch (error) {
+        console.error('Error sending password reset email:', error);
+      }
+    });
+
+    async function sendPasswordResetEmail(email) {
+     
+      return new Promise((resolve, reject) => {
+        // successful pss reset email send
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+    }
+  </script>
+
+  <script src="login-script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
