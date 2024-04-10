@@ -58,7 +58,7 @@
     </nav>
 </header>
 <body>
-    Press Which songs you want   
+    <h1 style="text-align: center;"> Pick a song to save as the default background music </h1>
     <button class="classic-button" onclick="changeAudio('music/Rocky Balboa-Theme Song.mp3')">Rocky Theme songs</button>
     <button class="classic-button" onclick="changeAudio('music/Eye of The Tiger-Survivor.mp3')">Eye of the Tiger-Survivor</button>
     <button class="classic-button" onclick="changeAudio('music/Ready for It-Taylor swift.mp3')">Ready for it By taylor swift</button>
@@ -66,8 +66,7 @@
     <button class="classic-button" onclick="changeAudio('music/Cupid-Fifty Fifty.mp3')">Cupid by fifty fifty</button>
     <button class="classic-button" onclick="changeAudio('music/Gucci Gang -lil pump.mp3')">Gucci Gang by lil pump</button>
 
-    You can play ur own music by inserting a mp3 file inside music and rename it to other.mp3
-    <button class="classic-button" onclick="changeAudio('music/other.mp3')">other.mp3</button>
+
 </body>
 <script>
     function changeAudio(src){
@@ -77,4 +76,6 @@
         audio.src = localStorage.getItem('defaultSong');
         audio.play();
     }
+
+    
 </script>

@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Replace with your key
+    const YoutubeApiKey = "ADD Key";
+    const ChatgptApiKey = "ADD Key"; 
+
+    //Example 
+    //const YoutubeApiKey = "asdasfafaf";
+    //const ChatgptApiKey = "asddsa"; 
+
+
+
+
     const GenerateButton = document.getElementById('Generate');
     const GenerateButton_again = document.getElementById('Generate_Again');
     const GenerateButton_Different = document.getElementById('Generate_Different');
@@ -20,8 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    const YoutubeApiKey = "ADD Key";
-    const ChatgptApiKey = "ADD key" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
