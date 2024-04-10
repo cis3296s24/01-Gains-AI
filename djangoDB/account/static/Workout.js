@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     GenerateButton_again.addEventListener('click', function() {
-        window.location.href = 'Form.html';
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("workout", "form");
+        window.location.href = newUrl;
         
     });
 
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    const YoutubeApiKey = "AIzaSyAXjzH8sqzsz5c_yNWDhr_Cf-RHH6FzY1E";
+    const YoutubeApiKey = "AIzaSyAitlfpyy-m0voZqi5aPyMDDiaKsC7o2kw";
     const ChatgptApiKey = "Add Key" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {

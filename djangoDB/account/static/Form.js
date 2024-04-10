@@ -54,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         // Redirect
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
     var checkboxes = document.querySelectorAll('input[name="TypesofEquipment[]"]:checked');
@@ -95,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         // Redirect 
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
     function handleFormSubmissionWorkoutBodyBuilding(event, actionUrl) {
@@ -125,7 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         // Redirect 
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
 
@@ -156,7 +162,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         // Redirect 
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
  
@@ -189,7 +197,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
     
@@ -219,7 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //  form submission logic
         console.log('Form submitted!');
         
-        window.location.href = actionUrl;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace("form", actionUrl);
+        window.location.href = newUrl;
     }
 
 
