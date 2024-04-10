@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     GenerateButton_again.addEventListener('click', function() {
-        window.location.href = 'Form.html';
+        window.location.href = 'form.html';
         
     });
 
