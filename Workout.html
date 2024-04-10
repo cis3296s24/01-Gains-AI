@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         .container {
             display: flex;
@@ -17,19 +20,58 @@
             margin: 10px; /* Adjust spacing between video-exercise containers */
             text-align: center; /* Center content horizontally */
         }
+        .btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3; 
+            color: white; 
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">GaiNS.ai</div>
-            <ul class="nav-menu">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="Music.html">Music</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
+            <a class="navbar-brand" href="index.html">    
+            <img src="GaiNS_icon.jpeg" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Community.html">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Music.html">Music</a>
+                    </li>
+                    <li>
+                        <img id="icon" src="Mute_Icon.png" alt="Icon">
+                        <audio id="music" src=""></audio>
+                    </li>
+                </ul>
+                <div class="nav-buttons mr-3"> 
+                    <a href="signup.html" class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+                <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()">
+            </div>
         </nav>
     </header>
+    <style>.dark-mode {
+        /*  dark mode  */
+        background-color: #000000;
+        color: #fff;
+    }
+    </style>
+    <script>
+        function toggleTheme() {
+        console.log('Toggle theme function called');
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+        }
+    </script>
     <div class="container">
         <div id="player">
             <!-- Videos will be inserted here -->
@@ -41,10 +83,11 @@
     </div>
     <script src="script.js"></script>
 
-    
-    <button id="Generate">Generate</button>
-    <button id="Generate_Different">Generate 5 more exercise</button>
-    <button id="Generate_Again"> Change workout Type</button>
+    <div class="nav-buttons mr-3"> 
+    <button id="Generate" class="btn btn-custom" >Generate(May Take a few seconds for API)</button>
+    <button id="Generate_Different" class="btn btn-custom">Generate 5 more exercise</button>
+    <button id="Generate_Again" class="btn btn-custom"> Change workout Type</button>
+    </div>
     <div id = "content">
         <!-- Your content here -->
     </div>
