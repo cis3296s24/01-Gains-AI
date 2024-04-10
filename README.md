@@ -6,8 +6,12 @@ This is a web application aimed at streamlining personalized exercise routines t
 
 
 # How to run
-You can view this page here but it won't generate workout(At this moment) 
-Click on the link https://cis3296s24.github.io/01-Gains-AI/
+1. Follow Build local and run this locally.
+ 
+   or
+
+  
+2. Follow Build in Vscode and run in this Vscode with entension
 
 
 ## To generate workout to you have to run this locally
@@ -19,11 +23,32 @@ Right click on Homepage.html and click on option Open in Default Browser
 # How to contribute
 Follow this project board to know the latest status of the project: https://github.com/orgs/cis3296s24/projects/65
 
-### How to build
-- Use this github repository: https://github.com/cis3296s24/01-Gains-AI/tree/main?tab=readme-ov-file
-- Select release 2 from Tags
-- Downloaded the coded from the Tag
-- Install Vscode and install open in browser extenstion  
-- Go to OpenAl and sign up and create a key
-- In the script.js replace the ChatGPT key with your own
-- Right click on Homepage.html and click on option Open in Default Browser
+# How to build
+### (BEFORE BUILDING)
+- Step 0) Get your own Free OpenA1 and Youtube API Key and save them 
+
+Youtube API Key tutorial 
+https://www.youtube.com/watch?v=uz7dY8qTFJw&t=18s
+
+OpenA1 API Key tutorial (First time user going have a free trial)
+https://www.youtube.com/watch?v=OB99E7Y1cMA
+
+### Build Local 
+- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI/tree/release3
+
+clone tutorial https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+- Step 2) In the Workout.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
+- Step 3) Run command Prompt on your PC/Desktop/Latop or device
+- Step 4) enter cd 01-Gains-AI 
+- step 5) enter index.html
+
+
+### Build In Vscode 
+- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI/tree/release3
+
+clone tutorial https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+- Step 2) In the Workout.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
+- Step 3) Install Vscode and install Live Server by Ritwick Dey extenstion  
+- step 4) Right click on index.html and click on option Open in Live Server
