@@ -1,65 +1,9 @@
+{% extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - GaiNS.ai</title>
-  <link rel="stylesheet" href="{% static 'styles.css'%}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-    <!-- Header -->
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
-          <a class="navbar-brand" href={% url 'homepage' %}>    
-          <img src="{% static 'GaiNs_icon.jpeg'%}" style="width: 30px; height: 30px;">GaiNS.ai</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href={% url 'about' %}>About Us</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="Community.html">Community</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="Checkin.html">Check-in</a>
-                  <li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="">Music</a>
-                  </li>
-                      <img id="icon" src="{% static 'Mute_Icon.png' %}" alt="Icon">
-                      <audio id="music" src=""></audio>
-                  </li>
-              </ul>
-              {% if user.is_authenticated %}
-              <div class="nav-buttons mr-3"> 
-                  <a href={% url 'logout' %} class="btn btn-outline-light">Logout</a>
-              </div>
-              {% else %}
-              <div class="nav-buttons mr-3"> 
-                  <a href={% url 'signup' %} class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
-                  <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
-              </div>
-              {% endif %}
-              <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()"></div>
-          </div>
-      </nav>
-  </header>
-<body>
+{% block content %}
+  <title>Login Page</title>
+  <!-- Login Form -->
   <h1 style="text-align: center;" >Login to GaiNS.ai</h1>
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-warning" role="alert" style="text-align: center;">
-          {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
   <form id="loginForm" method="POST" action="{% url 'login' %}">
     {%csrf_token%}
     <label for="login-username">Username:</label>
@@ -91,7 +35,7 @@
       </div>
     </div>
   </div>
-  
+  <!-- Styling -->
   <style>
     .dark-mode {
       /* dark mode */
@@ -99,7 +43,7 @@
       color: #fff;
     }
   </style>
-
+  <!-- Scripts -->
   <script>
     function toggleTheme() {
       console.log('Toggle theme function called');
@@ -140,5 +84,4 @@
 
   <script src="login-script.js"></script>
   <script src="{% static 'script.js' %}"></script>
-</body>
-</html>
+{%endblock%}
