@@ -83,7 +83,7 @@
     function changeAudio(src){
         var audio = document.getElementById('music');
         localStorage.setItem('defaultSong', src);
-        icon.src = "{% static 'Speaker_Icon.png' %}";
+        icon.src = "Speaker_Icon.png";
         audio.src = localStorage.getItem('defaultSong');
         audio.play();
     }
