@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Replace with your key
+    const YoutubeApiKey = "ADD Key";
+    const ChatgptApiKey = "ADD Key"; 
+
+    //Example 
+    //const YoutubeApiKey = "asdasfafaf";
+    //const ChatgptApiKey = "asddsa"; 
+
+
+
+
     const GenerateButton = document.getElementById('Generate');
     const GenerateButton_again = document.getElementById('Generate_Again');
     const GenerateButton_Different = document.getElementById('Generate_Different');
@@ -10,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     GenerateButton_again.addEventListener('click', function() {
-        window.location.href = 'Form.html';
+        window.location.href = 'form.html';
         
     });
 
@@ -20,8 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    const YoutubeApiKey = "AIzaSyAXjzH8sqzsz5c_yNWDhr_Cf-RHH6FzY1E";
-    const ChatgptApiKey = "ADD KEY" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',

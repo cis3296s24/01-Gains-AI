@@ -11,17 +11,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+
 <body>
    <style>.btn-custom {
     background-color: #9c56e3;
     border-color: #9c56e3; 
     color: white; /* Set text color to white */
 }</style>
+
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
-            <a class="navbar-brand" href="#">    
-            <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <a class="navbar-brand" href={% url 'homepage' %}>    
+            <img src="{% static 'GaiNs_icon.jpeg'%}" style="width: 30px; height: 30px;">GaiNS.ai</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,7 +36,13 @@
                         <a class="nav-link" href="Community.html">Community</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Music.html">Music</a>
+                        <a class="nav-link" href="Checkin.html">Check-in</a>
+                    <li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'music' %}">Music</a>
+                    </li>
+                        <img id="icon" src="{% static 'Mute_Icon.png' %}" alt="Icon">
+                        <audio id="music" src="{% static 'music' %}"></audio>
                     </li>
                 </ul>
                 {% if user.is_authenticated %}

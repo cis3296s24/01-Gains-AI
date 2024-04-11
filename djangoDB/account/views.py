@@ -66,6 +66,9 @@ def about(request):
 def workout(request):
     return render(request, 'Workout.html', {})
 
+def music(request):
+    return render(request, 'Music.html', {})
+
 
     
     

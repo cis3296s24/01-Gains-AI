@@ -11,23 +11,30 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<!-- Header -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
         <a class="navbar-brand" href={% url 'homepage' %}>    
-        <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+        <img src="{% static 'GaiNs_icon.jpeg'%}" style="width: 30px; height: 30px;">GaiNS.ai</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href={% url 'about' %}>About</a>
+                    <a class="nav-link" href={% url 'about' %}>About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Community.html">Community</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Music.html">Music</a>
+                    <a class="nav-link" href="Checkin.html">Check-in</a>
+                <li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Music</a>
+                </li>
+                    <img id="icon" src="{% static 'Mute_Icon.png' %}" alt="Icon">
+                    <audio id="music" src=""></audio>
                 </li>
             </ul>
             {% if user.is_authenticated %}
@@ -40,8 +47,8 @@
                 <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
             </div>
             {% endif %}
-            <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()">
-            </div>
+            <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()"></div>
+        </div>
     </nav>
 </header>
 <body>

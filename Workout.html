@@ -20,13 +20,18 @@
             margin: 10px; /* Adjust spacing between video-exercise containers */
             text-align: center; /* Center content horizontally */
         }
+        .btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3; 
+            color: white; 
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
             <a class="navbar-brand" href="index.html">    
-            <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <img src="GaiNS_icon.jpeg" style="width: 30px; height: 30px;">GaiNS.ai</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,6 +45,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Music.html">Music</a>
+                    </li>
+                    <li>
+                        <img id="icon" src="Mute_Icon.png" alt="Icon">
+                        <audio id="music" src=""></audio>
                     </li>
                 </ul>
                 <div class="nav-buttons mr-3"> 
@@ -74,10 +83,11 @@
     </div>
     <script src="script.js"></script>
 
-    
-    <button id="Generate">Generate</button>
-    <button id="Generate_Different">Generate 5 more exercise</button>
-    <button id="Generate_Again"> Change workout Type</button>
+    <div class="nav-buttons mr-3"> 
+    <button id="Generate" class="btn btn-custom" >Generate(May Take a few seconds for API)</button>
+    <button id="Generate_Different" class="btn btn-custom">Generate 5 more exercise</button>
+    <button id="Generate_Again" class="btn btn-custom"> Change workout Type</button>
+    </div>
     <div id = "content">
         <!-- Your content here -->
     </div>

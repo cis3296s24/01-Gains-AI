@@ -1,8 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Replace with your key
+    const YoutubeApiKey = "ADD Key";
+    const ChatgptApiKey = "ADD Key"; 
+
+    //Example 
+    //const YoutubeApiKey = "asdasfafaf";
+    //const ChatgptApiKey = "asddsa"; 
+
+
+
+
     const GenerateButton = document.getElementById('Generate');
     const GenerateButton_again = document.getElementById('Generate_Again');
     const GenerateButton_Different = document.getElementById('Generate_Different');
-
+    
     GenerateButton.addEventListener('click', function() {
         var Prompt = localStorage.getItem("Workout_prompt_key");
         sendMessage(Prompt);
@@ -13,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
         var currentUrl = window.location.href;
         var newUrl = currentUrl.replace("workout", "form");
         window.location.href = newUrl;
-        
     });
 
     GenerateButton_Different.addEventListener('click', function() {
@@ -21,9 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
         sendMessage(Different_Prompt);
     });
 
-
-    const YoutubeApiKey = "AIzaSyAitlfpyy-m0voZqi5aPyMDDiaKsC7o2kw";
-    const ChatgptApiKey = "Add Key" // Replace with your key
     function sendMessage(message) {
         fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -106,18 +113,4 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error:', error);
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });

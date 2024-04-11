@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src ="Form.js"></script>
+    <script src ="script.js"></script>
     <style>
         /* CSS for the popup */
         .open-mini-popup {
@@ -120,6 +121,7 @@
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            border: 1px solid white;
         }
         .sidebar .btn-group button:hover {
             color: #9c56e3;
@@ -190,7 +192,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
             <a class="navbar-brand" href="index.html">
-                <img src="" style="width: 30px; height: 30px;">GaiNS.ai</a>
+                <img src="GaiNS_icon.jpeg" style="width: 30px; height: 30px;">GaiNS.ai</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -205,6 +207,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Music.html">Music</a>
                     </li>
+                    <li>
+                        <img id="icon" src="Mute_Icon.png" alt="Icon">
+                        <audio id="music" src=""></audio>
+                    </li>
                 </ul>
                 <div class="nav-buttons mr-3">
                     <a href="signup.html" class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
@@ -215,13 +221,6 @@
             </div>
         </nav>
     </header>
-    <script>
-        function toggleTheme() {
-        console.log('Toggle theme function called');
-        const body = document.body;
-        body.classList.toggle('dark-mode');
-        }
-    </script>
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <div class="search-bar">
@@ -240,7 +239,6 @@
     </div></div>
     <!-- popup from the Gym.html -->
     <div id="mini-workout-popup" class="mini-popup" style="display: none;">
-        <span class="popup-close">&times;</span>
             <span class="popup-close">&times;</span>
             <form onsubmit="handleFormSubmissionGym(event, 'Workout.html')" data-workout-type="Gym">
                 <h3 style="text-align: center;color: #000;">Gym Form</h3>
@@ -406,7 +404,7 @@
                 </tr>
                 <tr>
                     <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.home" class="form-control" rows="1"></textarea></td>
+                    <td><textarea id="Other.home" name="Other" class="form-control" rows="1"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
@@ -734,8 +732,150 @@
             </table>
         </form>
     </div>
-    <script>
+    <style>
+        /* Calendar container styles */
+        .calendar-container {
+            padding: 10px;
+            background-color: #cbcaca; /* Calendar background color */
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1); /*  shadow for separation */
+            float: right; /* Align the container to the right */
+            margin-right: 0px; /*  space between the container and the content */
+            border-left: 1px solid #ccc; /* vertical bar */
+        }   
+    
+    
+        @media (max-width: 768px) {
+            .calendar-container {
+                float: none; /*  float */
+                margin-right: 0; /*  margin */
+                border-left: none; 
+            }
+        }
+    
+        /* Calendar header styles */
+        .calendar-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000; 
+            
+        }
+        /* Adjustments for darkmode */
+        @media (prefers-color-scheme: dark) {
+        .calendar-container {
+            background-color: #333; /* Dark background color */
+        }
+    
+        .calendar-header {
+            color: #fff; /* Color for dark mode */
+        }
+    }
+    
+     
         
+        /* Calendar table styles */
+        .calendar {
+            width: 10%;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: 0;
+        }
+    
+        .calendar th,
+        .calendar td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    
+        .calendar th {
+            background-color: #100f0f; 
+            color: #9c56e3;
+        }
+    
+        .calendar td {
+            background-color: #989494; 
+        }
+    
+        .current-day {
+            background-color: #3c3930; 
+            color: #fff; /*  text color */
+            border-radius: 50%; /* Rounded corners */
+            font-weight: bold; /* Bold text */
+        }
+    </style>
+    </head>
+    <body>
+    <div id="rightsidebar"></div>
+    
+    <script>
+    function createCalendar() {
+        // current date
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+        const currentDay = currentDate.getDate();
+    
+        // first day of the current month
+        const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+        // number of days in the current month
+        const numberOfDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+        // Month 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
+       
+        // calendar header
+        const calendarHeader = `<div class="calendar-header">${monthNames[currentMonth]} ${currentYear}</div>`;
+    
+        // calendar table
+        let calendarTable = '<table class="calendar">';
+        calendarTable += '<thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
+        calendarTable += '<tbody>';
+    
+        // keep track of the day of the week
+        let dayOfWeek = firstDayOfMonth.getDay();
+    
+        // fill the days of the previous month if necessary to complete the first week
+        calendarTable += '<tr>';
+        for (let i = 0; i < dayOfWeek; i++) {
+            calendarTable += '<td></td>';
+        }
+    
+        // calendar days
+        for (let i = 1; i <= numberOfDaysInMonth; i++) {
+            if (i === currentDay) {
+                calendarTable += `<td class="current-day">${i}</td>`;
+            } else {
+                calendarTable += `<td>${i}</td>`;
+            }
+            dayOfWeek++;
+            if (dayOfWeek === 7) {
+                calendarTable += '</tr><tr>';
+                dayOfWeek = 0;
+            }
+        }
+    
+        // fill the days of the next month if necessary to complete the last week
+        if (dayOfWeek > 0) {
+            for (let i = dayOfWeek; i < 7; i++) {
+                calendarTable += '<td></td>';
+            }
+        }
+    
+        calendarTable += '</tr></tbody></table>';
+    
+        // combine header and table and append to sidebar
+        const calendarContainer = document.createElement('div');
+        calendarContainer.classList.add('calendar-container');
+        calendarContainer.innerHTML = calendarHeader + calendarTable;
+    
+        document.getElementById('rightsidebar').appendChild(calendarContainer);
+    }
+    
+    // generate calendar
+    createCalendar();
     </script>
 
 </body>
