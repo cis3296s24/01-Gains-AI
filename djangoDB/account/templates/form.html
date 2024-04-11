@@ -1,234 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% block content %}
     <title>Form</title>
-    <link rel="stylesheet" href="{% static 'styles.css'%}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{% static 'Form.js' %}"></script>
-    <script src="{% static 'script.js' %}"></script>
-    <style>
-        /* CSS for the popup */
-        .open-mini-popup {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #9c56e3;
-            color: #fff;
-        }
-        .mini-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fefefe;
-            padding: 20px;
-            border: 1px solid #888;
-            z-index: 9999;
-            max-width: 80%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Close button */
-        .popup-close {
-            float: right;
-            cursor: pointer;
-            font-size: 20px;
-        }
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .form-container h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6C63FF;
-        }
-        .form-container label {
-            font-weight: bold;
-        }
-        .form-container input[type="text"],
-        .form-container input[type="number"],
-        .form-container select,
-        .form-container textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-container .radio-group label,
-        .form-container .checkbox label {
-            margin-right: 10px;
-        }
-        .form-container .form-buttons {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .form-container .form-buttons button {
-            margin: 0 5px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #6C63FF;
-            color: #fff;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        /* Sidebar Styles */
-        .sidebar {
-            height: 100%;
-            width: 280px;
-            position: fixed;
-            z-index: 1;
-            top: 75px;
-            left: 0;
-            background-color: #333;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 30px;
-        }
-
-        .sidebar .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            padding: 0 15px;
-        }
-
-        .sidebar .btn-group button {
-            width: 100%;
-            text-align: left;
-            padding: 10px 0;
-            margin: 5px 0;
-            font-size: 18px;
-            color: #f5f3f3;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid white;
-        }
-        .sidebar .btn-group button:hover {
-            color: #9c56e3;
-        }
-
-        /* Responsive media queries */
-        @media screen and (max-height: 450px) {
-            .sidebar {
-                padding-top: 15px;
-            }
-            .sidebar a {
-                font-size: 18px;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-            .sidebar a {
-                font-size: 16px;
-            }
-        }
-        /* Types of workouts form styles */
-        form {
-            margin: 20px auto;
-            max-width: 600px;
-            max-height: min-content;
-            padding: 20px;
-            border: 1px solid #333;
-            border-radius: 4px;
-            background-color: #f3f6f8;
-            color: #fff;
-        }
-
-        /* Search bar */
-        .search-bar {
-            margin-bottom: 20px;
-            width: 80%;
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .search-bar input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .search-bar i {
-            margin-left: 10px;
-            color: #9c56e3;
-            cursor: pointer;
-        }
-        .dark-mode {
-            /*  dark mode  */
-            background-color: #000000;
-            color: #fff;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Header -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
-            <a class="navbar-brand" href={% url 'homepage' %}>    
-            <img src="{% static 'GaiNs_icon.jpeg'%}" style="width: 30px; height: 30px;">GaiNS.ai</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href={% url 'about' %}>About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Community.html">Community</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Checkin.html">Check-in</a>
-                    <li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Music</a>
-                    </li>
-                        <img id="icon" src="{% static 'Mute_Icon.png' %}" alt="Icon">
-                        <audio id="music" src=""></audio>
-                    </li>
-                </ul>
-                {% if user.is_authenticated %}
-                <div class="nav-buttons mr-3"> 
-                    <a href={% url 'logout' %} class="btn btn-outline-light">Logout</a>
-                </div>
-                {% else %}
-                <div class="nav-buttons mr-3"> 
-                    <a href={% url 'signup' %} class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
-                    <a href={% url 'login' %} class="btn btn-outline-light">Login</a>
-                </div>
-                {% endif %}
-                <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()"></div>
-            </div>
-        </nav>
-    </header>
-    
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <div class="search-bar">
@@ -245,6 +18,8 @@
         <button  id="Meditation-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-meditation-popup">Meditation</button>
         
     </div></div>
+
+    <!-- Forms-Buttons-Content -->
     <!-- popup from the Gym.html -->
     <div id="mini-workout-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
@@ -740,6 +515,184 @@
             </table>
         </form>
     </div>
+    </head>
+    <body>
+    <div id="rightsidebar"></div>
+    <!-- Styling -->
+    <style>
+        /* CSS for the popup */
+        .open-mini-popup {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #9c56e3;
+            color: #fff;
+        }
+        .mini-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            z-index: 9999;
+            max-width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Close button */
+        .popup-close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6C63FF;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container .radio-group label,
+        .form-container .checkbox label {
+            margin-right: 10px;
+        }
+        .form-container .form-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-container .form-buttons button {
+            margin: 0 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #6C63FF;
+            color: #fff;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1;
+            top: 75px;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+        }
+
+        .sidebar .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .sidebar .btn-group button {
+            width: 100%;
+            text-align: left;
+            padding: 10px 0;
+            margin: 5px 0;
+            font-size: 18px;
+            color: #f5f3f3;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid white;
+        }
+        .sidebar .btn-group button:hover {
+            color: #9c56e3;
+        }
+
+        /* Responsive media queries */
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .sidebar a {
+                font-size: 16px;
+            }
+        }
+        /* Types of workouts form styles */
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            max-height: min-content;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #f3f6f8;
+            color: #fff;
+        }
+
+        /* Search bar */
+        .search-bar {
+            margin-bottom: 20px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar i {
+            margin-left: 10px;
+            color: #9c56e3;
+            cursor: pointer;
+        }
+        .dark-mode {
+            /*  dark mode  */
+            background-color: #000000;
+            color: #fff;
+        }
+    </style>
     <style>
         /* Calendar container styles */
         .calendar-container {
@@ -813,78 +766,75 @@
             font-weight: bold; /* Bold text */
         }
     </style>
-    </head>
-    <body>
-    <div id="rightsidebar"></div>
-    
+    <!-- Scripts -->
     <script>
-    function createCalendar() {
-        // current date
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-        const currentDay = currentDate.getDate();
-    
-        // first day of the current month
-        const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-        // number of days in the current month
-        const numberOfDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    
-        // Month 
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    
-       
-        // calendar header
-        const calendarHeader = `<div class="calendar-header">${monthNames[currentMonth]} ${currentYear}</div>`;
-    
-        // calendar table
-        let calendarTable = '<table class="calendar">';
-        calendarTable += '<thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
-        calendarTable += '<tbody>';
-    
-        // keep track of the day of the week
-        let dayOfWeek = firstDayOfMonth.getDay();
-    
-        // fill the days of the previous month if necessary to complete the first week
-        calendarTable += '<tr>';
-        for (let i = 0; i < dayOfWeek; i++) {
-            calendarTable += '<td></td>';
-        }
-    
-        // calendar days
-        for (let i = 1; i <= numberOfDaysInMonth; i++) {
-            if (i === currentDay) {
-                calendarTable += `<td class="current-day">${i}</td>`;
-            } else {
-                calendarTable += `<td>${i}</td>`;
-            }
-            dayOfWeek++;
-            if (dayOfWeek === 7) {
-                calendarTable += '</tr><tr>';
-                dayOfWeek = 0;
-            }
-        }
-    
-        // fill the days of the next month if necessary to complete the last week
-        if (dayOfWeek > 0) {
-            for (let i = dayOfWeek; i < 7; i++) {
+        function createCalendar() {
+            // current date
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+            const currentYear = currentDate.getFullYear();
+            const currentDay = currentDate.getDate();
+        
+            // first day of the current month
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+            // number of days in the current month
+            const numberOfDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        
+            // Month 
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+        
+            // calendar header
+            const calendarHeader = `<div class="calendar-header">${monthNames[currentMonth]} ${currentYear}</div>`;
+        
+            // calendar table
+            let calendarTable = '<table class="calendar">';
+            calendarTable += '<thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
+            calendarTable += '<tbody>';
+        
+            // keep track of the day of the week
+            let dayOfWeek = firstDayOfMonth.getDay();
+        
+            // fill the days of the previous month if necessary to complete the first week
+            calendarTable += '<tr>';
+            for (let i = 0; i < dayOfWeek; i++) {
                 calendarTable += '<td></td>';
             }
+        
+            // calendar days
+            for (let i = 1; i <= numberOfDaysInMonth; i++) {
+                if (i === currentDay) {
+                    calendarTable += `<td class="current-day">${i}</td>`;
+                } else {
+                    calendarTable += `<td>${i}</td>`;
+                }
+                dayOfWeek++;
+                if (dayOfWeek === 7) {
+                    calendarTable += '</tr><tr>';
+                    dayOfWeek = 0;
+                }
+            }
+        
+            // fill the days of the next month if necessary to complete the last week
+            if (dayOfWeek > 0) {
+                for (let i = dayOfWeek; i < 7; i++) {
+                    calendarTable += '<td></td>';
+                }
+            }
+        
+            calendarTable += '</tr></tbody></table>';
+        
+            // combine header and table and append to sidebar
+            const calendarContainer = document.createElement('div');
+            calendarContainer.classList.add('calendar-container');
+            calendarContainer.innerHTML = calendarHeader + calendarTable;
+        
+            document.getElementById('rightsidebar').appendChild(calendarContainer);
         }
-    
-        calendarTable += '</tr></tbody></table>';
-    
-        // combine header and table and append to sidebar
-        const calendarContainer = document.createElement('div');
-        calendarContainer.classList.add('calendar-container');
-        calendarContainer.innerHTML = calendarHeader + calendarTable;
-    
-        document.getElementById('rightsidebar').appendChild(calendarContainer);
-    }
-    
-    // generate calendar
-    createCalendar();
+        
+        // generate calendar
+        createCalendar();
     </script>
-
-</body>
-</html>
+    <script src="{% static 'Form.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
+{% endblock %}
