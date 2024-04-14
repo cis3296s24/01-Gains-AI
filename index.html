@@ -56,10 +56,42 @@
         <div class="container">
             <h1 class="display-1 font-weight-bold">Welcome to GaiNS.ai</h1>
             <p class="lead">Where personalized fitness routines meet cutting-edge technology for your optimal workout experience!</p>
-            <a href="form.html" class="btn btn-custom btn-lg" style="background-color: #9c56e3;">Get Started</a>
+            <button type="button" class="btn btn-custom btn-lg" data-toggle="modal" data-target="#miniPopup">Get Started</button>
         </div>
     </div>
     
+    <!-- Mini Popup Workout/Diet -->
+<div class="modal fade" id="miniPopup" tabindex="-1" role="dialog" aria-labelledby="miniPopupLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miniPopupLabel" style="color: black;">Choose Your Plan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color: black;">
+                <p>Select workout plan or diet plan</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom" style="background-color: #9c56e3;" onclick="redirectToWorkout()">Workout Plan</button>
+                <button type="button" class="btn btn-secondary" onclick="redirectToDiet()" data-dismiss="modal">Diet Plan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // redirect to workout plan page
+    function redirectToWorkout() {
+        window.location.href = "form.html"; 
+    }
+
+    //redirect to diet plan page
+    function redirectToDiet() {
+        window.location.href = "Diet.html"; 
+    }
+</script>
 
     <!-- Feature Sections -->
     <section class="features">
