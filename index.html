@@ -11,11 +11,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-   <style>.btn-custom {
-    background-color: #9c56e3;
-    border-color: #9c56e3; 
-    color: white; /* Set text color to white */
-}</style>
+   <style>
+    .btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3; 
+            color: white; 
+        }
+    </style>
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
@@ -33,7 +35,9 @@
                         <a class="nav-link" href="Community.html">Community</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Checkin.html">Check-in</a>
+                        <a class="nav-link" href="Checkin.html">Check-in</a></li>
+                    <li><a class="nav-link" button onclick="openPopup()">Give Feedback</button></a></li>
+                
                     <li>
                     <li class="nav-item">
                         <a class="nav-link" href="Music.html">Music</a>
@@ -80,7 +84,6 @@
         </div>
     </div>
 </div>
-
 <script>
     // redirect to workout plan page
     function redirectToWorkout() {
@@ -91,6 +94,122 @@
     function redirectToDiet() {
         window.location.href = "Diet.html"; 
     }
+
+</script>
+<!-- Feedback popup -->
+<style>
+    /* Styles for the popup */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+    /* star ratings */
+    .stars {
+        display: flex;
+        justify-content: center;
+    }
+    .star {
+        font-size: 30px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .star:hover,
+    .star.active {
+        color: gold;
+    }
+</style>
+</head>
+<body>
+
+<div class="popup" id="feedbackPopup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">×</span>
+        <h3>Rate Your Experience</h3>
+        <div class="stars">
+            <span class="star" onclick="setRating(1)">★</span>
+            <span class="star" onclick="setRating(2)">★</span>
+            <span class="star" onclick="setRating(3)">★</span>
+            <span class="star" onclick="setRating(4)">★</span>
+            <span class="star" onclick="setRating(5)">★</span>
+        </div>
+        <button onclick="submitFeedback()">Submit</button>
+    </div>
+</div>
+
+<script>
+    let rating = 0;
+
+    function openPopup() {
+        document.getElementById('feedbackPopup').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('feedbackPopup').style.display = 'none';
+    }
+
+    function setRating(value) {
+        rating = value;
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    function submitFeedback() {
+        if (rating === 0) {
+            alert('Please select a rating!');
+        } else {
+            // Send rating to backend for saving in the database
+            const formData = new FormData();
+            formData.append('rating', rating);
+
+            fetch('/save-feedback', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                alert('Feedback submitted successfully!');
+                closePopup();
+            })
+            .catch(error => {
+                console.error('Error submitting feedback:', error);
+                alert('An error occurred while submitting feedback. Please try again later.');
+            });
+        }
+    }
+
 </script>
 
     <!-- Feature Sections -->
@@ -119,12 +238,6 @@
                 <p class="lead">Connect with like-minded individuals and achieve your fitness goals together!</p>
                 <a href="Community.html" class="btn btn-outline-light btn-lg">Join Now</a>
         </div>
-        <!-- Add other footer sections here -->
-       <!-- <div class="social-links">
-            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-        </div>-->
     </footer>
 
     <script src="script.js"></script>
