@@ -300,7 +300,12 @@
         sortQuestions();
     };
 
-    // Load previous answers
+    // Load previous answers on page load
+    window.onload = function() {
+        loadPreviousAnswers();
+    };
+
+    // Load previous answers from localStorage
     function loadPreviousAnswers() {
       for (let i = 1; i <= 3; i++) {
         let storedAnswers = localStorage.getItem("answers" + i);
@@ -312,61 +317,61 @@
             newAnswer.classList.add("submitted-answer");
             newAnswer.innerHTML = "<p><strong>Your Answer:</strong> " + answer + "</p>";
             submittedAnswersContainer.appendChild(newAnswer);
-            
           });
         }
       }
     }
-
-
     function toggleWriteAnswer(answerId) {
-      var answer = document.getElementById(answerId);
-      if (answer.style.display === "none") {
-        answer.style.display = "block";
+      var answerDiv = document.getElementById(answerId);
+      if (answerDiv.style.display === "none") {
+        answerDiv.style.display = "block";
       } else {
-        answer.style.display = "none";
+        answerDiv.style.display = "none";
       }
     }
-
+    // Function to submit an answer
     function submitAnswer(answerId) {
-        var answerText = document.querySelector("#" + answerId + " textarea").value;
-            //empty answer is not allowed
-            if (answerText === '') {
-            alert('Please write the answer.');
-            return;
-        }
-        var submittedAnswersContainer = document.getElementById("submittedAnswers" + answerId.slice(-1));
-        var newAnswerId = "answer" + answerId.slice(-1) + "_" + Date.now(); 
-        var newAnswer = document.createElement("div");
-        newAnswer.setAttribute("id", newAnswerId)
-        newAnswer.classList.add("submitted-answer");
-        newAnswer.innerHTML = "<p><strong>Your Answer:</strong> " + answerText + "</p>" + "<button class='btn btn-danger btn-sm mt-2' onclick='deleteAnswer(\"" + newAnswerId + "\")'>Delete</button>";
-        submittedAnswersContainer.appendChild(newAnswer);
+      var answerText = document.querySelector("#" + answerId + " textarea").value.trim();
+      // Check if the answer is not empty
+      if (answerText === '') {
+        alert('Please write the answer.');
+        return;
+      }
+      var submittedAnswersContainer = document.getElementById("submittedAnswers" + answerId.slice(-1));
+      var newAnswerId = "answer" + answerId.slice(-1) + "_" + Date.now(); // Unique ID for each answer
+      var newAnswer = document.createElement("div");
+      newAnswer.setAttribute("id", newAnswerId)
+      newAnswer.classList.add("submitted-answer");
+      newAnswer.innerHTML = "<p><strong>Your Answer:</strong> " + answerText + "</p>";
+      submittedAnswersContainer.appendChild(newAnswer);
 
-        // retrieve existing ans
-        var storedAnswers = localStorage.getItem("answers" + answerId.slice(-1));
-        var answers = storedAnswers ? JSON.parse(storedAnswers) : [];
-        answers.push(answerText);
+      // Retrieve existing answers from localStorage
+      var storedAnswers = localStorage.getItem("answers" + answerId.slice(-1));
+      var answers = storedAnswers ? JSON.parse(storedAnswers) : [];
+      answers.push(answerText);
 
-        // store the ans in localStorage
-        localStorage.setItem("answers" + answerId.slice(-1), JSON.stringify(answers));
-        document.querySelector("#" + answerId + " textarea").value = "";
+      // Store the answers in localStorage
+      localStorage.setItem("answers" + answerId.slice(-1), JSON.stringify(answers));
+      
+      // Clear the textarea after submitting the answer
+      document.querySelector("#" + answerId + " textarea").value = "";
     }
 
-
-    // funtion to delete answer 
+    // Function to delete an answer
     function deleteAnswer(answerId) {
-        var answerContainer = document.getElementById(answerId);
-        answerContainer.parentNode.removeChild(answerContainer);
+      var answerContainer = document.getElementById(answerId);
+      answerContainer.parentNode.removeChild(answerContainer);
 
-        // remove the answer 
-            var storedAnswers = localStorage.getItem("answers" + answerId.slice(-1));
-                if (storedAnswers) {
-                    var answers = JSON.parse(storedAnswers);
-                    answers.splice(answers.indexOf(answerId), 1);
-                    localStorage.setItem("answers" + answerId.slice(-1), JSON.stringify(answers));
-                }
+      // Remove the answer from localStorage
+      var questionNumber = answerId.slice(-1);
+      var storedAnswers = localStorage.getItem("answers" + questionNumber);
+      if (storedAnswers) {
+        var answers = JSON.parse(storedAnswers);
+        answers.splice(answers.indexOf(answerId), 1);
+        localStorage.setItem("answers" + questionNumber, JSON.stringify(answers));
+      }
     }
+  
     //toggle pin
     function togglePin(questionId) {
         var pinIcon = document.getElementById("pinIcon_" + questionId);
