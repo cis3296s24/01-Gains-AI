@@ -1,6 +1,10 @@
 
-// dark mode function
-function toggleTheme() {
+/**
+ * Toggles the theme between light and dark modes.
+ * 
+ * @param {Document} [document=document] - The document object to query for the body element.
+ */
+function toggleTheme(document = document) {
     const body = document.body;
     if (body.classList.contains('light')) {
         body.classList.remove('light');
@@ -22,16 +26,55 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Set initial mode function
-function setInitialMode() {
-    var mode = localStorage.getItem("mode");
-    if (mode === "light") {
-        document.body.classList.add("light-mode");
-    } else {
-        document.body.classList.remove("light-mode");
-    }
+/**
+ * Sets the initial mode of the website based on the user's preference.
+ * 
+ * @param {string} mode - The user's selected mode (light or dark).
+ */
+function setInitialMode(mode) {
+  if (mode === "light") {
+    document.body.classList.add("light-mode");
+  } else {
+    document.body.classList.remove("light-mode");
+  }
 }
 
 
+/**
+ * Toggles the theme between light and dark modes.
+ * 
+ * @param {Document} [document=document] - The document object to query for the body element.
+ */
+function toggleTheme(document = document) {
+    const body = document.body;
+    if (body.classList.contains('light')) {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+/**
+ * Sets the initial mode of the website based on the user's preference.
+ * 
+ * @param {string} mode - The user's selected mode (light or dark).
+ */
+function setInitialMode(mode) {
+  if (mode === "light") {
+    document.body.classList.add("light-mode");
+  } else {
+    document.body.classList.remove("light-mode");
+  }
+}
+
+/**
+ * Adds an event listener to the DOMContentLoaded event, which is triggered when the document has been loaded and parsed.
+ * This function sets the initial mode of the website based on the user's preference, and adds an event listener to the icon element that changes the current icon source when clicked.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     // Define an array of icon sources
     var iconSources = ["Mute_Icon.png", "Speaker_Icon.png"]; // Update with your icon sources
@@ -79,7 +122,3 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('lastPlayedTime', audio.currentTime.toString());
     };
 });
-
-
-
-   

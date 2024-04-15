@@ -1,3 +1,7 @@
+/**
+ * Sends a message to the OpenAI API and processes the response to display workout exercise information.
+ * @param {string} message - The message to be sent to the OpenAI API.
+ */
 document.addEventListener("DOMContentLoaded", function() {
     // Replace with your key
     const YoutubeApiKey = "ADD Key";
@@ -6,9 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
     //Example 
     //const YoutubeApiKey = "asdasfafaf";
     //const ChatgptApiKey = "asddsa"; 
-
-
-
 
     const GenerateButton = document.getElementById('Generate');
     const GenerateButton_again = document.getElementById('Generate_Again');
@@ -102,29 +103,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         .catch(error => {
                             console.error('Error fetching workout video:', error);
                         });
-                    
-                
-               
-            });
+                });
 
             
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            })
+            .catch(error => {
+                console.error('Error:', error);
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
