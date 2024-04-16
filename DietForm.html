@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="DietForm.js"></script>
+    <style>
+        /* CSS for the popup */
+        .open-mini-popup {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #9c56e3;
+            color: #fff;
+        }
+        .mini-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            z-index: 9999;
+            max-width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Close button */
+        .popup-close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6C63FF;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container .radio-group label,
+        .form-container .checkbox label {
+            margin-right: 10px;
+        }
+        .form-container .form-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-container .form-buttons button {
+            margin: 0 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #6C63FF;
+            color: #fff;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Sidebar Styles */
+        .sidebar_diet {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1;
+            top: 75px;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+        }
+
+        .sidebar_diet .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .sidebar_diet .btn-group button {
+            width: 100%;
+            text-align: left;
+            padding: 10px 0;
+            margin: 5px 0;
+            font-size: 18px;
+            color: #f5f3f3;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid white;
+        }
+        .sidebar_diet .btn-group button:hover {
+            color: #9c56e3;
+        }
+
+        /* Responsive media queries */
+        @media screen and (max-height: 450px) {
+            .sidebar_diet {
+                padding-top: 15px;
+            }
+            .sidebar_diet a {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar_diet {
+                width: 200px;
+            }
+            .sidebar_diet a {
+                font-size: 16px;
+            }
+        }
+        /* Types of diet form styles */
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            max-height: min-content;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #f3f6f8;
+            color: #fff;
+        }
+
+        /* Search bar */
+        .search-bar_diet{
+            margin-bottom: 20px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-bar_diet input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar_diet i {
+            margin-left: 10px;
+            color: #9c56e3;
+            cursor: pointer;
+        }
+        .dark-mode {
+            /*  dark mode  */
+            background-color: #000000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+   <style>.btn-custom {
+        background-color: #9c56e3;
+        border-color: #9c56e3; 
+        color: white; 
+    }   
+</style>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
+            <a class="navbar-brand" href="index.html">    
+            <img src="GaiNS_icon.jpeg" style="width: 30px; height: 30px;">GaiNS.ai</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Community.html">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Checkin.html">Check-in</a>
+                    <li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Music.html">Music</a>
+                    </li>
+                        <img id="icon" src="Mute_Icon.png" alt="Icon">
+                        <audio id="music" src=""></audio>
+
+                    </li>
+                </ul>
+                <div class="nav-buttons mr-3"> 
+                    <a href="signup.html" class="btn btn-custom mr-2" style="background-color: #9c56e3;">Sign Up</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+                <div id="themeToggle" class="fas fa-adjust fa-lg text-primary; " style="cursor: pointer; " onclick="toggleTheme()">
+            </div>
+        </nav>
+
+    </header>
+    <!-- Sidebar -->
+    <div id="mySidebar_diet" class="sidebar_diet">
+        <div class="search-bar_diet">
+            <input type="text" id="workout-search-diet" placeholder="Search diet...">
+            <i class="fas fa-search"></i>
+        </div>
+        <h3 style="text-align: center; color: #b57bf0" class="font-weight-bold">Types of Diet</h3>
+        <div class="btn-group">
+        <button  id="Bulking-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-bulking-popup">Bulking</button>
+
+        
+    </div></div>
+    <!-- popup from the Gym.html -->
+    <div id="mini-bulking-popup" class="mini-popup" style="display: none;">
+            <span class="popup-close">&times;</span>
+            <form onsubmit="handleFormSubmissionBulking(event, 'Diet.html')" data-workout-type="Bulking">
+                <h3 style="text-align: center;color: #000;">Bulking</h3>
+            <!-- workout form fields -->
+            <table class="table">
+    
+                <tr>
+                    <th>Attribute</th>
+                    <th>Entry</th>
+                </tr>
+                <tr>
+                    <td><label for="name">Name</label></td>
+                    <td><input type="text" id="name.gym" name="name" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="number" id="age.gym" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Gender.gym" value="Male"> Male</label>
+                            <label><input type="radio" name="Gender.gym" value="Female"> Female</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Duration">Duration</label></td>
+                    <td>
+                        <select id="Duration.gym" name="Duration" class="form-control">
+                            <option value="10">10 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Fitness Level">Fitness Level</label></td>
+                    <td>
+                        <select id="Fitness Level.gym" name="Fitness Level" class="form-control">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermidate">Intermidate</option>
+                            <option value="Advance">Advance</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Types of Workout</label></td>
+                    <td>
+                        <select name="TypeofWorkout" id="GymWorkout">
+                          <option value="Full Body">Full Body</option>
+                          <option value="Upper Body">Upper Body</option>
+                          <option value="Lower Body">Lower Body</option>
+                          <option value="Chest">Chest</option>
+                          <option value="Arms">Arms</option>
+                          <option value="legs">legs</option>
+                          <option value="back">back</option>
+                          <option value="other">other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                <tr>
+                    <td><label for="Other">Other</label></td>
+                    <td><textarea id="Other" name="Other.gym" class="form-control" rows="1"></textarea></td>
+                </tr>
+               
+                    <td colspan="2" class="text-center">
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+    </div>
+
+
+
+
+</body>
+</head>
