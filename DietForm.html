@@ -43,7 +43,7 @@
         }
         .form-container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 78px auto 0 auto; /* Adjusted margin-top to accommodate the navbar height */
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -236,16 +236,20 @@
             <i class="fas fa-search"></i>
         </div>
         <h3 style="text-align: center; color: #b57bf0" class="font-weight-bold">Types of Diet</h3>
-        <div class="btn-group">
-        <button  id="Bulking-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-bulking-popup">Bulking</button>
-
+        <div class="btn-group"> 
+        <button  id="Healthydiet-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Healthydiet-popup">Healthy Diet</button>
+        <button  id="Weightgain-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Weightgain-popup">Weight Gain Diet</button>
+        <button  id="WeightLoss-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-WeightLoss-popup">Weight Loss Diet</button>
+        <button  id="Vegan-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Vegan-popup">Vegan Diet</button>
+        <button  id="Keto-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Keto-popup">Keto Diet</button>
+        <button  id="Paleo-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Paleo-popup">Paleo Diet</button>
+    </div>       
         
-    </div></div>
-    <!-- popup from the Gym.html -->
-    <div id="mini-bulking-popup" class="mini-popup" style="display: none;">
+    <!-- Healthy diet form -->
+    <div id="mini-Healthydiet-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
-            <form onsubmit="handleFormSubmissionBulking(event, 'Diet.html')" data-workout-type="Bulking">
-                <h3 style="text-align: center;color: #000;">Bulking</h3>
+            <form onsubmit="handleFormSubmissionHealthydiet(event, 'Diet.html')" data-workout-type="Healthydiet">
+                <h3 style="text-align: center;color: #000;">Healthy Diet</h3>
             <!-- workout form fields -->
             <table class="table">
     
@@ -255,61 +259,30 @@
                 </tr>
                 <tr>
                     <td><label for="name">Name</label></td>
-                    <td><input type="text" id="name.gym" name="name" class="form-control"></td>
+                    <td><input type="text" id="name.Healthydiet" name="name" class="form-control"></td>
                 </tr>
                 <tr>
                     <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age.gym" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    <td><input type="number" id="age.Healthydiet" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
                     <td>
                         <div class="radio-group">
-                            <label><input type="radio" name="Gender.gym" value="Male"> Male</label>
-                            <label><input type="radio" name="Gender.gym" value="Female"> Female</label>
+                            <label><input type="radio" name="Gender.Healthydiet" value="Male"> Male</label>
+                            <label><input type="radio" name="Gender.Healthydiet" value="Female"> Female</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Duration">Duration</label></td>
-                    <td>
-                        <select id="Duration.gym" name="Duration" class="form-control">
-                            <option value="10">10 minutes</option>
-                            <option value="30">30 minutes</option>
-                            <option value="45">45 minutes</option>
-                            <option value="60">60 minutes</option>
-                        </select>
-                    </td>
+                    <td><label for="Weight">Weight</label></td>
+                    <td><input type="number" id="Weight.Healthydiet" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td><label for="Fitness Level">Fitness Level</label></td>
-                    <td>
-                        <select id="Fitness Level.gym" name="Fitness Level" class="form-control">
-                            <option value="Beginner">Beginner</option>
-                            <option value="Intermidate">Intermidate</option>
-                            <option value="Advance">Advance</option>
-                        </select>
-                    </td>
-                </tr>
+
                 <tr>
-                    <td><label>Types of Workout</label></td>
-                    <td>
-                        <select name="TypeofWorkout" id="GymWorkout">
-                          <option value="Full Body">Full Body</option>
-                          <option value="Upper Body">Upper Body</option>
-                          <option value="Lower Body">Lower Body</option>
-                          <option value="Chest">Chest</option>
-                          <option value="Arms">Arms</option>
-                          <option value="legs">legs</option>
-                          <option value="back">back</option>
-                          <option value="other">other</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.gym" class="form-control" rows="1"></textarea></td>
+                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.Healthydiet" name="Food Allergies.Healthydiet" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
@@ -324,8 +297,308 @@
     
     </div>
 
+        <!-- Weightgain form -->
+    <div id="mini-Weightgain-popup" class="mini-popup" style="display: none;">
+            <span class="popup-close">&times;</span>
+            <form onsubmit="handleFormSubmissionWeightGain(event, 'Diet.html')" data-workout-type="Weightgain">
+                <h3 style="text-align: center;color: #000;">Weight Gain</h3>
+            <!-- workout form fields -->
+            <table class="table">
+    
+                <tr>
+                    <th>Attribute</th>
+                    <th>Entry</th>
+                </tr>
+                <tr>
+                    <td><label for="name">Name</label></td>
+                    <td><input type="text" id="name.Weightgain" name="name" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="number" id="age.Weightgain" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Gender.Weightgain" value="Male"> Male</label>
+                            <label><input type="radio" name="Gender.Weightgain" value="Female"> Female</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Weight">Weight</label></td>
+                    <td><input type="number" id="Weight.Weightgain" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                </tr>
+                <tr>
 
+                </tr>
+                <tr>
+                    <td><label for="GoalWeight">Goal Weight</label></td>
+                    <td><input type="number" id="GoalWeight.Weightgain" name="GoalWeight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                </tr>
+                <tr>
 
+                <tr>
+                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.Weightgain" name="Food Allergies.Weightgain" class="form-control" rows="1"></textarea></td>
+                </tr>
+               
+                    <td colspan="2" class="text-center">
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+    </div>
 
+        <!-- WeightLoss form -->
+    <div id="mini-WeightLoss-popup" class="mini-popup" style="display: none;">
+            <span class="popup-close">&times;</span>
+            <form onsubmit="handleFormSubmissionWeightLoss(event, 'Diet.html')" data-workout-type="WeightLoss">
+                <h3 style="text-align: center;color: #000;">Weight Loss</h3>
+            <!-- workout form fields -->
+            <table class="table">
+    
+                <tr>
+                    <th>Attribute</th>
+                    <th>Entry</th>
+                </tr>
+                <tr>
+                    <td><label for="name">Name</label></td>
+                    <td><input type="text" id="name.WeightLoss" name="name" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="number" id="age.WeightLoss" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="Gender.WeightLoss" value="Male"> Male</label>
+                            <label><input type="radio" name="Gender.WeightLoss" value="Female"> Female</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Weight">Weight</label></td>
+                    <td><input type="number" id="Weight.WeightLoss" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td><label for="GoalWeight">Goal Weight</label></td>
+                    <td><input type="number" id="GoalWeight.WeightLoss" name="GoalWeight" min="10" max="600" autocomplete="GoalWeight" class="form-control"></td>
+                </tr>
+                <tr>
+
+                <tr>
+                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.WeightLoss" name="Food Allergies.WeightLoss" class="form-control" rows="1"></textarea></td>
+                </tr>
+               
+                    <td colspan="2" class="text-center">
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+    </div>
+
+    <!-- Vegan diet form -->
+    <div id="mini-Vegan-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <form onsubmit="handleFormSubmissionVegan(event, 'Diet.html')" data-workout-type="Vegan">
+            <h3 style="text-align: center;color: #000;">Vegan Diet</h3>
+        <!-- workout form fields -->
+        <table class="table">
+
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name.Vegan" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age.Vegan" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender.Vegan" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender.Vegan" value="Female"> Female</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Weight">Weight</label></td>
+                <td><input type="number" id="Weight.Vegan" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="Weight_control">Weight Control</label></td>
+                <td>
+                    <select id="Weight_control.Vegan" name="Weight_control" class="form-control">
+                        <option value="Gain Weight">Gain Weight</option>
+                        <option value="Loss Weight">Loss Weight</option>
+                        <option value="Maintain Weight">Maintain Weight</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+            <tr>
+                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Vegan" name="Food Allergies.Vegan" class="form-control" rows="1"></textarea></td>
+            </tr>
+           
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </form>
+
+    </div>
+
+    <!-- Keto diet form -->
+    <div id="mini-Keto-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <form onsubmit="handleFormSubmissionKeto(event, 'Diet.html')" data-workout-type="Keto">
+            <h3 style="text-align: center;color: #000;">Keto Diet</h3>
+        <!-- workout form fields -->
+        <table class="table">
+
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name.Keto" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age.Keto" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender.Keto" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender.Keto" value="Female"> Female</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Weight">Weight</label></td>
+                <td><input type="number" id="Weight.Keto" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="Weight_control">Weight Control</label></td>
+                <td>
+                    <select id="Weight_control.Keto" name="Weight_control" class="form-control">
+                        <option value="Gain Weight">Gain Weight</option>
+                        <option value="Loss Weight">Loss Weight</option>
+                        <option value="Maintain Weight">Maintain Weight</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+            <tr>
+                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Keto" name="Food Allergies.Keto" class="form-control" rows="1"></textarea></td>
+            </tr>
+           
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </form>
+
+    </div>
+
+    <!-- Paleo diet form -->
+    <div id="mini-Paleo-popup" class="mini-popup" style="display: none;">
+        <span class="popup-close">&times;</span>
+        <form onsubmit="handleFormSubmissionPaleo(event, 'Diet.html')" data-workout-type="Paleo">
+            <h3 style="text-align: center;color: #000;">Paleo Diet</h3>
+        <!-- workout form fields -->
+        <table class="table">
+
+            <tr>
+                <th>Attribute</th>
+                <th>Entry</th>
+            </tr>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" id="name.Paleo" name="name" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" id="age.Paleo" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Gender.Paleo" value="Male"> Male</label>
+                        <label><input type="radio" name="Gender.Paleo" value="Female"> Female</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Weight">Weight</label></td>
+                <td><input type="number" id="Weight.Paleo" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label for="Weight_control">Weight Control</label></td>
+                <td>
+                    <select id="Weight_control.Paleo" name="Weight_control" class="form-control">
+                        <option value="Gain Weight">Gain Weight</option>
+                        <option value="Loss Weight">Loss Weight</option>
+                        <option value="Maintain Weight">Maintain Weight</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+            <tr>
+                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Paleo" name="Food Allergies.Paleo" class="form-control" rows="1"></textarea></td>
+            </tr>
+           
+                <td colspan="2" class="text-center">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-custom"style="background-color: #9c56e3;">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </form>
+
+    </div>
 </body>
 </head>
