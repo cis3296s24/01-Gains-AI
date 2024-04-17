@@ -46,7 +46,7 @@ function handleFormSubmissionHealthydiet(event, actionUrl) {
     
  
 
-    Diet_prompt = `Give me a week(Separated by days) healthy diet plan for ${gender} ${age} year old that weights ${weight} pound and is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) healthy diet plan for ${gender} ${age} year old that weights ${weight} pound and is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
    
 
@@ -67,7 +67,7 @@ function handleFormSubmissionWeightGain(event, actionUrl) {
     let Food_Allergies = document.getElementById('Food Allergies.Weightgain').value;
     
 
-    Diet_prompt = `Give me a week(Separated by days) for a Weight Gain diet plan for ${gender} ${age} year old that weights ${weight} pounds and want to gain ${weight_difference} pounds and is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) for a Weight Gain diet plan for ${gender} ${age} year old that weights ${weight} pounds and want to gain ${weight_difference} pounds and is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
     
 
@@ -88,7 +88,7 @@ function handleFormSubmissionWeightLoss(event, actionUrl) {
     let Food_Allergies = document.getElementById('Food Allergies.WeightLoss').value;
 
 
-    Diet_prompt = `Give me a week(Separated by days) for a Weight Loss diet plan for ${gender} ${age} year old that weights ${weight} pounds and  want to lose ${weight_difference} pounds and is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) for a Weight Loss diet plan for ${gender} ${age} year old that weights ${weight} pounds and  want to lose ${weight_difference} pounds and is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
     console.log(Diet_prompt);
 
@@ -108,7 +108,7 @@ function handleFormSubmissionVegan(event, actionUrl) {
     let Food_Allergies = document.getElementById('Food Allergies.Vegan').value;
     
 
-    Diet_prompt = `Give me a week(Separated by days) for a vegan diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) for a vegan diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
     console.log(Diet_prompt);
 
@@ -129,7 +129,7 @@ function handleFormSubmissionKeto(event, actionUrl) {
 
 
 
-    Diet_prompt = `Give me a week(Separated by days) for a Keto diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) for a Keto diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
     
     window.location.href = actionUrl;
@@ -147,7 +147,7 @@ function handleFormSubmissionPaleo(event, actionUrl) {
     let Food_Allergies = document.getElementById('Food Allergies.Paleo').value;
 
 
-    Diet_prompt = `Give me a week(Separated by days) for a Paleo diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
+    Diet_prompt = `Give me a week(Separated by 7 days and meals are separated -) for a Paleo diet plan for ${weight_control} for a ${gender} ${age} year old that weights ${weight} pounds is allegric to ${Food_Allergies}`;
     localStorage.setItem("Diet_prompt_key", Diet_prompt);
     
     window.location.href = actionUrl;

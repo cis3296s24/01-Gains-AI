@@ -42,13 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
         let fitnessLevel = document.querySelector('input[name="Fitness Level.gym"]:checked')?.value || "";
         var selectElement = document.getElementById('GymWorkout');
         var Body_Part = selectElement.value;
-        if(Body_Part == "other"){
-            Body_Part = document.getElementById('Other.gym').value;
+        if(Body_Part == "others"){
+            var specifiedWorkoutElement = document.getElementById('specifiedBodypartGym');
+            Body_Part = specifiedWorkoutElement.value
         }
     
-        Workout_prompt = `Give me 5 ${Body_Part} gym exercises for ${gender} age ${age} with a description that last for ${duration} for ${fitnessLevel} seperated by :`;
+        Workout_prompt = `Give me 5 ${Body_Part} gym exercises for ${gender} age ${age} with sets and reps and with a description that last for ${duration} minutes for ${fitnessLevel} seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
@@ -77,19 +78,20 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedValues.push(checkbox.value);
         });
 
-        var limits= "Limit to these equipment: " + selectedValues.join(', ');
+        var limits= "(Limit to these equipment: " + selectedValues.join(', ');
 
 
 
         var selectElement = document.getElementById('HomeWorkout');
         var Body_Part = selectElement.value;
-        if(Body_Part == "other"){
-            Body_Part = document.getElementById('Other.home').value;
+        if(Body_Part == "others"){
+            var specifiedWorkoutElement = document.getElementById('specifiedBodypart_home');
+            Body_Part = specifiedWorkoutElement.value
         }
     
-        Workout_prompt = `Give me 5 ${Body_Part} home exercises ${limits} for ${gender} age ${age} with a description that last for ${duration} minutes for ${fitnessLevel} seperated by :`;
+        Workout_prompt = `Give me 5 ${Body_Part} home exercises ${limits}) for ${gender} age ${age} with sets and reps and with a description that last for ${duration} minutes for ${fitnessLevel} seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
@@ -113,13 +115,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var selectElement = document.getElementById('BodyWorkout');
         var Body_Part = selectElement.value;
-        if(Body_Part == "other"){
-            Body_Part = document.getElementById('Other.BodyBuilding').value;
+        if(Body_Part == "others"){
+            var specifiedWorkoutElement = document.getElementById('specifiedBodypart_body');
+            Body_Part = specifiedWorkoutElement.value
         }
 
-        Workout_prompt = `Give me 5 ${Body_Part} exercise for ${TypeofBodyBuilding} for ${gender} age ${age} with a description that last for ${duration} minutes seperated by :`;
+        Workout_prompt = `Give me 5 ${Body_Part} exercise for ${TypeofBodyBuilding} for ${gender} age ${age} with sets and reps and with a description that last for ${duration} minutes seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
@@ -144,13 +147,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var selectElement = document.getElementById('Bodypart');
         var Body_Part = selectElement.value;
-        if(Body_Part == "other"){
-            Body_Part = document.getElementById('Other.Calistenthic').value;
+        if (Body_Part == "others") {
+            var specifiedWorkoutElement = document.getElementById('specifiedBodypart');
+            Body_Part = specifiedWorkoutElement.value
         }
 
-        Workout_prompt = `Give me 5 ${Body_Part} ${TypeofCalisthenics} Calisthenics for ${gender} age ${age} with a description that last for ${duration} minutes seperated by :`;
+        Workout_prompt = `Give me 5 ${Body_Part} ${TypeofCalisthenics} Calisthenics for ${gender} age ${age} with sets and reps and with a description that last for ${duration} minutes seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
@@ -174,16 +178,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var Yoga = document.getElementById('Yoga');
         var TypeofYoga = Yoga.value;
-        // Check if the selected value is "other"
-        if (TypeofYoga === "other") {
-        // Get the value from the "Other" textarea
-        TypeofYoga = document.getElementById('Other.yoga').value;
-        }
 
 
-        Workout_prompt = `Give me 5 ${TypeofYoga} yoga exercise for ${gender} with a description that last for ${duration} minutes for ${fitnessLevel} seperated by :`;
+
+        Workout_prompt = `Give me 5 ${TypeofYoga} yoga exercise for ${gender} with sets and reps and with a description that last for ${duration} minutes for ${fitnessLevel} seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
@@ -204,16 +204,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var Meditation = document.getElementById('Meditation');
         var TypeofMeditation = Meditation.value;
-        // Check if the selected value is "other"
-        if (TypeofMeditation === "other") {
-        // Get the value from the "Other" textarea
-        TypeofMeditation = document.getElementById('Other.meditation').value;
-        }
 
 
-        Workout_prompt = `Give me 5 ${TypeofMeditation} Meditation Techniques for ${gender} with a description that last for ${duration} minutes seperated by :`;
+
+        Workout_prompt = `Give me 5 ${TypeofMeditation} Meditation Techniques for ${gender} with sets and reps and with a description that last for ${duration} minutes seperated by ":"`;
         localStorage.setItem("Workout_prompt_key", Workout_prompt);
-        Different_prompt = Workout_prompt + " Not Included "
+        Different_prompt = Workout_prompt + " (Not Included: ";
         localStorage.setItem("DifferentWorkout_prompt_key", Different_prompt);
         console.log(Workout_prompt);
         //  form submission logic
