@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
+from .models import FitnessRecord
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -12,4 +13,9 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
+
+class FitnessRecordForm(forms.ModelForm):
+    class Meta:
+        model = FitnessRecord
+        fields = '__all__'
 
