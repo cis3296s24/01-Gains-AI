@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Replace with your key
-    const YoutubeApiKey = "";
-    const ChatgptApiKey = ""; 
+    const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
 
-    //Example 
-    //const YoutubeApiKey = "asdasfafaf";
-    //const ChatgptApiKey = "asddsa"; 
+
 
 
 
@@ -52,14 +48,14 @@ document.addEventListener("DOMContentLoaded", function() {
             // Extract the text starting from "Day 1:"
             const extractedText = responseMessage.slice(startIndex);
             
-    // Define the regular expression pattern to match each day's content
-    const dayPattern = /Day\s+\d+:[^]*?(?=Day\s+\d+:|$)/gs;
+            // Define the regular expression pattern to match each day's content
+            const dayPattern = /Day\s+\d+:[^]*?(?=Day\s+\d+:|$)/gs;
 
-    // Extract all occurrences of day content using the regular expression
-    const days = extractedText.match(dayPattern);
+            // Extract all occurrences of day content using the regular expression
+            const days = extractedText.match(dayPattern);
 
-    // Get the reference to the contextDiv
-const contextDiv = document.getElementById("context");
+            // Get the reference to the contextDiv
+            const contextDiv = document.getElementById("context");
 
 // Iterate over each day and append it to the contextDiv
 if (days) {
