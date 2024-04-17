@@ -69,7 +69,13 @@ def workout(request):
 def music(request):
     return render(request, 'Music.html', {})
 
-
-    
+def community(request):
+    return render(request, 'Community.html', {})
+def checkin(request):
+    return render(request, 'Checkin.html', {})
+def diet(request):
+    return render(request, 'Diet.html', {})
+def dietform(request):
+    return render(request, 'DietForm.html', {})
     
     

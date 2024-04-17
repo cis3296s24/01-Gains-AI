@@ -14,7 +14,7 @@
 <!-- Header -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark-#333">
-        <a class="navbar-brand" href={% url 'homepage' %}>    
+        <a class="navbar-brand" href="{% url 'homepage' %}">    
         <img src="{% static 'GaiNs_icon.jpeg'%}" style="width: 30px; height: 30px;">GaiNS.ai</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,22 +22,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href={% url 'about' %}>About Us</a>
+                    <a class="nav-link" href="{% url 'about' %}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Community.html">Community</a>
+                    <a class="nav-link" href="{% url 'community' %}">Community</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Checkin.html">Check-in</a>
+                    <a class="nav-link" href="{% url 'checkin' %}">Check-in</a>
                 <li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'music' %}">Music</a>
                 </li>
                     <img id="icon" src="{% static 'Mute_Icon.png' %}" alt="Icon">
-                    <audio id="music" src="{% static 'music' %}"></audio>
+                    <audio id="music" src="{% static 'music\Ready for It-Taylor swift.mp3' %}"></audio>
                 </li>
             </ul>
             {% if user.is_authenticated %}
+            <div class="nav-buttons mr-3"> 
+                <a class="btn btn-outline-light">Logged In as<br>{{ request.user.username }}</a>
+            </div>
             <div class="nav-buttons mr-3"> 
                 <a href={% url 'logout' %} class="btn btn-outline-light">Logout</a>
             </div>
@@ -55,7 +58,7 @@
       <div class="container">
         {% if messages %}
             {% for message in messages %}
-            <div class="alert alert-warning" role="alert">{{ message }}</div>
+            <div class="alert alert-warning" role="alert" style="text-align: center;">{{ message }}</div>
             {% endfor %}
         {% endif %}
       </div>
