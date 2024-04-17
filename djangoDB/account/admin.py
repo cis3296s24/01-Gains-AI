@@ -11,4 +11,4 @@ class PromptAdmin(admin.ModelAdmin):
             obj.user = request.user
         obj.save()
 
-admin.site.register(Prompt, PromptAdmin)
+admin.site.register(Prompt)
