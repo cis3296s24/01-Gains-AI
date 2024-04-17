@@ -34,21 +34,25 @@ OpenA1 API Key tutorial (First time user going have a free trial)
 https://www.youtube.com/watch?v=OB99E7Y1cMA
 
 ### Build Local 
-- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI/tree/release3
+- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI.git
+- Step 2) cd 01-Gains-AI
+- Step 3) git checkout tags/release4
 
 clone tutorial https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
-- Step 2) In the Workout.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
+- Step 2) In the Key.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
 - Step 3) Run command Prompt on your PC/Desktop/Latop or device
 - Step 4) enter cd 01-Gains-AI 
 - step 5) enter index.html
 
 
 ### Build In Vscode 
-- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI/tree/release3
+- Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI.git
+- Step 2) cd 01-Gains-AI
+- Step 3) git checkout tags/release4
 
 clone tutorial https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
-- Step 2) In the Workout.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
-- Step 3) Install Vscode and install Live Server by Ritwick Dey extenstion  
-- step 4) Right click on index.html and click on option Open in Live Server
+- Step 4) In the Key.js replace the Chatgpt key with your OPENAPI Key and Youtube Key with ur own Youtube key
+- Step 5) Install Vscode and install Live Server by Ritwick Dey extenstion  
+- step 6) Right click on index.html and click on option Open in Live Server
