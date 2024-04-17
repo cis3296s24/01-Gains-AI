@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>History</h1>
+    {% if workoutprompts %}
+        <ul>
+            {% for prompt in workoutprompts %}
+                <li>{{ prompt.sentence }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Workout History Found.</p>
+    {% endif %}
+</div>
+{% endblock %}

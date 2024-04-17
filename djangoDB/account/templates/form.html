@@ -23,7 +23,8 @@
     <!-- popup from the Gym.html -->
     <div id="mini-workout-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
-            <form onsubmit="handleFormSubmissionGym(event, 'workout')" data-workout-type="Gym">
+            <form data-workout-type="Gym" method="POST" action="{% url 'save_sentence' %}">
+                {% csrf_token %}
                 <h3 style="text-align: center;color: #000;">Gym Form</h3>
             <!-- workout form fields -->
             <table class="table">
@@ -33,27 +34,27 @@
                     <th>Entry</th>
                 </tr>
                 <tr>
-                    <td><label for="name">Name</label></td>
+                    <td><label for="name.gym">Name</label></td>
                     <td><input type="text" id="name.gym" name="name" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age.gym" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    <td><label for="age.gym">Age</label></td>
+                    <td><input type="number" id="age.gym" name="age" min="10" max="100" autocomplete="age" class="form-control"></td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
                     <td>
                         <div class="radio-group">
-                            <label><input type="radio" name="Gender.gym" value="Male"> Male</label>
-                            <label><input type="radio" name="Gender.gym" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.gym" value="Other"> Other</label>
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Duration">Duration</label></td>
+                    <td><label for="Duration.gym">Duration</label></td>
                     <td>
-                        <select id="Duration.gym" name="Duration" class="form-control">
+                        <select id="Duration.gym" name="duration" class="form-control">
                             <option value="10">10 minutes</option>
                             <option value="30">30 minutes</option>
                             <option value="45">45 minutes</option>
@@ -62,9 +63,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Fitness Level">Fitness Level</label></td>
+                    <td><label for="Fitness Level.gym">Fitness Level</label></td>
                     <td>
-                        <select id="Fitness Level.gym" name="Fitness Level" class="form-control">
+                        <select id="Fitness Level.gym" name="fitness" class="form-control">
                             <option value="Beginner">Beginner</option>
                             <option value="Intermidate">Intermidate</option>
                             <option value="Advance">Advance</option>
@@ -74,7 +75,7 @@
                 <tr>
                     <td><label>Types of Workout</label></td>
                     <td>
-                        <select name="TypeofWorkout" id="GymWorkout">
+                        <select id="GymWorkout" name="typeofworkout">
                           <option value="Full Body">Full Body</option>
                           <option value="Upper Body">Upper Body</option>
                           <option value="Lower Body">Lower Body</option>
@@ -88,8 +89,8 @@
                 </tr>
                 <tr>
                 <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.gym" class="form-control" rows="1"></textarea></td>
+                    <td><label for="Other.gym">Other</label></td>
+                    <td><textarea id="Other.gym" name="other" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
