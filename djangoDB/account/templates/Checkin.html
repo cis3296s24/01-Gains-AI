@@ -1,0 +1,225 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+<title>Interactive Calendar</title>
+
+<style>.dark-mode {
+    /*  dark mode  */
+    background-color: #000000;
+    color: #fff;
+}
+</style>
+<script>
+    function toggleTheme() {
+    console.log('Toggle theme function called');
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    }
+</script>
+<style>
+    /* Calendar container styles */
+    .calendar-container {
+        padding: 10px;
+        background-color: #fff; 
+        box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1); 
+        float: center; 
+        margin-right: 30px; 
+        margin-left: 30px;         
+        border-left: 1px solid #8b8686; 
+    }
+
+    /* Calendar header styles */
+    .calendar-header {
+        font-size: 24px; /*  font size for desktop */
+        margin-bottom: 20px; /* margin for better spacing */
+        text-align: center;
+        color: #333;
+    }
+
+    /* Calendar table styles */
+    .calendar {
+        width: 100%; /* Full width */
+        max-width: 2000px; /*  width for desktop */
+        margin: 0 auto; 
+        border-collapse: collapse;
+    }
+
+    .calendar th,
+    .calendar td {
+        padding: 15px; 
+        text-align: center;
+        border: 1px solid #ccc;
+        color: #333;
+        font-size: 50px;
+    }
+
+    .calendar th {
+        background-color: #979393; 
+    }
+
+
+    .current-day {
+        background-color: #9c56e3;
+        color: #fff; /* Text color */
+    }
+
+    /* Checked-in day styles */
+    .checked-in {
+        background-color: #afaeaf; 
+        color: #fff; 
+        pointer-events: none; 
+    }
+    
+    /* History container styles */
+    .history-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+    }
+
+    .history-header {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .history-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .history-item {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+<div id="rightsidebar"></div>
+<div id="history"></div>
+
+<script>
+    function createCalendar() {
+        // current date
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+        const currentDay = currentDate.getDate();
+
+        // first day of the current month
+        const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+        // number of days in the current month
+        const numberOfDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        // Month 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // calendar header
+        const calendarHeader = `<div class="calendar-header">${monthNames[currentMonth]} ${currentYear}</div>`;
+
+        // calendar table
+        let calendarTable = '<table class="calendar">';
+        calendarTable += '<thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>';
+        calendarTable += '<tbody>';
+
+        // keep track of the day of the week
+        let dayOfWeek = firstDayOfMonth.getDay();
+
+        // fill the days of the previous month if necessary to complete the first week
+        calendarTable += '<tr>';
+        for (let i = 0; i < dayOfWeek; i++) {
+            calendarTable += '<td></td>';
+        }
+
+        // calendar days
+        for (let i = 1; i <= numberOfDaysInMonth; i++) {
+            if (i === currentDay) {
+                calendarTable += `<td class="current-day">${i}</td>`;
+            } else {
+                calendarTable += `<td>${i}</td>`;
+            }
+            dayOfWeek++;
+            if (dayOfWeek === 7) {
+                calendarTable += '</tr><tr>';
+                dayOfWeek = 0;
+            }
+        }
+
+        // fill the days of the next month if necessary to complete the last week
+        if (dayOfWeek > 0) {
+            for (let i = dayOfWeek; i < 7; i++) {
+                calendarTable += '<td></td>';
+            }
+        }
+
+        calendarTable += '</tr></tbody></table>';
+
+        // combine header and table and append to sidebar
+        const calendarContainer = document.createElement('div');
+        calendarContainer.classList.add('calendar-container');
+        calendarContainer.innerHTML = calendarHeader + calendarTable;
+
+        document.getElementById('rightsidebar').appendChild(calendarContainer);
+
+        // Track checked-in days
+        const checkedInDays = new Map();
+
+        //  event listener for each day for check-in
+        const days = calendarContainer.querySelectorAll('td');
+        days.forEach(day => {
+            day.addEventListener('click', () => {
+                // Check if the day is the present day
+                if (parseInt(day.textContent) === currentDay) {
+                    // Check if the day is already checked in
+                    if (checkedInDays.has(day.textContent)) {
+                        console.log(`Already checked in on day ${day.textContent}`);
+                        alert(`You have already checked in on day ${day.textContent}.`);
+                    } else {
+                        // Toggle checked-in status
+                        day.classList.add('checked-in');
+                        checkedInDays.set(day.textContent, new Date());
+                        // Log the checked-in status (for demonstration)
+                        console.log(`Checked in on day ${day.textContent}`);
+                        alert(`You have checked in on day ${day.textContent}.`);
+                        updateHistory(checkedInDays);
+                    }
+                } else {
+                    // Show alert if trying to check in on a different day
+                    alert(`You can only check in on the current day.`);
+                }
+            });
+        });
+    }
+
+    function updateHistory(checkedInDays) {
+        const historyContainer = document.getElementById('history');
+        historyContainer.innerHTML = ''; // Clear previous history
+
+        const historyHeader = document.createElement('div');
+        historyHeader.classList.add('history-header');
+        historyHeader.textContent = 'Checked-in History:';
+        historyContainer.appendChild(historyHeader);
+
+        const historyList = document.createElement('ul');
+        historyList.classList.add('history-list');
+
+        checkedInDays.forEach((date, day) => {
+            const historyItem = document.createElement('li');
+            historyItem.classList.add('history-item');
+            const formattedDate = formatDate(date);
+            historyItem.textContent = `${formattedDate}`;
+            historyList.appendChild(historyItem);
+        });
+
+        historyContainer.appendChild(historyList);
+    }
+
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // generate calendar
+    createCalendar();
+</script>
+{% endblock %}

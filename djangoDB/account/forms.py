@@ -1,16 +1,15 @@
 from django import forms
-from .models import Member, SignUpMember
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.forms.widgets import PasswordInput, TextInput
 
-class Memberform(forms.ModelForm):
+class CreateUserForm(UserCreationForm):
     class Meta:
-        model = Member
-        fields = ['fname', 'lname', 'email', 'password', 'age']
-
-class SignUpform(forms.ModelForm):
-    class Meta:
-        model = SignUpMember
-        fields = ['fname', 'lname', 'email', 'password']
-        
-        
+        model = User
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
     
-        
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput())
+    password = forms.CharField(widget=PasswordInput())
+
+

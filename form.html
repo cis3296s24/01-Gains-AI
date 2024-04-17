@@ -263,7 +263,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.gym" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.gym" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.gym" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -288,10 +287,19 @@
                         </select>
                     </td>
                 </tr>
+                <script type="text/javascript">
+                    function CheckWorkoutGym(val){
+                     var element=document.getElementById('workout_inputGym');
+                     if(val=='others')
+                       element.style.display='block';
+                     else  
+                       element.style.display='none';
+                    }
+                </script>
                 <tr>
                     <td><label>Types of Workout</label></td>
                     <td>
-                        <select name="TypeofWorkout" id="GymWorkout">
+                        <select name="TypeofWorkout" onchange="CheckWorkoutGym(this.value);" id="GymWorkout">
                           <option value="Full Body">Full Body</option>
                           <option value="Upper Body">Upper Body</option>
                           <option value="Lower Body">Lower Body</option>
@@ -299,15 +307,15 @@
                           <option value="Arms">Arms</option>
                           <option value="legs">legs</option>
                           <option value="back">back</option>
-                          <option value="other">other</option>
+                          <option value="others">Others</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other" name="Other.gym" class="form-control" rows="1"></textarea></td>
-                </tr>
+                    <tr id="workout_inputGym" style="display: none;">
+                        <td><label>Specify Bodypart</label></td>
+                        <td><input type="text" id="specifiedBodypartGym"></td>
+                    </tr>
                
                     <td colspan="2" class="text-center">
                         <div class="form-buttons">
@@ -351,7 +359,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.home" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.home" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.home" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -387,10 +394,19 @@
                         </div>
                     </td>
                 </tr>
+                <script type="text/javascript">
+                    function CheckWorkouthome(val){
+                     var element=document.getElementById('workout_input_home');
+                     if(val=='others')
+                       element.style.display='block';
+                     else  
+                       element.style.display='none';
+                    }
+                </script>
                 <tr>
                     <td><label>Types of Workout</label></td>
                     <td>
-                        <select name="TypeofWorkout" id="HomeWorkout">
+                        <select name="TypeofWorkout" onchange="CheckWorkouthome(this.value);" id="HomeWorkout">
                           <option value="Full Body">Full Body</option>
                           <option value="Upper Body">Upper Body</option>
                           <option value="Lower Body">Lower Body</option>
@@ -398,13 +414,13 @@
                           <option value="Arms">Arms</option>
                           <option value="legs">legs</option>
                           <option value="back">back</option>
-                          <option value="other">other</option>
+                          <option value="others">Others</option>
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other.home" name="Other" class="form-control" rows="1"></textarea></td>
+                <tr id="workout_input_home" style="display: none;">
+                    <td><label>Specify Bodypart</label></td>
+                    <td><input type="text" id="specifiedBodypart_home"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
@@ -443,7 +459,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.BodyBuilding" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.BodyBuilding" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.BodyBuilding" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -479,10 +494,19 @@
                           </select>
                     </td>
                 </tr>
+                <script type="text/javascript">
+                    function CheckWorkoutbody(val){
+                     var element=document.getElementById('workout_input_body');
+                     if(val=='others')
+                       element.style.display='block';
+                     else  
+                       element.style.display='none';
+                    }
+                </script>
                 <tr>
                     <td><label>Types of Workout</label></td>
                     <td>
-                        <select name="TypeofWorkout" id="BodyWorkout">
+                        <select name="TypeofWorkout" onchange="CheckWorkoutbody(this.value);" id="BodyWorkout">
                           <option value="Full Body">Full Body</option>
                           <option value="Upper Body">Upper Body</option>
                           <option value="Lower Body">Lower Body</option>
@@ -490,12 +514,12 @@
                           <option value="Arms">Arms</option>
                           <option value="legs">legs</option>
                           <option value="back">back</option>
-                          <option value="other">other</option>
+                          <option value="others">Others</option>
                         </select>
                 </tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other.BodyBuilding" name="Other" class="form-control" rows="1"></textarea></td>
+                <tr id="workout_input_body" style="display: none;">
+                    <td><label>Specify Bodypart</label></td>
+                    <td><input type="text" id="specifiedBodypart_body"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
@@ -533,7 +557,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.Calisthenics" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.Calisthenics" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.Calisthenics" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -560,24 +583,33 @@
                           </select>
                     </td>
                 </tr>
+                <script type="text/javascript">
+                    function CheckWorkout(val){
+                     var element=document.getElementById('workout_input');
+                     if(val=='others')
+                       element.style.display='block';
+                     else  
+                       element.style.display='none';
+                    }
+                </script>
                 <tr>
                     <td><label>Types of Workout</label></td>
                     <td>
-                        <select name="TypeofWorkout" id="Bodypart">
+                        <select name="TypeofWorkout" onchange="CheckWorkout(this.value);" id="Bodypart">
                             <option value="Full Body">Full Body</option>
                             <option value="Upper Body">Upper Body</option>
                             <option value="Lower Body">Lower Body</option>
                             <option value="Chest">Chest</option>
                             <option value="Arms">Arms</option>
-                            <option value="legs">legs</option>
-                            <option value="back">back</option>
-                            <option value="other">other</option>
-                          </select>
+                            <option value="Legs">Legs</option>
+                            <option value="Back">Back</option>
+                            <option value="others">Others</option>
+                        </select>
                     </td>
                 </tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other.Calistenthic" name="Other" class="form-control" rows="1"></textarea></td>
+                <tr id="workout_input" style="display: none;">
+                    <td><label>Specify Bodypart</label></td>
+                    <td><input type="text" id="specifiedBodypart"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="form-buttons">
@@ -631,7 +663,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.yoga" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.yoga" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.yoga" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -646,13 +677,8 @@
                             <option value="Ashtanga">Ashtanga</option>
                             <option value="Katonah">Katonah</option>
                             <option value="Vinyasa">Vinyasa</option>
-                            <option value="other">other</option>
                           </select>
                     </td>
-                </tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other.yoga" name="Other" class="form-control" rows="1"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
@@ -699,7 +725,6 @@
                         <div class="radio-group">
                             <label><input type="radio" name="Gender.Meditation" value="Male"> Male</label>
                             <label><input type="radio" name="Gender.Meditation" value="Female"> Female</label>
-                            <label><input type="radio" name="Gender.Meditation" value="Other"> Other</label>
                         </div>
                     </td>
                 </tr>
@@ -709,19 +734,10 @@
                         <select name="TypeofWorkout" id="Meditation">
                             <option value="Mindfulness">Mindfulness</option>
                             <option value="Transcendental">Transcendental</option>
-                            <option value="Guided">Guided</option>
                             <option value="Loving-Kindness">Loving-Kindness</option>
-                            <option value="Body Scan">Body Scan</option>
-                            <option value="Breath Awareness">Breath Awareness</option>
                             <option value="Chakra">Chakra </option>
-                            <option value="Mantra">Mantra  </option>
-                            <option value="other">other</option>
                           </select>
                     </td>
-                </tr>
-                <tr>
-                    <td><label for="Other">Other</label></td>
-                    <td><textarea id="Other.meditation" name="Other" class="form-control" rows="1"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="form-buttons">

@@ -1,8 +1,87 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html'%}
+{% load static %}
 {% block content %}
-<h1 style="display: flex; justify-content: center; align-items: center; height: 75vh; margin: 0;font-size: 300px;">WIP...</h1>
-<div style="display: flex; justify-content: center; align-items: center;" >
-    <a href="{% url 'homepage' %}"><button class="sign-up">Back to HomePage</button></a>           
-</div>
-{% endblock %}
+  <title>Login Page</title>
+  <!-- Login Form -->
+  <h1 style="text-align: center;" >Login to GaiNS.ai</h1>
+  <form id="loginForm" method="POST" action="{% url 'login' %}">
+    {%csrf_token%}
+    <label for="login-username">Username:</label>
+    <input type="text" id="login-username" name="username" required>
+    <label for="login-password">Password:</label>
+    <input type="password" id="login-password" name="password" required>
+    <button type="submit">Login</button>
+    <a href="#" id="forgotPassword">Forgot Password?</a>
+  </form>
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <form id="forgotPasswordForm">
+            <div class="form-group">
+              <label for="forgot-email" class="mr-2">Email:</label>
+              <input type="text" id="forgot-email" name="email" class="form-control" style="max-width: 250px;">
+            </div>
+            <button type="submit" class="btn btn-custom" style="background-color: #ae77e5;">Reset Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Styling -->
+  <style>
+    .dark-mode {
+      /* dark mode */
+      background-color: #000000;
+      color: #fff;
+    }
+  </style>
+  <!-- Scripts -->
+  <script>
+    function toggleTheme() {
+      console.log('Toggle theme function called');
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+    }
+
+    // listener for the forgot pss link
+    document.getElementById('forgotPassword').addEventListener('click', () => {
+      $('#forgotPasswordModal').modal('show');
+    });
+
+    // listener for the forgot pss form submission
+    document.getElementById('forgotPasswordForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('forgot-email').value;
+
+      try {
+        await sendPasswordResetEmail(email);
+        console.log('Password reset email sent');
+        // Close or redirect the user to the appropriate page
+        $('#forgotPasswordModal').modal('hide');
+      } catch (error) {
+        console.error('Error sending password reset email:', error);
+      }
+    });
+
+    async function sendPasswordResetEmail(email) {
+     
+      return new Promise((resolve, reject) => {
+        // successful pss reset email send
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+    }
+  </script>
+
+  <script src="login-script.js"></script>
+  <script src="{% static 'script.js' %}"></script>
+{%endblock%}

@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Replace with your key
-    const YoutubeApiKey = "ADD Key";
-    const ChatgptApiKey = "ADD Key"; 
+   
+    const YoutubeApiKey = localStorage.getItem("YoutubeApiKey_key");
+    const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
 
-    //Example 
-    //const YoutubeApiKey = "asdasfafaf";
-    //const ChatgptApiKey = "asddsa"; 
+
 
 
 
@@ -21,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     GenerateButton_again.addEventListener('click', function() {
-        window.location.href = 'Form.html';
+        window.location.href = 'form.html';
         
     });
 

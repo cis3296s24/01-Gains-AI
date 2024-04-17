@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <title>About Us</title>
+    <!-- About Us Content -->
+    <div>
+        <div class="card card-custom" style="margin: 75px 300px 75px 300px;text-align:center;">  
+            <h5 class="card-title" style="font-size: 50px;">Our Goal</h5>
+            <div class="card-body">
+                <p class="card-text">
+                        At GaiNS.ai, we understand that achieving your fitness goals requires personalized support and guidance tailored to your unique needs.
+                    That's why we've developed a revolutionary platform that connects you with expertly crafted workout videos directly from YouTube API, 
+                    all personalized to your fitness level, age, gender, and targeted body parts. Whether you prefer hitting the gym, working out at home, pursuing bodybuilding goals,
+                    or seeking the serenity of yoga and meditation, we have a comprehensive range of workout options to suit every preference. Say goodbye to generic routines and hello 
+                    to a fitness journey designed just for you, with GaiNS.ai.
+                </p>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="col-md-4">
+                <div class="card card-custom">      
+                    <div class="card-body">
+                            <h5 class="card-title" style="text-align:center;">Brian Truong</h5>
+                        <p class="card-text">"Hi there! I'm a senior studying computer science, and I have a passion for napping, eating, and gaming! At home, I have a feline companion named Mo, who's always eager for a treat. Whenever I crave a delicious meal, pho is my go-to dish. Lately, I've been immersing myself in the world of Deep Rock Galactic – it's my current gaming obsession!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-custom">      
+                    <div class="card-body">
+                            <h5 class="card-title" style="text-align:center;">Himanshi</h5>
+                        <p class="card-text">Hello, I'm Himanshi, a Computer Science senior from India. My aspiration was to pursue my bachelor's degree in the US, and here I am fulfilling that dream. Looking ahead, I envision myself thriving as a developer. Adding to the joy of my journey is my loyal companion, Milo, my adorable pet dog, who makes my world even more wonderful.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-custom">      
+                    <div class="card-body">
+                            <h5 class="card-title" style="text-align:center;">Justin Truong</h5>
+                        <p class="card-text">Hey there, I'm Justin, a junior studying Computer Science. I have a burning passion for programming, napping, and gains. Beyond coding, I'm also a fan of maximizing gains in other areas of life. Whether it's hitting the gym to build strength or diving into personal development to sharpen my skills, I'm always looking for ways to elevate myself to the next level.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Styling -->
+    <style>
+        .card-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3;
+            color: black;
+        }
+    </style>
+    <!-- Scripts -->
+    <script src="{% static 'script.js' %}"></script>
+{% endblock %}
