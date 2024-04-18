@@ -69,7 +69,7 @@
             const GenerateButton_Different = document.getElementById('Generate_Different');
             
             GenerateButton.addEventListener('click', function() {
-                var Prompt = {{ last_string }}
+                var Prompt = "{{ last_string }}"
                 console.log("Prompt: ", Prompt)
             });
         
@@ -80,7 +80,8 @@
             });
         
             GenerateButton_Different.addEventListener('click', function() {
-                var Different_Prompt = localStorage.getItem("DifferentWorkout_prompt_key");
+                var Different_Prompt = "{{ last_different_string }}"
+                console.log("Different_Prompt: ", Different_Prompt)
                 sendMessage(Different_Prompt);
             });
         

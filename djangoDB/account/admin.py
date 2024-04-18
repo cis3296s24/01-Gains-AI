@@ -3,7 +3,7 @@ from .models import Prompt
 
 # Register Models Here
 class PromptAdmin(admin.ModelAdmin):
-    list_display = ['sentence', 'user']  # Display these fields in the admin list view
+    list_display = ['sentence', 'user', 'different_sentence']  # Display these fields in the admin list view
 
     def save_model(self, request, obj, form, change):
         """Override save_model to automatically set the user field."""

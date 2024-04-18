@@ -19,5 +19,7 @@ urlpatterns = [
     path('history/', views.history, name = 'history'),
     path('success/', views.success, name = 'success'),
     
+    path('favicon.ico/', views.favicon_redirect_view, name = 'favicon'),
+    
     
 ]

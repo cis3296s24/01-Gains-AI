@@ -5,6 +5,15 @@ from .models import Prompt
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import CreateUserForm, LoginForm
+from django.http import HttpResponseNotFound
+
+def favicon_redirect_view(request):
+    previous_page = request.META.get('HTTP_REFERER')
+    if previous_page:
+        return redirect(previous_page)
+    else:
+        messages.error(request, 'Something went wrong')
+        return redirect('indeex')
 
 def index(request):
     return render(request, 'index.html', {})
@@ -23,7 +32,7 @@ def signup(request):
             messages.success(request, (form.errors))
             return render(request, 'signup.html', {})
         messages.success(request, ('Signed Up Successfully'))
-        return redirect('homepage')
+        return redirect('index')
     else:
         return render(request, 'signup.html', {})
     
@@ -50,7 +59,7 @@ def login_user(request):
                     'first_name': first_name,
                     'last_name': last_name,
                 }
-                return render(request, 'homepage.html', context=context)
+                return render(request, 'index.html', context=context)
         else:
             messages.success(request, ('Incorrect Username or Password'))
             return render(request, 'login.html', {})
@@ -59,7 +68,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, ('You have been Logged Out'))
-    return redirect('homepage')
+    return redirect('index')
 
 def about(request):
     return render(request, 'About.html', {})
@@ -67,9 +76,10 @@ def about(request):
 
 def workout(request):
     last_instance = Prompt.objects.latest('id')
-    last_string = last_instance.sentence
     last_user = last_instance.user
-    return render(request, 'Workout.html', {'last_string': last_string, 'last_user': last_user})
+    last_string = last_instance.sentence
+    last_different_string = last_instance.different_sentence
+    return render(request, 'Workout.html', {'last_string': last_string, 'last_user': last_user, 'last_different_string': last_different_string})
 
 def music(request):
     return render(request, 'Music.html', {})
@@ -86,32 +96,41 @@ def diet(request):
 def dietform(request):
     return render(request, 'DietForm.html', {})
 
-
 def save_sentence(request):
     if request.method == 'POST':
-            age = request.POST.get('age', '')
-            gender = request.POST.get('gender', '')
-            duration = request.POST.get('duration', '')
-            fitness = request.POST.get('fitness', '')
-            typeofworkout = request.POST.get('typeofworkout', '')
-            other = request.POST.get('other', '')
-            # Construct the sentence
-            if typeofworkout == "other":
-                sentence = f"`Give me 5 {other} exercises at the gym for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :`;"
-            else:
-                sentence = f"`Give me 5 {typeofworkout} exercises at the gym for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :`;"
-            if request.user.is_authenticated:
-                # Save the sentence to the database
-                Prompt_instance = Prompt(sentence=sentence, user=request.user)
-                Prompt_instance.save()
-                return redirect('workout')  # Redirect to success page
-            else:
-                Prompt_instance = Prompt(sentence=sentence, user=None)
-                Prompt_instance.save()
-                return redirect('workout')
+        age = request.POST.get('age', '')
+        gender = request.POST.get('gender', '')
+        duration = request.POST.get('duration', '')
+        fitness = request.POST.get('fitness', '')
+        typeofworkout = request.POST.get('typeofworkout', '')
+        other = request.POST.get('other', '')
+        
+        # Construct the sentence
+        if typeofworkout == "other":
+            sentence = f"Give me 5 {other} exercises at the gym for a {gender} age {age} with a description that lasts for {duration} minutes for a {fitness} fitness level separated by :"
+        else:
+            sentence = f"Give me 5 {typeofworkout} exercises at the gym for a {gender} age {age} with a description that lasts for {duration} minutes for a {fitness} fitness level separated by :"
+        
+        different_sentence = sentence + " Not Included "
+        
+        # Validate form data
+        if sentence.strip() == "":
+            messages.error(request, "Sentence cannot be empty")
+            return redirect('workout')
+        
+        # Create Prompt instance
+        if request.user.is_authenticated:
+            prompt_instance = Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence)
+        else:
+            prompt_instance = Prompt.objects.create(sentence=sentence, different_sentence=different_sentence)
+        
+        # Redirect to appropriate page
+        return redirect('workout')
+    
     else:
-        messages.error(request, "Error has occured")
-        return render(request, 'index')  # Render the form template
+        messages.error(request, "Error: Invalid request method")
+        return render(request, 'index.html')  # Render the form template
+    
 
 def history(request):
     pass
