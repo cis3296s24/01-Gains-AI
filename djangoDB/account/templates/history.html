@@ -1,11 +1,12 @@
 {%extends 'base.html'%}
 {% load static %}
 {% block content %}
+
 <div class="container">
-    <h1>History</h1>
-    {% if workoutprompts %}
+    <h1>Workout History</h1>
+    {% if prompts %}
         <ul>
-            {% for prompt in workoutprompts %}
+            {% for prompt in prompts %}
                 <li>{{ prompt.sentence }}</li>
             {% endfor %}
         </ul>
@@ -13,4 +14,18 @@
         <p>No Workout History Found.</p>
     {% endif %}
 </div>
+
+<div class="container">
+    <h1>Diet History</h1>
+    {% if prompts %}
+        <ul>
+            {% for prompt in prompts %}
+                <li>{{ prompt.sentence }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Workout History Found.</p>
+    {% endif %}
+</div>
+
 {% endblock %}
