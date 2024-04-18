@@ -16,4 +16,4 @@ class LoginForm(AuthenticationForm):
 class PromptForm(forms.ModelForm):
     class Meta:
         model = Prompt
-        fields = ['sentence']
+        fields = ['sentence', 'different_sentence']

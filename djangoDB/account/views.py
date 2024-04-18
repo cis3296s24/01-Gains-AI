@@ -66,7 +66,10 @@ def about(request):
 
 
 def workout(request):
-    return render(request, 'Workout.html', {})
+    last_instance = Prompt.objects.latest('id')
+    last_string = last_instance.sentence
+    last_user = last_instance.user
+    return render(request, 'Workout.html', {'last_string': last_string, 'last_user': last_user})
 
 def music(request):
     return render(request, 'Music.html', {})
@@ -83,10 +86,9 @@ def diet(request):
 def dietform(request):
     return render(request, 'DietForm.html', {})
 
-@login_required
+
 def save_sentence(request):
     if request.method == 'POST':
-        if request.user.is_authenticated:
             age = request.POST.get('age', '')
             gender = request.POST.get('gender', '')
             duration = request.POST.get('duration', '')
@@ -98,14 +100,18 @@ def save_sentence(request):
                 sentence = f"`Give me 5 {other} exercises at the gym for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :`;"
             else:
                 sentence = f"`Give me 5 {typeofworkout} exercises at the gym for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :`;"
-            # Save the sentence to the database
-            Prompt_instance = Prompt(sentence=sentence, user=request.user)
-            Prompt_instance.save()
-            return redirect('workout')  # Redirect to success page
-        else:
-            return redirect('workout')
-    messages.error(request, "Error has occured")
-    return render(request, 'index')  # Render the form template
+            if request.user.is_authenticated:
+                # Save the sentence to the database
+                Prompt_instance = Prompt(sentence=sentence, user=request.user)
+                Prompt_instance.save()
+                return redirect('workout')  # Redirect to success page
+            else:
+                Prompt_instance = Prompt(sentence=sentence, user=None)
+                Prompt_instance.save()
+                return redirect('workout')
+    else:
+        messages.error(request, "Error has occured")
+        return render(request, 'index')  # Render the form template
 
 def history(request):
     pass
