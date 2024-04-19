@@ -2,20 +2,20 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
+<div class="container" style="border: 2px solid black;padding: 10px;margin-bottom: 20px;margin-top: 20px;">
     <h1>Workout History</h1>
-    {% if prompts %}
+    {% if last_10_workouts %}
         <ul>
-            {% for prompt in prompts %}
+            {% for prompt in last_10_workouts %}
                 <li>{{ prompt.sentence }}</li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No Workout History Found.</p>
+        <p>No Workout History Found</p>
     {% endif %}
 </div>
 
-<div class="container">
+<div class="container" style="border: 2px solid black;padding: 10px;margin-bottom: 20px;">
     <h1>Diet History</h1>
     {% if prompts %}
         <ul>
@@ -24,7 +24,7 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>No Workout History Found.</p>
+        <p>No Diet History Found</p>
     {% endif %}
 </div>
 

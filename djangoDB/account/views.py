@@ -120,9 +120,9 @@ def save_sentence(request):
         
         # Create Prompt instance
         if request.user.is_authenticated:
-            prompt_instance = Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence)
+            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence)
         else:
-            prompt_instance = Prompt.objects.create(sentence=sentence, different_sentence=different_sentence)
+            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence)
         
         # Redirect to appropriate page
         return redirect('workout')
@@ -132,8 +132,17 @@ def save_sentence(request):
         return render(request, 'index.html')  # Render the form template
     
 
+@login_required
 def history(request):
-    pass
+    user = request.user
+    last_10_workouts = user.prompt_set.order_by('-id')[:10]
+    context = {
+        'last_10_workouts': last_10_workouts,
+    }
+
+    # Render the 'history.html' template with the context
+    return render(request, 'history.html', context)
+
 
 def success(request):
     return render(request, 'success.html', {})
