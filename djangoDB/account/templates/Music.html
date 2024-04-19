@@ -5,12 +5,12 @@
     <!-- Music Choices -->
     <body>
         <h1 style="text-align: center;"> Pick a song to save as the default background music </h1>
-        <button class="classic-button" onclick="changeAudio('music/Rocky Balboa-Theme Song.mp3')">Rocky Theme songs</button>
-        <button class="classic-button" onclick="changeAudio('music/Eye of The Tiger-Survivor.mp3')">Eye of the Tiger-Survivor</button>
-        <button class="classic-button" onclick="changeAudio('music/Ready for It-Taylor swift.mp3')">Ready for it By taylor swift</button>
-        <button class="classic-button" onclick="changeAudio('music/MIC Drop (Steve Aoki Remix).mp3')">Mic drop by bts Steve aoki remix</button>
-        <button class="classic-button" onclick="changeAudio('music/Cupid-Fifty Fifty.mp3')">Cupid by fifty fifty</button>
-        <button class="classic-button" onclick="changeAudio('music/Gucci Gang -lil pump.mp3')">Gucci Gang by lil pump</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/Rocky Balboa-Theme Song.mp3"%}')">Rocky Theme songs</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/Eye of The Tiger-Survivor.mp3"%}')">Eye of the Tiger-Survivor</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/Ready for It-Taylor swift.mp3"%}')">Ready for it By taylor swift</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/MIC Drop (Steve Aoki Remix).mp3"%}')">Mic drop by bts Steve aoki remix</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/Cupid-Fifty Fifty.mp3"%}')">Cupid by fifty fifty</button>
+        <button class="classic-button" onclick="changeAudio('{% static "music/Gucci Gang -lil pump.mp3"%}')">Gucci Gang by lil pump</button>
     </body>
     <!-- Styling -->
     <style>
@@ -33,7 +33,7 @@
         function changeAudio(src){
             var audio = document.getElementById('music');
             localStorage.setItem('defaultSong', src);
-            icon.src = "Speaker_Icon.png";
+            icon.src = "{% static 'Speaker_Icon.png' %}";
             audio.src = localStorage.getItem('defaultSong');
             audio.play();
         }
