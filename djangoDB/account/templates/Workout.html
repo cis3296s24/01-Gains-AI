@@ -24,7 +24,7 @@
         background-color: #000000;
         color: #fff;
     }
-    </style>
+    </style> 
     <style>
         .container {
             display: flex;
@@ -44,26 +44,13 @@
     </style>
     <!-- Scripts -->
     <script src="{% static 'script.js' %}"></script>
-    <script>
-        function toggleTheme() {
-        console.log('Toggle theme function called');
-        const body = document.body;
-        body.classList.toggle('dark-mode');
-        }
-    </script>
+    <script src="{% static 'Key.js' %}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Replace with your key
-            const YoutubeApiKey = "";
-            const ChatgptApiKey = ""; 
-        
-            //Example 
-            //const YoutubeApiKey = "asdasfafaf";
-            //const ChatgptApiKey = "asddsa"; 
-        
-        
-        
-        
+            const YoutubeApiKey = localStorage.getItem("YoutubeApiKey_key");
+            const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
+            
             const GenerateButton = document.getElementById('Generate');
             const GenerateButton_again = document.getElementById('Generate_Again');
             const GenerateButton_Different = document.getElementById('Generate_Different');
@@ -157,12 +144,7 @@
                                 .catch(error => {
                                     console.error('Error fetching workout video:', error);
                                 });
-                            
-                        
-                       
                     });
-        
-                    
                 })
                 .catch(error => {
                     console.error('Error:', error);

@@ -7,247 +7,137 @@
       <a class="navbar-brand" href="{% url 'community' %}">GaiNS Community</a>
     </nav>
   </header>
-<script>
-    function toggleTheme() {
-      console.log('Toggle theme function called');
-      const body = document.body;
-      body.classList.toggle('dark-mode');
-    }
-</script>
-  <style>
-    .dark-mode {
-      /* dark mode */
-      background-color: #000000;
-      color: #fff;
-    }
-    /* General Styles */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
-
-    .container-fluid {
-      padding: 30px;
-    }
-
-    /* Header Styles */
-    .navbar {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-    }
-
-    /* Question Card Styles */
-    .question-card {
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .question-card h4 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .question-card .meta {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .question-card .username {
-      font-weight: bold;
-    }
-
-    .question-card .btn {
-      font-size: 14px;
-      padding: 5px 10px;
-    }
-
-    /* Top Contributors Styles */
-    .top-contributors {
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .top-contributors h4 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .top-contributors .contributor {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .top-contributors .contributor .username {
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .top-contributors .contributor .badge {
-      font-size: 12px;
-      padding: 4px 8px;
-    }
-
-    /* Top Questions Styles */
-    .top-questions {
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-
-    .top-questions h4 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .top-questions ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .top-questions li {
-      margin-bottom: 10px;
-    }
-
-    .top-questions li a {
-      color: #333;
-      text-decoration: none;
-    }
-
-    .top-questions li a:hover {
-      color: #9c56e3;
-    }
-    .btn-custom {
-        background-color: #9c56e3;
-        border-color: #9c56e3; 
-        color: white; 
-    }   
-  </style>
-
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-        <div class="question-card" id="question1">
-            <h4>What are some effective exercises to build muscle mass?</h4>
-            <p class="meta">1 days ago | 10 answers</p>
+  
+        <!-- Question 1 Card -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">What are some effective exercises to build muscle mass?</h4>
+            <p class="card-text">1 days ago | 10 answers</p>
             <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
-                    <span class="username">Howard Hogan</span>
-                </div>
-                <div>
-                    <button class="btn btn-custom btn-sm" onclick="toggleWriteAnswer('answer1')">Write</button>
-                    <span class="pin-icon ml-2" onclick="togglePin('question1')">
-                        <i id="pinIcon_question1" class="fas fa-thumbtack"></i> 
-                    </span>
-                    <span class="pin-icon ml-2" onclick="togglePin('question1')">
-                      <i class="fas fa-times-circle"></i> 
-                  </span>
-                    
-                </div>
-            </div>
-            <div class="write-answer" id="answer1" style="display: none;">
-                <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
-                <button class="btn btn-custom mt-2" onclick="submitAnswer('answer1')">Submit</button>
-            </div>
-            <div id="submittedAnswers1" class="submitted-answers"></div>
-        </div>
-        <div class="question-card" id="question2">
-            <h4>How can I improve my flexibility for better performance in workouts?</h4>
-            <p class="meta">2 days ago | 2 answers</p>
-            <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                      <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
-                      <span class="username">Johan Pritchel</span>
-              </div>
-              <div>
-                  <button class="btn btn-custom btn-sm" onclick="toggleWriteAnswer('answer2')">Write</button>
-                  <span class="pin-icon ml-2" onclick="togglePin('question2')">
-                    <i id="pinIcon_question2" class="fas fa-thumbtack"></i> 
-                </span>
-                <span class="pin-icon ml-2" onclick="togglePin('question2')">
-                    <i class="fas fa-times-circle"></i> 
-                </span>
-              </div>
-            </div>
-            <div class="write-answer" id="answer2" style="display: none;">
-              <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
-              <button class="btn btn-custom mt-2" onclick="submitAnswer('answer2')">Submit </button>
-            </div>
-            <div id="submittedAnswers2" class="submitted-answers"></div>
-          </div>
-          <div class="question-card" id="question3">
-            <h4>What is the best way to lose belly fat?</h4>
-            <p class="meta">1 days ago | 1 answers</p>
-            <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                      <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
-                      <span class="username">Mitchell Johnson</span>
-              </div>
-              <div>
-                  <button class="btn btn-custom btn-sm" onclick="toggleWriteAnswer('answer3')">Write</button>
-                  <span class="pin-icon ml-2" onclick="togglePin('question3')">
-                      <i id="pinIcon_question3" class="fas fa-thumbtack"></i> 
-                  </span>
-                  <span class="pin-icon ml-2" onclick="togglePin('question3')">
-                    <i class="fas fa-times-circle"></i> 
-                </span>
-              </div>
-            </div>
-            <div class="write-answer" id="answer3" style="display: none;">
-              <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
-              <button class="btn btn-custom mt-2" onclick="submitAnswer('answer3')">Submit </button>
-            </div>
-            <div id="submittedAnswers3" class="submitted-answers"></div>
-          </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="top-contributors">
-          <h4>Top Contributors</h4>
-            <div class="contributor">
-                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
-                <span class="username">Johan Pritchel</span>
-                <span class="badge badge-success">Active</span>
-            </div>
-          <div class="contributor">
+              <div class="d-flex align-items-center">
                 <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                 <span class="username">Howard Hogan</span>
-                <span class="badge badge-danger">Inactive</span>
-          </div>
-          <div class="contributor">
-                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
-                <span class="username">Mitchell Johnson</span>
-                <span class="badge badge-success">Active</span>
+              </div>
+              <div>
+                <button class="btn btn-primary btn-sm" onclick="toggleWriteAnswer('answer1')">Write</button>
+                <button class="btn btn-secondary btn-sm ml-2" onclick="togglePin('question1')">
+                  <i id="pinIcon_question1" class="fas fa-thumbtack"></i> 
+                </button>
+                <button class="btn btn-danger btn-sm ml-2" onclick="toggleDelete('question1')">
+                  <i class="fas fa-times-circle"></i> 
+                </button>
+              </div>
+            </div>
+            <div class="write-answer mt-3" id="answer1" style="display: none;">
+              <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
+              <button class="btn btn-success mt-2" onclick="submitAnswer('answer1')">Submit</button>
+            </div>
+            <div id="submittedAnswers1" class="submitted-answers mt-3"></div>
           </div>
         </div>
-
-        <div class="top-questions">
-          <h4>Top Questions</h4>
-            <ul>
-                <li><a href="#">What are some effective exercises to build muscle mass?</a></li>
-                <li><a href="#">How can I improve my flexibility for better performance in workouts?</a></li>
-                <li><a href="#">What is the best way to lose belly fat?</a></li>
+        <!-- End Question 1 Card -->
+  
+        <!-- Question 2 Card -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">How can I improve my flexibility for better performance in workouts?</h4>
+            <p class="card-text">2 days ago | 2 answers</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                <span class="username">Johan Pritchel</span>
+              </div>
+              <div>
+                <button class="btn btn-primary btn-sm" onclick="toggleWriteAnswer('answer2')">Write</button>
+                <button class="btn btn-secondary btn-sm ml-2" onclick="togglePin('question2')">
+                  <i id="pinIcon_question2" class="fas fa-thumbtack"></i> 
+                </button>
+                <button class="btn btn-danger btn-sm ml-2" onclick="toggleDelete('question2')">
+                  <i class="fas fa-times-circle"></i> 
+                </button>
+              </div>
+            </div>
+            <div class="write-answer mt-3" id="answer2" style="display: none;">
+              <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
+              <button class="btn btn-success mt-2" onclick="submitAnswer('answer2')">Submit</button>
+            </div>
+            <div id="submittedAnswers2" class="submitted-answers mt-3"></div>
+          </div>
+        </div>
+        <!-- End Question 2 Card -->
+  
+        <!-- Question 3 Card -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">What is the best way to lose belly fat?</h4>
+            <p class="card-text">1 days ago | 1 answers</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                <span class="username">Mitchell Johnson</span>
+              </div>
+              <div>
+                <button class="btn btn-primary btn-sm" onclick="toggleWriteAnswer('answer3')">Write</button>
+                <button class="btn btn-secondary btn-sm ml-2" onclick="togglePin('question3')">
+                  <i id="pinIcon_question3" class="fas fa-thumbtack"></i> 
+                </button>
+                <button class="btn btn-danger btn-sm ml-2" onclick="toggleDelete('question3')">
+                  <i class="fas fa-times-circle"></i> 
+                </button>
+              </div>
+            </div>
+            <div class="write-answer mt-3" id="answer3" style="display: none;">
+              <textarea class="form-control" rows="3" placeholder="Write your answer here"></textarea>
+              <button class="btn btn-success mt-2" onclick="submitAnswer('answer3')">Submit</button>
+            </div>
+            <div id="submittedAnswers3" class="submitted-answers mt-3"></div>
+          </div>
+        </div>
+        <!-- End Question 3 Card -->
+  
+        <!-- Repeat similar card structure for other questions -->
+  
+      </div>
+  
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">Top Contributors</h4>
+            <div class="contributor mb-2">
+              <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+              <span class="username">Johan Pritchel</span>
+              <span class="badge badge-success ml-2">Active</span>
+            </div>
+            <div class="contributor mb-2">
+              <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+              <span class="username">Howard Hogan</span>
+              <span class="badge badge-danger ml-2">Inactive</span>
+            </div>
+            <div class="contributor mb-2">
+              <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+              <span class="username">Mitchell Johnson</span>
+              <span class="badge badge-success ml-2">Active</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Top Questions</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="#">What are some effective exercises to build muscle mass?</a></li>
+              <li class="list-group-item"><a href="#">How can I improve my flexibility for better performance in workouts?</a></li>
+              <li class="list-group-item"><a href="#">What is the best way to lose belly fat?</a></li>
             </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>

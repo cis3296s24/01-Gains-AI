@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Replace with your key
-    const YoutubeApiKey = "ADD Key";
+    const YoutubeApiKey = "";
     const ChatgptApiKey = ""; 
 
     //Example 

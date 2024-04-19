@@ -29,10 +29,26 @@
 
 <div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;text-align:center;">
     <h1>Diet History</h1>
-    {% if prompts %}
+    {% if last_10_diets %}
         <ul class="list-group">
-            {% for prompt in prompts %}
-                <li class="list-group-item">{{ prompt.sentence }}</li>
+            {% for dietprompt in last_10_diets %}
+            <li class="list-group-item">
+                <a href="#" style="text-decoration: none;">
+                    Type of Diet: {{ dietprompt.typeofdiet }} <br>
+                    Weight: {{ dietprompt.weight }} <br>
+                    {% if dietprompt.weightcontrol != None %}
+                    Weight Control: {{ dietprompt.weightcontrol }} <br>
+                    {% endif %}
+                    {% if dietprompt.weightgoal != None %}
+                    Weight Goal: {{ dietprompt.weightgoal }} <br>
+                    {% endif %}
+                    {% if dietprompt.foodAllergies != '' %}
+                    Food Allergies: {{ dietprompt.foodAllergies }} <br>
+                    {% endif %}
+                    Age: {{ dietprompt.age }} <br>
+                    Gender: {{ dietprompt.gender }} <br>
+                </a>
+            </li>
             {% endfor %}
         </ul>
     {% else %}

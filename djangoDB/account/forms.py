@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
-from .models import Prompt
+from .models import Prompt, DietPrompt
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -16,4 +16,9 @@ class LoginForm(AuthenticationForm):
 class PromptForm(forms.ModelForm):
     class Meta:
         model = Prompt
-        fields = ['sentence', 'different_sentence', 'age', 'gender', 'duration', 'fitness', 'typeofworkout', 'other']
+        fields = ['sentence', 'different_sentence', 'age', 'gender', 'duration', 'fitness', 'typeofworkout', 'other', 'typeofextra']
+        
+class DietForm(forms.ModelForm):
+    class Meta:
+        model = DietPrompt
+        exclude = ['user']
