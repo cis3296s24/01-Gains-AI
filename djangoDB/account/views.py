@@ -120,9 +120,9 @@ def save_sentence(request):
         
         # Create Prompt instance
         if request.user.is_authenticated:
-            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence)
+            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other)
         else:
-            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence)
+            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other)
         
         # Redirect to appropriate page
         return redirect('workout')

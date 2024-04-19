@@ -2,25 +2,37 @@
 {% load static %}
 {% block content %}
 
-<div class="container" style="border: 2px solid black;padding: 10px;margin-bottom: 20px;margin-top: 20px;">
+<div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;margin-top: 20px;text-align:center;">
     <h1>Workout History</h1>
     {% if last_10_workouts %}
-        <ul>
+        <ol class="list-group">
             {% for prompt in last_10_workouts %}
-                <li>{{ prompt.sentence }}</li>
+                <li class="list-group-item">
+                    <a href="#" style="text-decoration: none;">
+                        {% if prompt.typeofworkout == "other" %}
+                            Type of Workout: {{ prompt.other|title }} <br>
+                        {% else %}
+                            Type of Workout: {{ prompt.typeofworkout }} <br>
+                        {% endif %}
+                        Fitness Level: {{ prompt.fitness }} <br>
+                        Duration: {{ prompt.duration }} minutes <br>
+                        Age: {{ prompt.age }} <br>
+                        Gender: {{ prompt.gender }} <br>
+                    </a>
+                </li>
             {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>No Workout History Found</p>
     {% endif %}
 </div>
 
-<div class="container" style="border: 2px solid black;padding: 10px;margin-bottom: 20px;">
+<div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;text-align:center;">
     <h1>Diet History</h1>
     {% if prompts %}
-        <ul>
+        <ul class="list-group">
             {% for prompt in prompts %}
-                <li>{{ prompt.sentence }}</li>
+                <li class="list-group-item">{{ prompt.sentence }}</li>
             {% endfor %}
         </ul>
     {% else %}
