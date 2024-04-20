@@ -77,7 +77,8 @@
                 .then(response => response.json())
                 .then(data => {
                     const responseMessage = data.choices[0].message.content;
-                    
+
+                    saveToDatabase(responseMessage)
                     const contextDiv = document.getElementById("context");
                     const Diet = document.createElement('div');
                     Diet.innerHTML = responseMessage.replace(/\n/g, "<br>");
@@ -85,6 +86,49 @@
                 })
         
             }
+            function saveToDatabase(message) {
+                const currentUrl = window.location.href;
+                const baseUrl = currentUrl.replace('/diet/', '');
+                const requestUrl = baseUrl + '/save_output_diet/';
+                fetch(requestUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                    },
+                    body: message,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.status === 'success') {
+                        console.log('Request successful');
+                        console.log(data.message);
+                    } else {
+                        console.error('Request failed');
+                        console.error(data.message);
+                    }
+                }
+                )
+                .catch(error => {console.error('Error:', error);});
+            }
+            
+            // Function to get CSRF token from cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }  
         });
     </script>
 {% endblock %}

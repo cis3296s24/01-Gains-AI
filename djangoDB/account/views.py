@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Prompt, DietPrompt
+from .models import DietOutput, Prompt, DietPrompt
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import CreateUserForm, LoginForm
@@ -108,10 +108,6 @@ def diet(request):
 def dietform(request):
     return render(request, 'DietForm.html', {})
 
-def diet_detail(request, pk):
-    dietprompt = get_object_or_404(DietPrompt, pk=pk)
-    return render(request, 'diet_detail.html', {'dietprompt': dietprompt})
-
 def save_sentence(request):
     if request.method == 'POST':
         age = request.POST.get('age', None)
@@ -210,4 +206,42 @@ def my_view_request(request):
 def my_view(request):
     return render(request, 'test.html', {})
 
-    
+def save_output_diet(request):
+    if request.method == 'POST':
+        message = request.body.decode('utf-8')
+        if message:
+            # Get the latest DietPrompt based on the latest ID
+            latest_prompt = DietPrompt.objects.latest('id')
+
+            # Create a new DietOutput object based on the latest prompt
+            new_output = DietOutput(diet_prompt=latest_prompt, diet_output=message)
+            new_output.save()
+            return JsonResponse({'status': 'success', 'message': message})
+    return JsonResponse({'status': 'error', 'message': 'No message provided'})
+
+def diet_detail(request, pk):
+    diet_prompt = get_object_or_404(DietPrompt, pk=pk)
+    diet_output = DietOutput.objects.filter(diet_prompt=diet_prompt).first()
+
+    if diet_output:
+        diet_output_string = diet_output.diet_output
+        day_meal_plans = diet_output_string.split("Day ")[1:]
+
+        formatted_output = ""
+        for day_meal_plan in day_meal_plans:
+            day, meals = day_meal_plan.split(": ", 1)
+            formatted_output += f"\nDay {day}:\n"
+            meals_list = meals.split(" ")
+            current_meal = ""
+            for meal in meals_list:
+                if meal.endswith(":"):
+                    formatted_output += f"- {current_meal.strip()}\n"
+                    current_meal = meal
+                else:
+                    current_meal += f" {meal}"
+            formatted_output += f"- {current_meal.strip()}\n"
+
+        return render(request, 'diet_detail.html', {'diet_prompt': diet_prompt, 'diet_output': formatted_output})
+    else:
+        return render(request, 'diet_detail.html', {'diet_prompt': diet_prompt, 'diet_output': None})
+

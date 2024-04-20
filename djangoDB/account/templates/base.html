@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'Key.js' %}"></script>
 </head>
 
 <!-- Header -->
@@ -60,7 +61,7 @@
         </div>
     </nav>
 </header>
-    <body>
+
       <div class="container">
         {% if messages %}
             {% for message in messages %}
@@ -71,7 +72,7 @@
       {% block content %}
 
       {% endblock %}
-    </body>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Define an array of icon sources

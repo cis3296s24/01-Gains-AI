@@ -33,7 +33,7 @@
         <ul class="list-group">
             {% for dietprompt in last_10_diets %}
             <li class="list-group-item">
-                <a href="#" style="text-decoration: none;">
+                <a href="{% url 'diet_detail' dietprompt.id %}" style="text-decoration: none;">
                     Type of Diet: {{ dietprompt.typeofdiet }} <br>
                     Weight: {{ dietprompt.weight }} <br>
                     {% if dietprompt.weightcontrol != None %}

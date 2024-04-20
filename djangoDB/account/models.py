@@ -38,4 +38,15 @@ class DietPrompt(models.Model):
             return f'User: {self.user.username} || Description: {self.sentence} ||'
         else:
             return f'User: Guest || Description: {self.sentence} ||'
+        
+class DietOutput(models.Model):
+    diet_prompt = models.ForeignKey(DietPrompt, on_delete=models.CASCADE, null=True, blank=True)
+    diet_output = models.TextField()
+    
+    def __str__(self):
+        user = self.diet_prompt.user
+        if user:
+            return f'User: {user} || Description: {self.diet_prompt}'
+        else:
+            return f'User: Guest || Description: {self.diet_prompt}'
     
