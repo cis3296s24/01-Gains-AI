@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <title>Workout Prompt Details</title>
+    <div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;margin-top: 20px;text-align:center;">
+        <h1>Workout Prompt</h1>
+        <ul style="list-style-type: none; padding: 0;">
+            <li><strong>Type of Workout: </strong> {{ prompt.typeofworkoutform }}</li>
+            {% if prompt.typeofworkout != '' %}
+            <li><strong>Body Part: </strong> {{ prompt.typeofworkout }}</li>
+            {% endif %}
+            {% if prompt.fitness != '' %}
+            <li><strong>Fitness: </strong> {{ prompt.fitness }}</li>
+            {% endif %}
+            {% if prompt.duration != '' %}
+            <li><strong>Duration: </strong> {{ prompt.duration }}</li>
+            {% endif %}
+            {% if prompt.gender != '' %}
+            <li><strong>Gender: </strong> {{ prompt.gender }}</li>
+            {% endif %}
+            <li><strong>Age: </strong> {{ prompt.age }}</li>
+        </ul>
+    </div>
+
+    {% if workout_output %}
+    <div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;text-align:center;">
+        <h1>Workout Details</h1>
+        <pre style="background-color: inherit; color: inherit; border: none; white-space: pre-wrap;">{{ workout_output }}</pre>
+    </div>
+    {% endif %}
+{%endblock%}

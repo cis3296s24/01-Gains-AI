@@ -14,6 +14,7 @@ class Prompt(models.Model):
     typeofextra = models.CharField(max_length=50)
     typeofworkout = models.CharField(max_length=50)
     other = models.TextField()
+    typeofworkoutform = models.CharField(max_length=50)
     
     def __str__(self):
         if self.user:
@@ -46,7 +47,18 @@ class DietOutput(models.Model):
     def __str__(self):
         user = self.diet_prompt.user
         if user:
-            return f'User: {user} || Description: {self.diet_prompt}'
+            return f'User: {user} || Description: {self.diet_prompt.sentence}'
         else:
-            return f'User: Guest || Description: {self.diet_prompt}'
+            return f'User: Guest || Description: {self.diet_prompt.sentence}'
+
+class WorkoutOutput(models.Model):
+    workout_prompt = models.ForeignKey(Prompt, on_delete=models.CASCADE, null=True, blank=True)
+    workout_output = models.TextField()
+    
+    def __str__(self):
+        user = self.workout_prompt.user
+        if user:
+            return f'User: {user} || Description: {self.workout_prompt.sentence}'
+        else:
+            return f'User: Guest || Description: {self.workout_prompt.sentence}'
     

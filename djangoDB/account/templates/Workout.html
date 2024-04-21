@@ -54,7 +54,8 @@
             const GenerateButton = document.getElementById('Generate');
             const GenerateButton_again = document.getElementById('Generate_Again');
             const GenerateButton_Different = document.getElementById('Generate_Different');
-            
+            let exerciseString = '';
+
             GenerateButton.addEventListener('click', function() {
                 var Prompt = "{{ last_string }}"
                 console.log("Prompt: ", Prompt)
@@ -88,7 +89,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const responseMessage = data.choices[0].message.content;
-        
+                    saveToDatabase(responseMessage);
         
                     // Split the response into separate strings based on the numbers
                     const ExcisesArray = responseMessage.split(/\d+\.|(?<=\d)\)/).filter(Boolean).map(s => s.trim());
@@ -98,7 +99,7 @@
                     // Create container for video and exercise name
                     const videoExerciseContainer = document.createElement('div');
                     videoExerciseContainer.classList.add('video-exercise-container');
-        
+                    
                     //Display each curl on the website
                      ExcisesArray.forEach((excrise) => {
                          const ExcisesDescription =excrise.split(':').map(part => part.trim());
@@ -113,7 +114,6 @@
                             ExciseDescription.textContent = ` ${ExcisesDescription[1]}`;
                             videoExerciseContainer.appendChild(ExciseDescription);
                             console.log(ExciseDescription)
-        
                             
                             const searchQuery = `How to do ${ExciseName.textContent}`;
                             // Call API to fetch video
@@ -123,6 +123,9 @@
                                     const videoId = data.items[0].id.videoId;
                                     const videoUrl = `https://www.youtube.com/embed/${videoId}`;
                                     
+                                    
+
+
                                     // Create an iframe element to embed the video
                                     const iframe = document.createElement('iframe');
                                     iframe.setAttribute('src', videoUrl);
@@ -149,6 +152,50 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
+            }
+
+            function saveToDatabase(message) {
+                const currentUrl = window.location.href;
+                const baseUrl = currentUrl.replace('/workout/', '');
+                const requestUrl = baseUrl + '/save_output_workout/';
+                fetch(requestUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                        'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                    },
+                    body: message, 
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.status === 'success') {
+                        console.log('Request successful');
+                        console.log(data.message);
+                    } else {
+                        console.error('Request failed');
+                        console.error(data.message);
+                    }
+                }
+                )
+                .catch(error => {console.error('Error:', error);});
+            }
+            
+            // Function to get CSRF token from cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
             }
         });        
     </script>

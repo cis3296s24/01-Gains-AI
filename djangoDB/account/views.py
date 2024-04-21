@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import DietOutput, Prompt, DietPrompt
+from .models import DietOutput, Prompt, DietPrompt, WorkoutOutput
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import CreateUserForm, LoginForm
@@ -117,13 +117,39 @@ def save_sentence(request):
         typeofextra = request.POST.get('typeofextra', '')
         typeofworkout = request.POST.get('typeofworkout', '')
         other = request.POST.get('other', '')
-        
+        typeofworkoutform = request.POST.get('typeofworkoutform', '')
         # Construct the sentence
-        if typeofworkout == "other":
-            sentence = f"Give me 5 {other} exercises at the gym for {typeofextra} for a {gender} age {age} with a description that lasts for {duration} minutes for a {fitness} fitness level separated by :"
-        else:
-            sentence = f"Give me 5 {typeofworkout} exercises at the gym for {typeofextra} for a {gender} age {age} with a description that lasts for {duration} minutes for a {fitness} fitness level separated by :"
-        
+        if typeofworkoutform == 'Gym':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} exercises at the gym for {gender} age {age} with a description that last for {duration} for {fitness} seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} exercises at the gym for {gender} age {age} with a description that last for {duration} for ${fitness} seperated by :"
+        elif typeofworkoutform == 'Home':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :"
+        elif typeofworkoutform == 'BodyBuilding':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} exercise for {typeofextra} for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} exercise for {typeofextra} for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+        elif typeofworkoutform == 'Calisthenics':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} {typeofextra} Calisthenics for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} {typeofextra} Calisthenics for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+        elif typeofworkoutform == 'Yoga':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} yoga exercise for {gender} with a description that last for {duration} minutes for {fitness} seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} yoga exercise for {gender} with a description that last for {duration} minutes for {fitness} seperated by :"
+        elif typeofworkoutform == 'Meditation':
+            if typeofworkout == "other":
+                sentence = f"Give me 5 {other} Meditation Techniques for {gender} with a description that last for {duration} minutes seperated by :"
+            else:
+                sentence = f"Give me 5 {typeofworkout} Meditation Techniques for {gender} with a description that last for {duration} minutes seperated by :"
+                
         different_sentence = sentence + " Not Included "
         
         # Validate form data
@@ -133,9 +159,9 @@ def save_sentence(request):
         
         # Create Prompt instance
         if request.user.is_authenticated:
-            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other)
+            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
         else:
-            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other)
+            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
         
         # Redirect to appropriate page
         return redirect('workout')
@@ -225,23 +251,29 @@ def diet_detail(request, pk):
 
     if diet_output:
         diet_output_string = diet_output.diet_output
-        day_meal_plans = diet_output_string.split("Day ")[1:]
-
-        formatted_output = ""
-        for day_meal_plan in day_meal_plans:
-            day, meals = day_meal_plan.split(": ", 1)
-            formatted_output += f"\nDay {day}:\n"
-            meals_list = meals.split(" ")
-            current_meal = ""
-            for meal in meals_list:
-                if meal.endswith(":"):
-                    formatted_output += f"- {current_meal.strip()}\n"
-                    current_meal = meal
-                else:
-                    current_meal += f" {meal}"
-            formatted_output += f"- {current_meal.strip()}\n"
-
-        return render(request, 'diet_detail.html', {'diet_prompt': diet_prompt, 'diet_output': formatted_output})
+        return render(request, 'diet_detail.html', {'diet_prompt': diet_prompt, 'diet_output': diet_output_string})
     else:
         return render(request, 'diet_detail.html', {'diet_prompt': diet_prompt, 'diet_output': None})
 
+def save_output_workout(request):
+    if request.method == 'POST':
+        message = request.body.decode('utf-8')
+        if message:
+            # Get the latest Prompt based on the latest ID
+            latest_prompt = Prompt.objects.latest('id')
+
+            # Create a new DietOutput object based on the latest prompt
+            new_output = WorkoutOutput(workout_prompt=latest_prompt, workout_output=message)
+            new_output.save()
+            return JsonResponse({'status': 'success', 'message': message})
+    return JsonResponse({'status': 'error', 'message': 'No message provided'})
+
+def workout_detail(request, pk):
+    prompt = get_object_or_404(Prompt, pk=pk)
+    workout_output = WorkoutOutput.objects.filter(workout_prompt=prompt).first()
+
+    if workout_output:
+        workout_output_string = workout_output.workout_output
+        return render(request, 'workout_detail.html', {'prompt': prompt, 'workout_output': workout_output_string})
+    else:
+        return render(request, 'workout_detail.html', {'prompt': prompt, 'workout_output': None})

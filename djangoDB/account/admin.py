@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Prompt, DietPrompt, DietOutput
+from .models import Prompt, DietPrompt, DietOutput, WorkoutOutput
 
 # Register Models Here
 class PromptAdmin(admin.ModelAdmin):
@@ -14,3 +14,5 @@ class PromptAdmin(admin.ModelAdmin):
 admin.site.register(Prompt)
 admin.site.register(DietPrompt)
 admin.site.register(DietOutput)
+admin.site.register(WorkoutOutput)
+

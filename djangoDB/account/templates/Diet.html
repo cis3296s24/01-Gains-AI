@@ -93,7 +93,7 @@
                 fetch(requestUrl, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain',
                         'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
                     },
                     body: message,

@@ -28,7 +28,7 @@
                 <h3 style="text-align: center;color: #000;">Gym Form</h3>
             <!-- workout form fields -->
             <table class="table">
-    
+                <input type="hidden" name="typeofworkoutform" value="Gym">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -118,6 +118,7 @@
             }</style>
             <!--  home workout form fields -->
             <table class="table">
+                <input type="hidden" name="typeofworkoutform" value="Home">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -211,6 +212,8 @@
             <h3 style="text-align: center;color: #000;">Body Building Form</h3>
             <!--  body building form fields -->
             <table class="table">
+                <input type="hidden" name="typeofworkoutform" value="BodyBuilding">
+
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -302,6 +305,7 @@
             {% csrf_token %}
             <h3 style="text-align: center;color: #000;">Calisthenics Form</h3>
             <table class="table">
+                <input type="hidden" name="typeofworkoutform" value="Calisthenics">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -384,6 +388,7 @@
             <h3 style="text-align: center;color: #000;">Yoga Form</h3>
             <!-- yoga form fields  -->
             <table class="table">
+                <input type="hidden" name="typeofworkoutform" value="Yoga">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -463,6 +468,7 @@
             <h3 style="text-align: center;color: #000;">Meditation Form</h3>
     
             <table class="table">
+                <input type="hidden" name="typeofworkoutform" value="Meditation">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
