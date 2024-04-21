@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 from .models import FitnessRecord
+from .models import Checkin
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -19,3 +20,7 @@ class FitnessRecordForm(forms.ModelForm):
         model = FitnessRecord
         fields = '__all__'
 
+class CheckinForm(forms.ModelForm):
+    class Meta:
+        model = Checkin
+        fields = ['date']

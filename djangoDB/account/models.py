@@ -22,3 +22,6 @@ class FitnessRecord(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Checkin(models.Model):
+    date = models.DateField()
