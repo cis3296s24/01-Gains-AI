@@ -31,8 +31,8 @@
     </div> {% endcomment %}
 
     <div class="nav-buttons mt-3" style="display: flex; justify-content: center;"> 
-        <button id="GenerateDiet" class="btn btn-custom mr-2" style="background-color: #800080; color: #fff; border-color: #800080; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Generate Diet (May Take 10 seconds for API)</button>
-        <button id="GenerateAgainDiet" class="btn btn-custom" style="background-color: #800080; color: #fff; border-color: #800080; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Change Diet Type</button>
+        <button id="GenerateDiet" class="btn btn-custom mr-2" style="background-color: #9c56e3; color: #fff; border-color: #9c56e3; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Generate Diet (May Take 10 seconds for API)</button>
+        <button id="GenerateAgainDiet" class="btn btn-custom" style="background-color: #9c56e3; color: #fff; border-color: #9c56e3; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Change Diet Type</button>
     </div>
     
     <div class="container">
@@ -44,10 +44,10 @@
         document.addEventListener("DOMContentLoaded", function() {
             const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
         
-            const GenerateButton = document.getElementById('Generate Diet');
-            const GenerateButton_again = document.getElementById('Generate_Again_Diet');
-            const GenerateButton_Different = document.getElementById('Save_Diet');
-        
+            const GenerateButton = document.getElementById('GenerateDiet');
+            const GenerateButton_again = document.getElementById('GenerateAgainDiet');
+
+
             GenerateButton.addEventListener('click', function() {
                 var Prompt = "{{ last_string }}"
                 console.log(Prompt)
@@ -62,8 +62,7 @@
                 
             });
         
-            GenerateButton_Different.addEventListener('click', function() {
-            });
+
         
         
             function sendMessage(message) {

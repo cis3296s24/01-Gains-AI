@@ -132,39 +132,33 @@ def save_sentence(request):
         fitness = request.POST.get('fitness', 'Any')
         typeofextra = request.POST.get('typeofextra', '')
         typeofworkout = request.POST.get('typeofworkout', '')
-        other = request.POST.get('other', '')
+        other = request.POST.get('other', None)
         typeofworkoutform = request.POST.get('typeofworkoutform', '')
         # Construct the sentence
         if typeofworkoutform == 'Gym':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} exercises at the gym for {gender} age {age} with a description that last for {duration} for {fitness} seperated by :"
+            if typeofworkout == "others":
+                sentence = f"Give me 5 {other} gym exercises for {gender} age {age} with sets and reps and with a description that last for {duration} minutes for {fitness} seperated by \":\""
             else:
-                sentence = f"Give me 5 {typeofworkout} exercises at the gym for {gender} age {age} with a description that last for {duration} for ${fitness} seperated by :"
+                sentence = f"Give me 5 {typeofworkout} gym exercises for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes for {fitness} separated by \":\"" 
         elif typeofworkoutform == 'Home':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :"
+            if typeofworkout == "others":
+                sentence = f"Give me 5 {other} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes for {fitness} seperated by \":\"" 
             else:
-                sentence = f"Give me 5 {typeofworkout} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with a description that last for {duration} minutes for {fitness} seperated by :"
+                sentence = f"Give me 5 {typeofworkout} home exercises Limit to these equipment: {typeofextra} for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes for {fitness} seperated by \":\"" 
         elif typeofworkoutform == 'BodyBuilding':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} exercise for {typeofextra} for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+            if typeofworkout == "others":
+                sentence = f"Give me 5 {other} exercise for {typeofextra} for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes seperated by \":\"" 
             else:
-                sentence = f"Give me 5 {typeofworkout} exercise for {typeofextra} for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+                sentence = f"Give me 5 {typeofworkout} exercise for {typeofextra} for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes seperated by \":\"" 
         elif typeofworkoutform == 'Calisthenics':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} {typeofextra} Calisthenics for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+            if typeofworkout == "others":
+                sentence = f"Give me 5 {other} {typeofextra} Calisthenics for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes seperated by \":\"" 
             else:
-                sentence = f"Give me 5 {typeofworkout} {typeofextra} Calisthenics for {gender} age {age} with a description that last for {duration} minutes seperated by :"
+                sentence = f"Give me 5 {typeofworkout} {typeofextra} Calisthenics for {gender} age {age} with sets and reps and with a description that lasts for {duration} minutes seperated by \":\"" 
         elif typeofworkoutform == 'Yoga':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} yoga exercise for {gender} with a description that last for {duration} minutes for {fitness} seperated by :"
-            else:
-                sentence = f"Give me 5 {typeofworkout} yoga exercise for {gender} with a description that last for {duration} minutes for {fitness} seperated by :"
+            sentence = f"Give me 5 {typeofworkout} yoga exercise for {gender} with sets and reps and with a description that lasts for {duration} minutes for {fitness} seperated by \":\"" 
         elif typeofworkoutform == 'Meditation':
-            if typeofworkout == "other":
-                sentence = f"Give me 5 {other} Meditation Techniques for {gender} with a description that last for {duration} minutes seperated by :"
-            else:
-                sentence = f"Give me 5 {typeofworkout} Meditation Techniques for {gender} with a description that last for {duration} minutes seperated by :"
+            sentence = f"Give me 5 {typeofworkout} Meditation Techniques for {gender} with a description that last for {duration} minutes seperated by \":\""
                 
         different_sentence = sentence + " Not Included "
         
@@ -175,9 +169,15 @@ def save_sentence(request):
         
         # Create Prompt instance
         if request.user.is_authenticated:
-            Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
+            if(typeofworkoutform == 'Meditation' or typeofworkoutform == 'Yoga' ):
+                Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, typeofworkoutform=typeofworkoutform)
+            else: 
+                Prompt.objects.create(user=request.user, sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
         else:
-            Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
+            if(typeofworkoutform == 'Meditation' or typeofworkoutform == 'Yoga' ):
+                Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, typeofworkoutform=typeofworkoutform)
+            else: 
+                Prompt.objects.create(sentence=sentence, different_sentence=different_sentence, age=age, gender=gender, duration=duration, fitness=fitness, typeofworkout=typeofworkout, other=other, typeofworkoutform=typeofworkoutform)
         
         # Redirect to appropriate page
         return redirect('workout')
