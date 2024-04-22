@@ -21,7 +21,7 @@ def index(request):
 def form(request):
     return render(request, 'form.html', {})
 
-def signup(request):
+def signup2(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         print(request.POST)
@@ -36,6 +36,22 @@ def signup(request):
     else:
         return render(request, 'signup.html', {})
     
+def signup(request):
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Signed Up Successfully')
+            return redirect('index')
+        else:
+            # If form is not valid, retrieve and display the first error message
+            error_message = next(iter(form.errors.values()))[0]  # Get the first error message
+            messages.error(request, error_message)
+            return render(request, 'signup.html', {'form': form})
+    else:
+        form = CreateUserForm()
+    return render(request, 'signup.html', {'form': form})
+
 def login_user(request):
     if request.method == "POST":
         form = LoginForm(data=request.POST)

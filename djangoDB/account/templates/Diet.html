@@ -25,12 +25,16 @@
     }
     </style>
 
-    <div class="nav-buttons mr-3"> 
-    <button id="Generate Diet" class="btn btn-custom" >Generate Diet (May Take 10 seconds for API)</button>
-    <button id="Generate_Again_Diet" class="btn btn-custom"> Change Diet Type</button>
-    <button id="Save_Diet" class="btn btn-custom"> Save Diet(Not implement) Type</button>
-    </div>
+    {% comment %} <div class="nav-buttons mr-3" style="text-align: center;"> 
+        <button id="Generate Diet" class="btn btn-custom" >Generate Diet (May Take 10 seconds for API)</button>
+        <button id="Generate_Again_Diet" class="btn btn-custom"> Change Diet Type</button>
+    </div> {% endcomment %}
 
+    <div class="nav-buttons mt-3" style="display: flex; justify-content: center;"> 
+        <button id="GenerateDiet" class="btn btn-custom mr-2" style="background-color: #800080; color: #fff; border-color: #800080; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Generate Diet (May Take 10 seconds for API)</button>
+        <button id="GenerateAgainDiet" class="btn btn-custom" style="background-color: #800080; color: #fff; border-color: #800080; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Change Diet Type</button>
+    </div>
+    
     <div class="container">
         <div id = "context">
                 <!-- Your content here -->

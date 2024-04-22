@@ -74,9 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(searchQuery)}&type=video&videoEmbeddable=true&key=${YoutubeApiKey}`)
                         .then(response => response.json())
                         .then(data => {
-                            const videoId = data.items[0].id.videoId;
-                            const videoUrl = `https://www.youtube.com/embed/${videoId}`;
-                            
                             // Create an iframe element to embed the video
                             const iframe = document.createElement('iframe');
                             iframe.setAttribute('src', videoUrl);
