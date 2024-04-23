@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=OB99E7Y1cMA
 ### Build In Vscode 
 - Step 1) clone this repository https://github.com/cis3296s24/01-Gains-AI.git
 - Step 2) cd 01-Gains-AI
-- Step 3) git checkout tags/release4
+- Step 3) git checkout tags/release5
 
 clone tutorial https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
