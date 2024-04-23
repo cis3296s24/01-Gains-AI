@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+</head>
+<body>
+    <button id="callDjangoViewBtn">Call Django View</button>
+    <div id="responseContainer">
+        <!-- Content Here -->
+    </div>
+
+    <script>
+        function callDjangoView() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+            const baseUrl = currentUrl.replace('/my_view/', '');
+            const requestUrl = baseUrl + '/my_view_request';
+            fetch(requestUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    document.getElementById('responseContainer').innerHTML = data.message;
+                })
+                .catch(error => {
+                    // Handle any errors
+                    console.error('Error:', error);
+                });
+        }
+
+        document.getElementById('callDjangoViewBtn').addEventListener('click', callDjangoView);
+    </script>
+</body>
+</html>

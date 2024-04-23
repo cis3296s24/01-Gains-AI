@@ -7,13 +7,6 @@
       <a class="navbar-brand" href="{% url 'community' %}">GaiNS Community</a>
     </nav>
   </header>
-<script>
-    function toggleTheme() {
-      console.log('Toggle theme function called');
-      const body = document.body;
-      body.classList.toggle('dark-mode');
-    }
-</script>
   <style>
     .dark-mode {
       /* dark mode */
@@ -138,7 +131,7 @@
     }   
   </style>
 
-  <div class="container-fluid">
+  <div class="container-fluid"  style="color: black;">
     <div class="row">
       <div class="col-md-8">
         <div class="question-card" id="question1">
@@ -146,7 +139,7 @@
             <p class="meta">1 days ago | 10 answers</p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                    <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                     <span class="username">Howard Hogan</span>
                 </div>
                 <div>
@@ -171,7 +164,7 @@
             <p class="meta">2 days ago | 2 answers</p>
             <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
-                      <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                      <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                       <span class="username">Johan Pritchel</span>
               </div>
               <div>
@@ -195,7 +188,7 @@
             <p class="meta">1 days ago | 1 answers</p>
             <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
-                      <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                      <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                       <span class="username">Mitchell Johnson</span>
               </div>
               <div>
@@ -220,17 +213,17 @@
         <div class="top-contributors">
           <h4>Top Contributors</h4>
             <div class="contributor">
-                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                 <span class="username">Johan Pritchel</span>
                 <span class="badge badge-success">Active</span>
             </div>
           <div class="contributor">
-                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                 <span class="username">Howard Hogan</span>
                 <span class="badge badge-danger">Inactive</span>
           </div>
           <div class="contributor">
-                <img src="profile-pic.jpg" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
+                <img src="{% static 'profile-pic.jpg'%}" class="rounded-circle mr-2" width="30" height="30" alt="User Avatar">
                 <span class="username">Mitchell Johnson</span>
                 <span class="badge badge-success">Active</span>
           </div>

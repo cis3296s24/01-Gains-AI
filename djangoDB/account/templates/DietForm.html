@@ -2,9 +2,8 @@
 {% load static %}
 {% block content %}
     <title>Diet Planner</title>
-
-    <script src="{% static 'DietForm.js'%}"></script>
     <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'DietForm.js' %}"></script>
     <style>
         /* CSS for the popup */
         .open-mini-popup {
@@ -189,10 +188,6 @@
 </style>
     <!-- Sidebar -->
     <div id="mySidebar_diet" class="sidebar_diet">
-        <div class="search-bar_diet">
-            <input type="text" id="workout-search-diet" placeholder="Search diet...">
-            <i class="fas fa-search"></i>
-        </div>
         <h3 style="text-align: center; color: #b57bf0" class="font-weight-bold">Types of Diet</h3>
         <div class="btn-group"> 
         <button  id="Healthydiet-btn" style="text-align: center" class="open-mini-popup" data-popup-target="mini-Healthydiet-popup">Healthy Diet</button>
@@ -206,11 +201,12 @@
     <!-- Healthy diet form -->
     <div id="mini-Healthydiet-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
-            <form onsubmit="handleFormSubmissionHealthydiet(event, 'Diet.html')" data-workout-type="Healthydiet">
+            <form data-workout-type="Healthydiet" method="POST" action="{% url 'save_sentence_diet' %}">
+                {% csrf_token %}
                 <h3 style="text-align: center;color: #000;">Healthy Diet</h3>
             <!-- workout form fields -->
             <table class="table">
-    
+                <input type="hidden" name="typeofdiet" value="Healthy">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
@@ -220,27 +216,27 @@
                     <td><input type="text" id="name.Healthydiet" name="name" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age.Healthydiet" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    <td><label for="age.Healthydiet">Age</label></td>
+                    <td><input type="number" id="age.Healthydiet" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
                     <td>
                         <div class="radio-group">
-                            <label><input type="radio" name="Gender.Healthydiet" value="Male"> Male</label>
-                            <label><input type="radio" name="Gender.Healthydiet" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Weight">Weight</label></td>
-                    <td><input type="number" id="Weight.Healthydiet" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                    <td><label for="Weight.Healthydiet">Weight</label></td>
+                    <td><input type="number" id="Weight.Healthydiet" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
                 </tr>
                 <tr>
 
                 <tr>
-                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                    <td><textarea id="Food Allergies.Healthydiet" name="Food Allergies.Healthydiet" class="form-control" rows="1"></textarea></td>
+                    <td><label for="Food Allergies.Healthydiet">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.Healthydiet" name="foodAllergies" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
@@ -258,48 +254,49 @@
         <!-- Weightgain form -->
     <div id="mini-Weightgain-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
-            <form onsubmit="handleFormSubmissionWeightGain(event, 'Diet.html')" data-workout-type="Weightgain">
+            <form data-workout-type="Weightgain" method="POST" action="{% url 'save_sentence_diet' %}">
+                {% csrf_token %}
                 <h3 style="text-align: center;color: #000;">Weight Gain</h3>
             <!-- workout form fields -->
             <table class="table">
-    
+                <input type="hidden" name="typeofdiet" value="Weight Gain">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
                 </tr>
                 <tr>
-                    <td><label for="name">Name</label></td>
+                    <td><label for="name.Weightgain">Name</label></td>
                     <td><input type="text" id="name.Weightgain" name="name" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age.Weightgain" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    <td><label for="age.Weightgain">Age</label></td>
+                    <td><input type="number" id="age.Weightgain" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
                     <td>
                         <div class="radio-group">
-                            <label><input type="radio" name="Gender.Weightgain" value="Male"> Male</label>
-                            <label><input type="radio" name="Gender.Weightgain" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Weight">Weight</label></td>
-                    <td><input type="number" id="Weight.Weightgain" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                    <td><label for="Weight.Weightgain">Weight</label></td>
+                    <td><input type="number" id="Weight.Weightgain" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
                 </tr>
                 <tr>
 
                 </tr>
                 <tr>
-                    <td><label for="GoalWeight">Goal Weight</label></td>
-                    <td><input type="number" id="GoalWeight.Weightgain" name="GoalWeight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                    <td><label for="GoalWeight.Weightgain">Goal Weight</label></td>
+                    <td><input type="number" id="GoalWeight.Weightgain" name="weightgoal" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
                 </tr>
                 <tr>
 
                 <tr>
-                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                    <td><textarea id="Food Allergies.Weightgain" name="Food Allergies.Weightgain" class="form-control" rows="1"></textarea></td>
+                    <td><label for="Food Allergies.Weightgain">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.Weightgain" name="foodAllergies" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
@@ -317,48 +314,49 @@
         <!-- WeightLoss form -->
     <div id="mini-WeightLoss-popup" class="mini-popup" style="display: none;">
             <span class="popup-close">&times;</span>
-            <form onsubmit="handleFormSubmissionWeightLoss(event, 'Diet.html')" data-workout-type="WeightLoss">
+            <form data-workout-type="WeightLoss" method="POST" action="{% url 'save_sentence_diet' %}">
+                {% csrf_token %}
                 <h3 style="text-align: center;color: #000;">Weight Loss</h3>
             <!-- workout form fields -->
             <table class="table">
-    
+                <input type="hidden" name="typeofdiet" value="Weight Loss">
                 <tr>
                     <th>Attribute</th>
                     <th>Entry</th>
                 </tr>
                 <tr>
-                    <td><label for="name">Name</label></td>
+                    <td><label for="name.WeightLoss">Name</label></td>
                     <td><input type="text" id="name.WeightLoss" name="name" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td><label for="age">Age</label></td>
-                    <td><input type="number" id="age.WeightLoss" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                    <td><label for="age.WeightLoss">Age</label></td>
+                    <td><input type="number" id="age.WeightLoss" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
                 </tr>
                 <tr>
                     <td><label>Gender</label></td>
                     <td>
                         <div class="radio-group">
-                            <label><input type="radio" name="Gender.WeightLoss" value="Male"> Male</label>
-                            <label><input type="radio" name="Gender.WeightLoss" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="Weight">Weight</label></td>
-                    <td><input type="number" id="Weight.WeightLoss" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                    <td><label for="Weight.WeightLoss">Weight</label></td>
+                    <td><input type="number" id="Weight.WeightLoss" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
                 </tr>
                 <tr>
 
                 </tr>
                 <tr>
-                    <td><label for="GoalWeight">Goal Weight</label></td>
-                    <td><input type="number" id="GoalWeight.WeightLoss" name="GoalWeight" min="10" max="600" autocomplete="GoalWeight" class="form-control"></td>
+                    <td><label for="GoalWeight.WeightLoss">Goal Weight</label></td>
+                    <td><input type="number" id="GoalWeight.WeightLoss" name="weightgoal" min="10" max="600" autocomplete="GoalWeight" class="form-control" required></td>
                 </tr>
                 <tr>
 
                 <tr>
-                    <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                    <td><textarea id="Food Allergies.WeightLoss" name="Food Allergies.WeightLoss" class="form-control" rows="1"></textarea></td>
+                    <td><label for="Food Allergies.WeightLoss">Food Allergies(if nothing, put nothing)</label></td>
+                    <td><textarea id="Food Allergies.WeightLoss" name="foodAllergies" class="form-control" rows="1"></textarea></td>
                 </tr>
                
                     <td colspan="2" class="text-center">
@@ -376,40 +374,41 @@
     <!-- Vegan diet form -->
     <div id="mini-Vegan-popup" class="mini-popup" style="display: none;">
         <span class="popup-close">&times;</span>
-        <form onsubmit="handleFormSubmissionVegan(event, 'Diet.html')" data-workout-type="Vegan">
+        <form data-workout-type="Vegan" method="POST" action="{% url 'save_sentence_diet' %}">
+            {% csrf_token %}
             <h3 style="text-align: center;color: #000;">Vegan Diet</h3>
         <!-- workout form fields -->
         <table class="table">
-
+            <input type="hidden" name="typeofdiet" value="Vegan">
             <tr>
                 <th>Attribute</th>
                 <th>Entry</th>
             </tr>
             <tr>
-                <td><label for="name">Name</label></td>
+                <td><label for="name.Vegan">Name</label></td>
                 <td><input type="text" id="name.Vegan" name="name" class="form-control"></td>
             </tr>
             <tr>
-                <td><label for="age">Age</label></td>
-                <td><input type="number" id="age.Vegan" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                <td><label for="age.Vegan">Age</label></td>
+                <td><input type="number" id="age.Vegan" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
             </tr>
             <tr>
                 <td><label>Gender</label></td>
                 <td>
                     <div class="radio-group">
-                        <label><input type="radio" name="Gender.Vegan" value="Male"> Male</label>
-                        <label><input type="radio" name="Gender.Vegan" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td><label for="Weight">Weight</label></td>
-                <td><input type="number" id="Weight.Vegan" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                <td><label for="Weight.Vegan">Weight</label></td>
+                <td><input type="number" id="Weight.Vegan" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
             </tr>
             <tr>
-                <td><label for="Weight_control">Weight Control</label></td>
+                <td><label for="Weight_control.Vegan">Weight Control</label></td>
                 <td>
-                    <select id="Weight_control.Vegan" name="Weight_control" class="form-control">
+                    <select id="Weight_control.Vegan" name="weightcontrol" class="form-control">
                         <option value="Gain Weight">Gain Weight</option>
                         <option value="Loss Weight">Loss Weight</option>
                         <option value="Maintain Weight">Maintain Weight</option>
@@ -419,8 +418,8 @@
             <tr>
 
             <tr>
-                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                <td><textarea id="Food Allergies.Vegan" name="Food Allergies.Vegan" class="form-control" rows="1"></textarea></td>
+                <td><label for="Food Allergies.Vegan">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Vegan" name="foodAllergies" class="form-control" rows="1"></textarea></td>
             </tr>
            
                 <td colspan="2" class="text-center">
@@ -438,22 +437,23 @@
     <!-- Keto diet form -->
     <div id="mini-Keto-popup" class="mini-popup" style="display: none;">
         <span class="popup-close">&times;</span>
-        <form onsubmit="handleFormSubmissionKeto(event, 'Diet.html')" data-workout-type="Keto">
+        <form data-workout-type="Keto" method="POST" action="{% url 'save_sentence_diet' %}">
+            {% csrf_token %}
             <h3 style="text-align: center;color: #000;">Keto Diet</h3>
         <!-- workout form fields -->
         <table class="table">
-
+            <input type="hidden" name="typeofdiet" value="Keto">
             <tr>
                 <th>Attribute</th>
                 <th>Entry</th>
             </tr>
             <tr>
-                <td><label for="name">Name</label></td>
+                <td><label for="name.Keto">Name</label></td>
                 <td><input type="text" id="name.Keto" name="name" class="form-control"></td>
             </tr>
             <tr>
-                <td><label for="age">Age</label></td>
-                <td><input type="number" id="age.Keto" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                <td><label for="age.Keto">Age</label></td>
+                <td><input type="number" id="age.Keto" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
             </tr>
             <tr>
                 <td><label>Gender</label></td>
@@ -465,13 +465,13 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="Weight">Weight</label></td>
-                <td><input type="number" id="Weight.Keto" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                <td><label for="Weight.Keto">Weight</label></td>
+                <td><input type="number" id="Weight.Keto" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
             </tr>
             <tr>
-                <td><label for="Weight_control">Weight Control</label></td>
+                <td><label for="Weight_control.Keto">Weight Control</label></td>
                 <td>
-                    <select id="Weight_control.Keto" name="Weight_control" class="form-control">
+                    <select id="Weight_control.Keto" name="weightcontrol" class="form-control">
                         <option value="Gain Weight">Gain Weight</option>
                         <option value="Loss Weight">Loss Weight</option>
                         <option value="Maintain Weight">Maintain Weight</option>
@@ -481,8 +481,8 @@
             <tr>
 
             <tr>
-                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                <td><textarea id="Food Allergies.Keto" name="Food Allergies.Keto" class="form-control" rows="1"></textarea></td>
+                <td><label for="Food Allergies.Keto">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Keto" name="foodAllergies" class="form-control" rows="1"></textarea></td>
             </tr>
            
                 <td colspan="2" class="text-center">
@@ -500,40 +500,41 @@
     <!-- Paleo diet form -->
     <div id="mini-Paleo-popup" class="mini-popup" style="display: none;">
         <span class="popup-close">&times;</span>
-        <form onsubmit="handleFormSubmissionPaleo(event, 'Diet.html')" data-workout-type="Paleo">
+        <form data-workout-type="Paleo" method="POST" action="{% url 'save_sentence_diet' %}">
+            {% csrf_token %}
             <h3 style="text-align: center;color: #000;">Paleo Diet</h3>
         <!-- workout form fields -->
         <table class="table">
-
+            <input type="hidden" name="typeofdiet" value="Paleo">
             <tr>
                 <th>Attribute</th>
                 <th>Entry</th>
             </tr>
             <tr>
-                <td><label for="name">Name</label></td>
+                <td><label for="name.Paleo">Name</label></td>
                 <td><input type="text" id="name.Paleo" name="name" class="form-control"></td>
             </tr>
             <tr>
-                <td><label for="age">Age</label></td>
-                <td><input type="number" id="age.Paleo" name="Age" min="10" max="100" autocomplete="age" class="form-control"></td>
+                <td><label for="age.Paleo">Age</label></td>
+                <td><input type="number" id="age.Paleo" name="age" min="10" max="100" autocomplete="age" class="form-control" required></td>
             </tr>
             <tr>
                 <td><label>Gender</label></td>
                 <td>
                     <div class="radio-group">
-                        <label><input type="radio" name="Gender.Paleo" value="Male"> Male</label>
-                        <label><input type="radio" name="Gender.Paleo" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td><label for="Weight">Weight</label></td>
-                <td><input type="number" id="Weight.Paleo" name="Weight" min="10" max="600" autocomplete="Weight" class="form-control"></td>
+                <td><label for="Weight.Paleo">Weight</label></td>
+                <td><input type="number" id="Weight.Paleo" name="weight" min="10" max="600" autocomplete="Weight" class="form-control" required></td>
             </tr>
             <tr>
-                <td><label for="Weight_control">Weight Control</label></td>
+                <td><label for="Weight_control.Paleo">Weight Control</label></td>
                 <td>
-                    <select id="Weight_control.Paleo" name="Weight_control" class="form-control">
+                    <select id="Weight_control.Paleo" name="weightcontrol" class="form-control">
                         <option value="Gain Weight">Gain Weight</option>
                         <option value="Loss Weight">Loss Weight</option>
                         <option value="Maintain Weight">Maintain Weight</option>
@@ -543,8 +544,8 @@
             <tr>
 
             <tr>
-                <td><label for="Food Allergies">Food Allergies(if nothing, put nothing)</label></td>
-                <td><textarea id="Food Allergies.Paleo" name="Food Allergies.Paleo" class="form-control" rows="1"></textarea></td>
+                <td><label for="Food Allergies.Paleo">Food Allergies(if nothing, put nothing)</label></td>
+                <td><textarea id="Food Allergies.Paleo" name="foodAllergies" class="form-control" rows="1"></textarea></td>
             </tr>
            
                 <td colspan="2" class="text-center">
@@ -558,6 +559,4 @@
         </form>
 
     </div>
-</body>
-</head>
-{% endblock %}
+    {% endblock %}

@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;margin-top: 20px;text-align:center;">
+    <h1>Workout History</h1>
+    {% if last_10_workouts %}
+        <ol class="list-group">
+            {% for prompt in last_10_workouts %}
+                <li class="list-group-item">
+                    <a href="{% url 'workout_detail' prompt.id %}"  style="text-decoration: none;">
+                        {% if prompt.typeofworkout == "other" %}
+                            Type of Workout: {{ prompt.other|title }} <br>
+                        {% else %}
+                            Type of Workout: {{ prompt.typeofworkout }} <br>
+                        {% endif %}
+                        Fitness Level: {{ prompt.fitness }} <br>
+                        Duration: {{ prompt.duration }} minutes <br>
+                        Age: {{ prompt.age }} <br>
+                        Gender: {{ prompt.gender }} <br>
+                    </a>
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No Workout History Found</p>
+    {% endif %}
+</div>
+
+<div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;text-align:center;">
+    <h1>Diet History</h1>
+    {% if last_10_diets %}
+        <ul class="list-group">
+            {% for dietprompt in last_10_diets %}
+            <li class="list-group-item">
+                <a href="{% url 'diet_detail' dietprompt.id %}" style="text-decoration: none;">
+                    Type of Diet: {{ dietprompt.typeofdiet }} <br>
+                    Weight: {{ dietprompt.weight }} <br>
+                    {% if dietprompt.weightcontrol != None %}
+                    Weight Control: {{ dietprompt.weightcontrol }} <br>
+                    {% endif %}
+                    {% if dietprompt.weightgoal != None %}
+                    Weight Goal: {{ dietprompt.weightgoal }} <br>
+                    {% endif %}
+                    {% if dietprompt.foodAllergies != '' %}
+                    Food Allergies: {{ dietprompt.foodAllergies }} <br>
+                    {% endif %}
+                    Age: {{ dietprompt.age }} <br>
+                    Gender: {{ dietprompt.gender }} <br>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Diet History Found</p>
+    {% endif %}
+</div>
+
+{% endblock %}

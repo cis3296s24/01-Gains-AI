@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Replace with your key
-    const YoutubeApiKey = "";
-    const ChatgptApiKey = ""; 
+    const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
 
-    //Example 
-    //const YoutubeApiKey = "asdasfafaf";
-    //const ChatgptApiKey = "asddsa"; 
+
 
 
 
@@ -22,9 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     GenerateButton_again.addEventListener('click', function() {
-        var currentUrl = window.location.href;
-        var newUrl = currentUrl.replace("diet", "dietform");
-        window.location.href = newUrl;
+        window.location.href = 'DietForm.html';
         
     });
 
@@ -47,39 +41,13 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             const responseMessage = data.choices[0].message.content;
-
-            // Find the index of "Day 1:"
-            const startIndex = responseMessage.indexOf('Day 1:');
             
-            // Extract the text starting from "Day 1:"
-            const extractedText = responseMessage.slice(startIndex);
-            
-    // Define the regular expression pattern to match each day's content
-    const dayPattern = /Day\s+\d+:[^]*?(?=Day\s+\d+:|$)/gs;
+            const contextDiv = document.getElementById("context");
+            const Diet = document.createElement('div');
+            Diet.innerHTML = responseMessage.replace(/\n/g, "<br>");
+            contextDiv.appendChild(Diet);
 
-    // Extract all occurrences of day content using the regular expression
-    const days = extractedText.match(dayPattern);
-
-    // Get the reference to the contextDiv
-const contextDiv = document.getElementById("context");
-
-// Iterate over each day and append it to the contextDiv
-if (days) {
-    days.forEach((day, index) => {
-        const Day_count = document.createElement('h1');
-        Day_count.innerHTML = `Day ${index + 1}:`;
-        contextDiv.appendChild(Day_count);
-
-        const dietPlanDiv = document.createElement('div');
-        // Find the index of "Breakfast"
-        const breakfastIndex = day.indexOf("Breakfast");
-        // Remove everything before "Breakfast"
-        const mealPlan = day.substring(breakfastIndex);
-        dietPlanDiv.textContent = mealPlan;
-        contextDiv.appendChild(dietPlanDiv);
-    });
-}
-            
+  
 
 
             

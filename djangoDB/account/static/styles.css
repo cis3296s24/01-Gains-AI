@@ -6,17 +6,61 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* Light Theme */
-body.light {
-    background-color: #ffffff;
-    color: #000000;
-}
-
 /* Dark Theme */
 body.dark {
     background-color: #1f1f1f;
     color: #ffffff;
 }
+
+body.dark .container {
+    border-color: #ffffff; /* White border color for dark theme */
+}
+
+body.dark .container h1 {
+    color: #ffffff; /* Change h1 color in dark mode */
+}
+
+body.dark .container .list-group-item {
+    background-color: #333; /* Change list-group-item background color in dark mode */
+    color: #ffffff; /* Change list-group-item text color in dark mode */
+}
+
+body.dark .container .list-group-item a {
+    color: #ffffff; /* Change list-group-item link color in dark mode */
+}
+
+body.dark .container .list-group-item a:hover {
+    color: #ff0000; /* Change list-group-item link hover color in dark mode */
+}
+
+/* Light Theme */
+body.light {
+    background-color: #ffffff;
+    color: #000000; /* Black text color for light mode */
+}
+
+body.light .container {
+    border-color: #000000; /* Black border color for light mode */
+}
+
+body.light .container h1 {
+    color: #000000; /* Black h1 color in light mode */
+}
+
+body.light .container .list-group-item {
+    background-color: #f8f9fa; /* Light background color for list-group-item in light mode */
+    color: #000000; /* Black text color for list-group-item in light mode */
+}
+
+body.light .container .list-group-item a {
+    color: #000000; /* Black link color for list-group-item in light mode */
+}
+
+body.light .container .list-group-item a:hover {
+    color: #ff0000; /* Red hover color for list-group-item link in light mode */
+}
+
+
 
 /* Button Style */
 .theme-toggle {

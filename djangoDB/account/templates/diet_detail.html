@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <title>Diet Prompt Details</title>
+    <div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;margin-top: 20px;text-align:center;">
+        <h1>Diet Prompt</h1>
+        <ul style="list-style-type: none; padding: 0;">
+            <li><strong>Type of Diet:</strong> {{ diet_prompt.typeofdiet }}</li>
+            <li><strong>Weight:</strong> {{ diet_prompt.weight }}</li>
+            {% if diet_prompt.weightcontrol %}
+            <li><strong>Weight Control:</strong> {{ diet_prompt.weightcontrol }}</li>
+            {% endif %}
+            {% if diet_prompt.weightgoal %}
+            <li><strong>Weight Goal:</strong> {{ diet_prompt.weightgoal }}</li>
+            {% endif %}
+            {% if diet_prompt.foodAllergies %}
+            <li><strong>Food Allergies:</strong> {{ diet_prompt.foodAllergies }}</li>
+            {% endif %}
+            <li><strong>Age:</strong> {{ diet_prompt.age }}</li>
+            <li><strong>Gender:</strong> {{ diet_prompt.gender }}</li>
+        </ul>
+    </div>
+
+    {% if diet_output %}
+    <div class="container" style="border: 2px solid;padding: 10px;margin-bottom: 20px;text-align:center;">
+        <h1>Diet Details</h1>
+        <pre style="background-color: inherit; color: inherit; border: none; white-space: pre-wrap;">{{ diet_output }}</pre>
+    </div>
+    {% endif %}
+{%endblock%}

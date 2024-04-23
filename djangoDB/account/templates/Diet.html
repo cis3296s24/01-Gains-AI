@@ -1,22 +1,22 @@
 {%extends 'base.html'%}
 {% load static %}
 {% block content %}
-<script src="{% static 'Diet.js'%}"></script>
-<script src="{% static 'script.js' %}"></script>
-<style>
-    .container {
-        display: flex;
-        align-items: center; /* Center items vertically */
-        justify-content: center; /* Center items horizontally */
-        flex-wrap: wrap; /* Allow items to wrap to the next line */
-    }
-    .btn-custom {
-        background-color: #9c56e3;
-        border-color: #9c56e3; 
-        color: white; 
-    }
-</style>
-
+    <title>Diet</title>
+    <script src="{% static 'script.js' %}"></script>
+    <style>
+        .container {
+            display: flex;
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+        }
+        .btn-custom {
+            background-color: #9c56e3;
+            border-color: #9c56e3; 
+            color: white; 
+        }
+    </style>
+</head>
 <body>
     <style>.dark-mode {
         /*  dark mode  */
@@ -25,18 +25,113 @@
     }
     </style>
 
+    {% comment %} <div class="nav-buttons mr-3" style="text-align: center;"> 
+        <button id="Generate Diet" class="btn btn-custom" >Generate Diet (May Take 10 seconds for API)</button>
+        <button id="Generate_Again_Diet" class="btn btn-custom"> Change Diet Type</button>
+    </div> {% endcomment %}
 
-    <script src="script.js"></script>
-
-    <div class="nav-buttons mr-3"> 
-    <button id="Generate Diet" class="btn btn-custom" >Generate Diet (May Take 10 seconds for API)</button>
-    <button id="Generate_Again_Diet" class="btn btn-custom"> Change Diet Type</button>
-    <button id="Save_Diet" class="btn btn-custom"> Save Diet(Not implement) Type</button>
+    <div class="nav-buttons mt-3" style="display: flex; justify-content: center;"> 
+        <button id="GenerateDiet" class="btn btn-custom mr-2" style="background-color: #9c56e3; color: #fff; border-color: #9c56e3; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Generate Diet (May Take 10 seconds for API)</button>
+        <button id="GenerateAgainDiet" class="btn btn-custom" style="background-color: #9c56e3; color: #fff; border-color: #9c56e3; border-radius: 5px; padding: 10px 20px; font-size: 16px;">Change Diet Type</button>
     </div>
-
+    
     <div class="container">
         <div id = "context">
                 <!-- Your content here -->
         </div>    
-        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ChatgptApiKey = localStorage.getItem("ChatgptApiKey_key");
+        
+            const GenerateButton = document.getElementById('GenerateDiet');
+            const GenerateButton_again = document.getElementById('GenerateAgainDiet');
+
+
+            GenerateButton.addEventListener('click', function() {
+                var Prompt = "{{ last_string }}"
+                console.log(Prompt)
+                sendMessage(Prompt)
+                
+            });
+        
+            GenerateButton_again.addEventListener('click', function() {
+                var currentUrl = window.location.href;
+                var newUrl = currentUrl.replace("diet", "dietform");
+                window.location.href = newUrl;
+                
+            });
+        
+
+        
+        
+            function sendMessage(message) {
+                fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${ChatgptApiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-3.5-turbo', // You can change the model if needed
+                        messages: [{ role: 'user', content: message }]
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const responseMessage = data.choices[0].message.content;
+
+                    saveToDatabase(responseMessage)
+                    const contextDiv = document.getElementById("context");
+                    const Diet = document.createElement('div');
+                    Diet.innerHTML = responseMessage.replace(/\n/g, "<br>");
+                    contextDiv.appendChild(Diet);
+                })
+        
+            }
+            function saveToDatabase(message) {
+                const currentUrl = window.location.href;
+                const baseUrl = currentUrl.replace('/diet/', '');
+                const requestUrl = baseUrl + '/save_output_diet/';
+                fetch(requestUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                        'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                    },
+                    body: message,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.status === 'success') {
+                        console.log('Request successful');
+                        console.log(data.message);
+                    } else {
+                        console.error('Request failed');
+                        console.error(data.message);
+                    }
+                }
+                )
+                .catch(error => {console.error('Error:', error);});
+            }
+            
+            // Function to get CSRF token from cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }  
+        });
+    </script>
 {% endblock %}
